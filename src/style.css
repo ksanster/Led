@@ -1,0 +1,45 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+global
+{
+	chrome-color: #333333;
+	content-background-color: #333333;
+	symbol-color: #FFFFFF;
+	selection-color: #FFB129;
+	focus-color: #FF7F29;
+	roll-over-color: #F7DCAD;
+	color: #D7D6D6;
+	fontSize:11;
+}
+
+s|WindowedApplication
+{
+	background-color: #3c3f41;
+}
+
+s|BorderContainer
+{
+	borderStyle:solid;
+	borderColor:#646464;
+	backgroundColor:#45494a;
+}
+
+s|Group
+{
+	background-color: #333333;
+}
+
+s|Button
+{
+	chromeColor: #44494b;
+	color: #bbbbbb;
+	cornerRadius: 2;
+	focusColor: #334861;
+}
+
+mx|Alert 
+{
+	color: #000000;
+}
