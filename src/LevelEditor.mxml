@@ -2,7 +2,10 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
-               width="800" height="600" creationComplete="onCreationComplete(event)" xmlns:controls="com.tengu.tools.leditor.view.controls.*">
+			   xmlns:controls="com.tengu.tools.leditor.view.controls.*"
+               width="820" height="640" 
+			   left="5" top="5" bottom="5" right="5"
+			   creationComplete="onCreationComplete(event)" >
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
@@ -25,7 +28,9 @@
     <fx:Style source="style.css" />
 	
 	<s:layout>
-		<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center" />
+		<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center" 
+							paddingLeft="5" paddingRight="5"
+							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
 
 	<s:BorderContainer width="500" height="600">
