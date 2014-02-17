@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	Cobalt by EffectiveUI
+	http://www.effectiveui.com
+
+-->
+
+<Skin xmlns="http://ns.adobe.com/mxml/2009">
+
+    <states>
+        <State name="up" />
+        <State name="over"/>
+        <State name="down" />
+        <State name="disabled" />
+    </states>
+
+    <!-- Skin -->
+    <Image right="0" top="0" maintainAspectRatio="false"
+    	source.up="@Embed(source='/cobalt/NumericStepper_upArrowUpSkin.png')"
+    	source.over="@Embed(source='/cobalt/NumericStepper_upArrowOverSkin.png')"
+    	source.down="@Embed(source='/cobalt/NumericStepper_upArrowDownSkin.png')"
+    	source.disabled="@Embed(source='/cobalt/NumericStepper_upArrowDisabledSkin.png')"
+    />
+
+</Skin>

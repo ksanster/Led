@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	Cobalt by EffectiveUI
+	http://www.effectiveui.com
+
+-->
+
+<Skin xmlns="http://ns.adobe.com/mxml/2009"
+	  alpha.disabled="0.5">
+	  
+	  <states>
+    	<State name="normal" />
+    	<State name="disabled" />
+    </states>
+    
+    <!-- border/fill -->
+    <Rect left="0" right="0" top="0" bottom="0">
+    	<stroke>
+    		<SolidColorStroke color="0x999999" />
+    	</stroke>
+    	<fill>
+    		<SolidColor color="0xFFFFFF" />
+    	</fill>
+    </Rect>
+    
+    <FxScroller left="1" top="1" right="1" bottom="1">
+	    <DataGroup id="dataGroup" width="110" height="110">
+	    	<layout>
+	    	    <VerticalLayout gap="0" />
+	    	</layout>
+	    </DataGroup>
+    </FxScroller>
+</Skin>

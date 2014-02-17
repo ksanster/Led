@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	Blue Steel by EffectiveUI
+	http://www.effectiveui.com
+
+-->
+
+<Skin xmlns="http://ns.adobe.com/mxml/2009" 
+      minWidth="23" minHeight="23"
+      alpha.disabledStates="0.5">
+
+    <states>
+        <State name="up" />
+        <State name="over" stateGroups="overStates" />
+        <State name="down" stateGroups="downStates" />
+        <State name="disabled" stateGroups="disabledStates" />
+        <State name="upAndSelected" stateGroups="selectedStates, selectedUpStates" />
+        <State name="overAndSelected" stateGroups="overStates, selectedStates" />
+        <State name="downAndSelected" stateGroups="downStates, selectedStates" />
+        <State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
+    </states>
+
+    <!-- Skin -->
+    <Image left="0" top="0" right="0" bottom="0" maintainAspectRatio="false"
+    	source.up="@Embed(source='/bluesteel/Button_upSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.over="@Embed(source='/bluesteel/Button_overSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.down="@Embed(source='/bluesteel/Button_downSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.disabled="@Embed(source='/bluesteel/Button_disabledSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.upAndSelected="@Embed(source='/bluesteel/Button_selectedUpSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.overAndSelected="@Embed(source='/bluesteel/Button_selectedOverSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.downAndSelected="@Embed(source='/bluesteel/Button_selectedDownSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    	source.disabledAndSelected="@Embed(source='/bluesteel/Button_selectedDisabledSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='59',scaleGridBottom='17')"
+    />
+    
+    <!-- Label -->
+    <TextBox id="labelField"
+             horizontalCenter="0" verticalCenter="1"
+             left="10" right="10" top="2" bottom="2"
+             textAlign="center" verticalAlign="middle">
+    </TextBox>
+
+</Skin>

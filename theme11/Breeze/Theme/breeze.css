@@ -1,0 +1,485 @@
+/*
+Breeze by EffectiveUI. 
+Copyright (c) 2008 www.effectiveui.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*
+//------------------------------
+//
+// **global
+//
+//------------------------------
+*/
+global 
+{
+ 	font-family: Arial;
+ 	font-size: 11pt;
+ 	color:#253766;
+   	cornerRadius: 5;
+   	highlightAlphas: 0.35, 0.23;
+   	fillAlphas: 0.41, 0.4;
+   	fillColors: #ffffff, #86abe2;
+   	themeColor: #b7c3ff;
+}
+
+/*
+//------------------------------
+//
+// **Accordian
+//
+//------------------------------
+*/
+Accordion {
+   backgroundColor: #F9FBFF;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **Alert
+//
+//------------------------------
+*/
+Alert
+{
+	button-style-name: "Button";
+	border-thickness: 0;
+	background-color: #e0e4e9;
+	border-color: #e0e4e9;
+ 	font-family: Arial;
+ 	font-size: 11pt;
+ 	color:#253766;
+}
+
+/*
+//------------------------------
+//
+// **Application
+//
+//------------------------------
+*/
+Application
+{
+	background-color: #d0d9df;
+}
+
+/*
+//------------------------------
+//
+// **ButtonBar
+//
+//------------------------------
+*/
+ButtonBar
+{
+	
+	buttonStyleName: "buttonBarButton";
+	firstButtonStyleName: "buttonBarFirstButton";
+	lastButtonStyleName: "buttonBarLastButton";
+	
+}
+.buttonBarButton
+{
+	borderColor: #9cacb7;
+	
+}
+.buttonBarFirstButton
+{
+	borderColor: #9cacb7;
+}
+.buttonBarLastButton
+{
+	borderColor: #9cacb7;
+	
+}
+
+/*
+//------------------------------
+//
+// **CheckBox
+//
+//------------------------------
+*/
+CheckBox
+{
+   iconColor: #025376;
+}
+
+/*
+//------------------------------
+//
+// **ColorPicker
+//
+//------------------------------
+*/
+ColorPicker
+{
+	icon-color: #025376;
+}
+
+
+/*
+//------------------------------
+//
+// **ComboBox
+//
+//------------------------------
+*/
+ComboBox
+{
+	selectionColor: #dce2e9;
+   	rollOverColor: #E4E8F9;
+}
+
+/*
+//------------------------------
+//
+// **DataGrid
+//
+//------------------------------
+*/
+DataGrid
+{
+   	backgroundColor: #F9FBFF;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+   	headerColors: #e2e8ef, #bbcbe2;
+   	alternating-item-colors: #f3f5fb, #ffffff;
+}
+
+/*
+//------------------------------
+//
+// **DateChooser
+//
+//------------------------------
+*/
+
+DateChooser
+{
+   	headerColors: #e3e1eb, #c3c7dd;
+   	highlightAlphas: 0.7, 0.3;
+   	todayColor: #b3c4db;
+   	rollOverColor: #ffffff;
+   	selectionColor: #a7c0de;
+   	backgroundAlpha: 1;
+   	backgroundColor: #e8ecf2;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **DateField
+//
+//------------------------------
+*/
+
+DateField
+{
+	date-chooser-style-name: "DateChooser";
+}
+
+/*
+//------------------------------
+//
+// **HorizontalList
+//
+//------------------------------
+*/
+HorizontalList
+{
+	selectionColor: #E4E8F9;
+   	rollOverColor: #E4E8F9;
+   	backgroundColor: #F9FBFF;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **HScrollBar
+//
+//------------------------------
+*/
+HScrollBar
+{
+   cornerRadius: 0;
+   thumbOffset: 1;
+   trackColors: #e2e3e8, #ffffff;
+}
+
+/*
+//------------------------------
+//
+// **HSlider
+//
+//------------------------------
+*/
+HSlider 
+{
+   labelOffset: -6;
+   thumbOffset: -2;
+   dataTipOffset: 2;
+   tickLength: 2;
+   tickThickness: 1;
+   showTrackHighlight: true;
+   invertThumbDirection: false;
+   themeColor: #b7c3ff;
+   fillAlphas: 0.39, 0.4, 0.75, 0.65;
+}
+
+/*
+//------------------------------
+//
+// **LinkBar
+//
+//------------------------------
+*/
+LinkBar
+{
+   rollOverColor: #E4E8F9;
+   selectionColor: #E4E8F9;
+}
+
+/*
+//------------------------------
+//
+// **List
+//
+//------------------------------
+*/
+List
+{
+	selectionColor: #E4E8F9;
+   	rollOverColor: #E4E8F9;
+   	backgroundColor: #F9FBFF;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **Menu
+//
+//------------------------------
+*/
+Menu
+{
+	selectionColor: #E4E8F9;
+   	rollOverColor: #E4E8F9;
+   	backgroundColor: #F9FBFF;
+}
+
+/*
+//------------------------------
+//
+// **MenuBar
+//
+//------------------------------
+*/
+MenuBar
+{
+	fill-colors: #e2e8ef, #bbcbe2;
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **Panel, TitleWindow, Alert
+//
+//------------------------------
+*/
+Panel,
+TitleWindow,
+Alert
+{
+	background-color: #e0e4e9 ;
+	border-color: #bababa;
+	border-thickness:1;
+	border-style: solid;
+	
+	header-colors: #ffffff, #86abe2;
+	header-height: 20;
+	border-thickness-top: 10;
+}
+
+/*
+//------------------------------
+//
+// **RadioButton
+//
+//------------------------------
+*/
+RadioButton
+{
+   iconColor: #025376;
+}
+
+/*
+//------------------------------
+//
+// **TabBar
+//
+//------------------------------
+*/
+TabBar
+{
+	tabStyleName: "tabBarTab";
+	firstTabStyleName: "tabBarTab";
+	lastTabStyleName: "tabBarTab";
+	selected-tab-text-style-name: "selectedTab";
+	padding-left: 10;
+}
+
+/*
+//------------------------------
+//
+// **TabNavigator
+//
+//------------------------------
+*/
+
+TabNavigator
+{
+   tabStyleName: "myTabs";
+   firstTabStyleName: "myTabs";
+   lastTabStyleName: "myTabs";
+   selectedTabTextStyleName: "mySelectedTabs";
+   horizontal-gap: 1;
+	background-color: #F4f7fc;
+}
+
+.myTabs {
+   	backgroundAlpha: 1;
+   	backgroundColor: #F4f7fc;
+   	borderColor: #9cacb7;
+
+}
+
+/*
+//------------------------------
+//
+// **TextArea
+//
+//------------------------------
+*/
+
+TextArea 
+{
+	padding-top: 2;
+	padding-left:2;
+	padding-right: 1;
+	padding-bottom: 2;
+}
+
+/*
+//------------------------------
+//
+// **TileList
+//
+//------------------------------
+*/
+TileList
+{
+   	dropShadowEnabled: true;
+   	shadowDistance: 0;
+   	dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **ToolTip
+//
+//------------------------------
+*/
+ToolTip
+{
+   backgroundColor: #C6E2FF;
+}
+
+/*
+//------------------------------
+//
+// **Tree
+//
+//------------------------------
+*/
+Tree
+{
+   backgroundColor: #f9fbff;
+   alternatingItemColors: #f9f3fe, #ffffff;
+   depthColors: #f3f5fb, #ffffff, #ffffff, #ffffff;
+   rollOverColor: #E4E8F9;
+   selectionColor: #E4E8F9;
+   dropShadowEnabled: true;
+   shadowDistance: 0;
+   dropShadowColor: #343437;
+}
+
+/*
+//------------------------------
+//
+// **VScrollBar
+//
+//------------------------------
+*/
+VScrollBar
+{
+   cornerRadius: 0;
+   thumbOffset: 1;
+   trackColors: #e2e3e8, #ffffff;
+}
+
+/*
+//------------------------------
+//
+// **VSlider
+//
+//------------------------------
+*/
+VSlider
+{
+   labelOffset: -6;
+   thumbOffset: -2;
+   dataTipOffset: 2;
+   tickLength: 2;
+   tickThickness: 1;
+   showTrackHighlight: true;
+   invertThumbDirection: false;
+   themeColor: #b7c3ff;
+   fillAlphas: 0.39, 0.4, 0.75, 0.65;
+}
+

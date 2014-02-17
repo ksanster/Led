@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	Cobalt by EffectiveUI
+	http://www.effectiveui.com
+
+-->
+
+<Skin xmlns="http://ns.adobe.com/mxml/2009"
+	alpha.disabled="0.5">
+
+	<states>
+        <State name="up" />
+        <State name="over" />
+        <State name="down" />
+        <State name="disabled" />
+    </states>
+
+    <!-- Skin -->
+    <Image left="0" right="0" top="0" bottom="0" maintainAspectRatio="false" rotation="90"
+    	source.up="@Embed(source='/cobalt/HScrollBar_thumbUpSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='40')"
+    	source.over="@Embed(source='/cobalt/HScrollBar_thumbOverSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='40')"
+    	source.down="@Embed(source='/cobalt/HScrollBar_thumbDownSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='40')"
+    	source.disabled="@Embed(source='/cobalt/HScrollBar_thumbUpSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='40')"
+    />
+    
+    <!-- Thumb Icon -->
+    <Image horizontalCenter="0" verticalCenter="0" maintainAspectRatio="false" rotation="90"
+    	source.up="@Embed(source='/cobalt/HScrollBar_thumbIcon.png')"
+    	source.over="@Embed(source='/cobalt/HScrollBar_thumbIcon.png')"
+    	source.down="@Embed(source='/cobalt/HScrollBar_thumbIcon.png')"
+    	source.disabled="@Embed(source='/cobalt/HScrollBar_thumbIcon.png')"
+    />
+
+</Skin>

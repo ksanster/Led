@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+	Cobalt by EffectiveUI
+	http://www.effectiveui.com
+
+-->
+
+<Skin xmlns="http://ns.adobe.com/mxml/2009"
+	alpha.disabled="0.5">
+
+	<states>
+        <State name="up" />
+        <State name="over" />
+        <State name="down" />
+        <State name="disabled" />
+    </states>
+
+    <!-- Skin -->
+    <Image top="0" right="0" bottom="0" left="0" maintainAspectRatio="false" rotation="90" minWidth="15" minHeight="15"
+    	source.up="@Embed(source='/cobalt/HScrollBar_trackSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='143')"
+    	source.over="@Embed(source='/cobalt/HScrollBar_trackSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='143')"
+    	source.down="@Embed(source='/cobalt/HScrollBar_trackSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='143')"
+    	source.disabled="@Embed(source='/cobalt/HScrollBar_trackDisabledSkin.png',scaleGridTop='5',scaleGridLeft='5',scaleGridRight='10',scaleGridBottom='143')"
+    />
+
+</Skin>

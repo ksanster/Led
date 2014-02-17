@@ -1,0 +1,1283 @@
+/*
+Cobalt by EffectiveUI. 
+Copyright (c) 2008 www.effectiveui.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*
+//------------------------------
+//  Fonts
+//------------------------------
+*/
+
+@font-face
+{
+	src: 								"/../assets/fonts/arial.ttf";
+	fontFamily: 						"Arial";	
+}
+
+/*
+//------------------------------
+//  Global
+//------------------------------
+*/
+
+global
+{
+	fontFamily: 						"Arial";
+	rollOverColor:						#CCCCCC;
+	selectionColor:						#4B6F9E;
+	color:								#333333;
+	textRollOverColor:					#333333;
+	textSelectedColor:					#FFFFFF;
+	themeColor:							#4B6F9E;
+}
+
+/*
+//------------------------------
+//  Accordion
+//------------------------------
+*/
+
+AccordionHeader
+{
+	disabledSkin: 						Embed(source="cobalt/AccordionHeader_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	downSkin: 							Embed(source="cobalt/AccordionHeader_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	overSkin: 							Embed(source="cobalt/AccordionHeader_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	selectedUpSkin: 					Embed(source="cobalt/AccordionHeader_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	selectedOverSkin: 					Embed(source="cobalt/AccordionHeader_selectedOverSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	selectedDownSkin: 					Embed(source="cobalt/AccordionHeader_selectedDownSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	upSkin: 							Embed(source="cobalt/AccordionHeader_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="20",
+											  scaleGridRight="145",
+											  scaleGridBottom="15");
+	
+	color: 								#D3E7F3;
+	textRollOverColor: 					#FFFFFF;
+	textSelectedColor: 					#FFFFFF;
+	paddingLeft: 						20;
+}
+
+/*
+//------------------------------
+//  Alert
+//------------------------------
+*/
+
+Alert
+{
+	titleBackgroundSkin: 				Embed(source="cobalt/Panel_titleBackgroundSkin.png",
+											  scaleGridTop="7",
+											  scaleGridLeft="7",
+											  scaleGridRight="264",
+											  scaleGridBottom="24"); 
+	closeButtonDisabledSkin: 			Embed(source="cobalt/Panel_closeButtonDisabledSkin.png");
+	closeButtonDownSkin: 				Embed(source="cobalt/Panel_closeButtonDownSkin.png");
+	closeButtonOverSkin: 				Embed(source="cobalt/Panel_closeButtonOverSkin.png");
+	closeButtonUpSkin: 					Embed(source="cobalt/Panel_closeButtonUpSkin.png");
+	borderThicknessTop: 				0;
+	borderThicknessBottom: 				0;
+	borderThicknessLeft: 				0;
+	borderThicknessRight: 				0;
+	titleStyleName: 					"titleStyle";
+	backgroundColor: 					#FFFFFF;
+	controlBarStyleName: 				"controlBarStyle";
+	button-style-name:					"alertButtonStyle";
+	headerHeight: 						32;
+	color:								#333333;
+}
+
+.alertButtonStyle
+{
+	color: 								#D3E7F3;
+	textRollOverColor: 					#FFFFFF;
+	textSelectedColor: 					#FFFFFF;
+}
+
+/*
+//------------------------------
+//  Application
+//------------------------------
+*/
+
+Application
+{
+	backgroundGradientColors:			#666666,#333333;	
+}
+
+/*
+//------------------------------
+//  FxApplication
+//------------------------------
+*/
+
+FxApplication
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxApplicationSkin');
+}
+
+/*
+//------------------------------
+//  Button
+//------------------------------
+*/
+
+Button
+{
+	disabledSkin: 						Embed(source="cobalt/Button_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/Button_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/Button_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/Button_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	selectedDisabledSkin: 				Embed(source="cobalt/Button_selectedDisabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	selectedDownSkin: 					Embed(source="cobalt/Button_selectedDownSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	selectedOverSkin: 					Embed(source="cobalt/Button_selectedOverSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	selectedUpSkin: 					Embed(source="cobalt/Button_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="59",
+											  scaleGridBottom="17");
+	
+	color: 								#D3E7F3;
+	textRollOverColor: 					#FFFFFF;
+	textSelectedColor: 					#FFFFFF;
+}
+
+/*
+//------------------------------
+//  FxButton
+//------------------------------
+*/
+
+FxButton
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxButtonSkin');
+}
+
+/*
+//------------------------------
+//  ButtonBar
+//------------------------------
+*/
+
+ButtonBar
+{
+	buttonStyleName: 					"buttonBarButton";
+	firstButtonStyleName: 				"buttonBarFirstButton";
+	lastButtonStyleName: 				"buttonBarLastButton";
+}
+.buttonBarButton
+{
+	disabledSkin: 						Embed(source="cobalt/ButtonBar-button_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/ButtonBar-button_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/ButtonBar-button_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDisabledSkin: 				Embed(source="cobalt/ButtonBar-button_selectedDisabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDownSkin: 					Embed(source="cobalt/ButtonBar-button_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedOverSkin: 					Embed(source="cobalt/ButtonBar-button_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedUpSkin: 					Embed(source="cobalt/ButtonBar-button_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/ButtonBar-button_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+}
+.buttonBarFirstButton
+{
+	disabledSkin: 						Embed(source="cobalt/ButtonBar-firstButton_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/ButtonBar-firstButton_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/ButtonBar-firstButton_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDisabledSkin: 				Embed(source="cobalt/ButtonBar-firstButton_selectedDisabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDownSkin: 					Embed(source="cobalt/ButtonBar-firstButton_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedOverSkin: 					Embed(source="cobalt/ButtonBar-firstButton_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedUpSkin: 					Embed(source="cobalt/ButtonBar-firstButton_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/ButtonBar-firstButton_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+}
+.buttonBarLastButton
+{
+	disabledSkin: 						Embed(source="cobalt/ButtonBar-lastButton_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/ButtonBar-lastButton_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/ButtonBar-lastButton_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDisabledSkin: 				Embed(source="cobalt/ButtonBar-lastButton_selectedDisabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedDownSkin: 					Embed(source="cobalt/ButtonBar-lastButton_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedOverSkin: 					Embed(source="cobalt/ButtonBar-lastButton_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	selectedUpSkin: 					Embed(source="cobalt/ButtonBar-lastButton_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/ButtonBar-lastButton_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="34",
+											  scaleGridBottom="17");
+}
+
+/*
+//------------------------------
+//  CheckBox
+//------------------------------
+*/
+
+CheckBox
+{
+	disabledIcon: 						Embed(source="cobalt/CheckBox_disabledIcon.png");
+	downIcon: 							Embed(source="cobalt/CheckBox_downIcon.png");
+	overIcon: 							Embed(source="cobalt/CheckBox_overIcon.png");
+	selectedDisabledIcon: 				Embed(source="cobalt/CheckBox_selectedDisabledIcon.png");
+	selectedDownIcon: 					Embed(source="cobalt/CheckBox_selectedDownIcon.png");
+	selectedOverIcon: 					Embed(source="cobalt/CheckBox_selectedOverIcon.png");
+	selectedUpIcon: 					Embed(source="cobalt/CheckBox_selectedUpIcon.png");
+	upIcon: 							Embed(source="cobalt/CheckBox_upIcon.png");
+	
+	color: 								#333333;
+	textRollOverColor: 					#333333;
+	textSelectedColor: 					#333333;
+}
+
+/*
+//------------------------------
+//  FxCheckBox
+//------------------------------
+*/
+
+FxCheckBox
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxCheckBoxSkin');
+}
+
+/*
+//------------------------------
+//  ColorPicker
+//------------------------------
+*/
+
+ColorPicker
+{
+	disabledSkin: 						Embed(source="cobalt/ColorPicker_disabledSkin.png");
+	downSkin: 							Embed(source="cobalt/ColorPicker_downSkin.png");
+	overSkin: 							Embed(source="cobalt/ColorPicker_overSkin.png");
+	upSkin: 							Embed(source="cobalt/ColorPicker_upSkin.png");
+}
+
+/*
+//------------------------------
+//  ComboBox
+//------------------------------
+*/
+
+ComboBox
+{
+	disabledSkin: 						Embed(source="cobalt/ComboBox_disabledSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/ComboBox_downSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	editableDisabledSkin: 				Embed(source="cobalt/ComboBox_editableDisabledSkin.png",
+											  scaleGridRight="2",
+											  scaleGridLeft="1",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	editableDownSkin: 					Embed(source="cobalt/ComboBox_editableDownSkin.png",
+											  scaleGridRight="2",
+											  scaleGridLeft="1",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	editableOverSkin: 					Embed(source="cobalt/ComboBox_editableOverSkin.png",
+											  scaleGridRight="2",
+											  scaleGridLeft="1",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	editableUpSkin: 					Embed(source="cobalt/ComboBox_editableUpSkin.png",
+											  scaleGridRight="2",
+											  scaleGridLeft="1",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/ComboBox_overSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/ComboBox_upSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	
+	color: 								#D3E7F3;
+	textInputStyleName: 				"textInputStyle";
+	fontWeight: 						normal;
+	paddingRight: 						0;
+	textIndent: 						5;
+	dropDownStyleName:					"dropDownStyle";
+	paddingTop: 1;
+	paddingBottom: -1;
+}
+
+.dropDownStyle
+{
+	color:								#333333;	
+}
+
+.textInputStyle
+{	
+	
+}
+
+/*
+//------------------------------
+//  Cursors
+//------------------------------
+*/
+
+CursorManager
+{
+	busyCursor: 						Embed(source="cobalt/CursorManager_busyCursor.png");
+}
+
+/*
+//------------------------------
+//  DataGrid
+//------------------------------
+*/
+
+DataGrid
+{
+	columnDropIndicatorSkin: 			Embed(source="cobalt/DataGrid_columnDropIndicatorSkin.png");
+	columnResizeSkin: 					Embed(source="cobalt/DataGrid_columnResizeSkin.png");
+	headerBackgroundSkin: 				Embed(source="cobalt/DataGrid_headerBackgroundSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="90",
+											  scaleGridBottom="15");
+	headerSeparatorSkin: 				Embed(source="cobalt/DataGrid_headerSeparatorSkin.png");
+	sortArrowSkin: 						Embed(source="cobalt/DataGrid_sortArrowSkin.png");
+	stretchCursor: 						Embed(source="cobalt/DataGrid_stretchCursor.png");
+}
+
+/*
+//------------------------------
+//  DateChooser
+//------------------------------
+*/
+
+DateChooser
+{
+	nextMonthDisabledSkin: 				Embed(source="cobalt/DateChooser_nextMonthDisabledSkin.png");
+	nextMonthDownSkin: 					Embed(source="cobalt/DateChooser_nextMonthDownSkin.png");
+	nextMonthOverSkin: 					Embed(source="cobalt/DateChooser_nextMonthOverSkin.png");
+	nextMonthUpSkin: 					Embed(source="cobalt/DateChooser_nextMonthUpSkin.png");
+	nextYearDisabledSkin: 				Embed(source="cobalt/DateChooser_nextYearDisabledSkin.png");
+	nextYearDownSkin: 					Embed(source="cobalt/DateChooser_nextYearDownSkin.png");
+	nextYearOverSkin: 					Embed(source="cobalt/DateChooser_nextYearOverSkin.png");
+	nextYearUpSkin: 					Embed(source="cobalt/DateChooser_nextYearUpSkin.png");
+	prevMonthDisabledSkin: 				Embed(source="cobalt/DateChooser_prevMonthDisabledSkin.png");
+	prevMonthDownSkin: 					Embed(source="cobalt/DateChooser_prevMonthDownSkin.png");
+	prevMonthOverSkin: 					Embed(source="cobalt/DateChooser_prevMonthOverSkin.png");
+	prevMonthUpSkin: 					Embed(source="cobalt/DateChooser_prevMonthUpSkin.png");
+	prevYearDisabledSkin: 				Embed(source="cobalt/DateChooser_prevYearDisabledSkin.png");
+	prevYearDownSkin: 					Embed(source="cobalt/DateChooser_prevYearDownSkin.png");
+	prevYearOverSkin: 					Embed(source="cobalt/DateChooser_prevYearOverSkin.png");
+	prevYearUpSkin: 					Embed(source="cobalt/DateChooser_prevYearUpSkin.png");
+	rollOverIndicatorSkin: 				Embed(source="cobalt/DateChooser_rollOverIndicatorSkin.png");
+	selectionIndicatorSkin: 			Embed(source="cobalt/DateChooser_selectionIndicatorSkin.png");
+	todayIndicatorSkin: 				Embed(source="cobalt/DateChooser_todayIndicatorSkin.png");
+	
+	headerColors:						#4B6F9E, #4B6F9E;
+	headerStyleName: 					"dateChooserHeader";
+	textRollOverColor:					#FFFFFF;
+	textSelectedColor:					#FFFFFF;
+	weekDayStyleName: 					"dateChooserWeekDay";
+	todayStyleName: 					"dateChooserToday";
+}
+
+.dateChooserHeader
+{
+	color: #FFFFFF;
+}
+
+.dateChooserWeekDay
+{
+	fontWeight: bold;
+}
+.dateChooserToday
+{
+	color: 								#FFFFFF;
+}
+
+/*
+//------------------------------
+//  DateField
+//------------------------------
+*/
+
+DateField
+{
+	disabledSkin: 						Embed(source="cobalt/DateField_disabledSkin.png");
+	downSkin: 							Embed(source="cobalt/DateField_downSkin.png");
+	overSkin: 							Embed(source="cobalt/DateField_overSkin.png");
+	upSkin: 							Embed(source="cobalt/DateField_upSkin.png");
+}
+
+/*
+//------------------------------
+//  DividedBox
+//------------------------------
+*/
+
+DividedBox
+{
+	dividerSkin: 						Embed(source="cobalt/DividedBox_dividerSkin.png");
+	horizontalCursor: 					Embed(source="cobalt/DividedBox_horizontalCursor.png");
+	verticalCursor: 					Embed(source="cobalt/DividedBox_verticalCursor.png");
+}
+
+/*
+//------------------------------
+//  DragManager
+//------------------------------
+*/
+
+DragManager
+{
+	copyCursor: 						Embed(source="cobalt/DragManager_copyCursor.png");
+	defaultDragImageSkin: 				Embed(source="cobalt/DragManager_defaultDragImageSkin.png");
+	linkCursor: 						Embed(source="cobalt/DragManager_linkCursor.png");
+	moveCursor: 						Embed(source="cobalt/DragManager_moveCursor.png");
+	rejectCursor: 						Embed(source="cobalt/DragManager_rejectCursor.png");
+}
+
+/*
+//------------------------------
+//  Form
+//------------------------------
+*/
+
+FormItem
+{
+	indicatorSkin: 						Embed(source="cobalt/FormItem_indicatorSkin.png");
+}
+
+/*
+//------------------------------
+//  HScrollBar
+//------------------------------
+*/
+
+HScrollBar
+{
+	downArrowDisabledSkin: 				Embed(source="cobalt/HScrollArrowLeft_disabledSkin.png");
+	downArrowDownSkin: 					Embed(source="cobalt/HScrollBar_downArrowDownSkin.png");
+	downArrowOverSkin: 					Embed(source="cobalt/HScrollBar_downArrowOverSkin.png");
+	downArrowUpSkin: 					Embed(source="cobalt/HScrollBar_downArrowUpSkin.png");
+	thumbDownSkin: 						Embed(source="cobalt/HScrollBar_thumbDownSkin.png",
+											  scaleGridTop="10",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	thumbIcon: 							Embed(source="cobalt/HScrollBar_thumbIcon.png");
+	thumbOverSkin: 						Embed(source="cobalt/HScrollBar_thumbOverSkin.png",
+											  scaleGridTop="10",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	thumbUpSkin: 						Embed(source="cobalt/HScrollBar_thumbUpSkin.png",
+											  scaleGridTop="10",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	trackDisabledSkin: 					Embed(source="cobalt/HScrollBar_trackDisabledSkin.png");
+	trackSkin: 							Embed(source="cobalt/HScrollBar_trackSkin.png");
+	upArrowDisabledSkin: 				Embed(source="cobalt/HScrollArrowRight_disabledSkin.png");
+	upArrowDownSkin: 					Embed(source="cobalt/HScrollBar_upArrowDownSkin.png");
+	upArrowOverSkin: 					Embed(source="cobalt/HScrollBar_upArrowOverSkin.png");
+	upArrowUpSkin: 						Embed(source="cobalt/HScrollBar_upArrowUpSkin.png");
+}
+
+/*
+//------------------------------
+//  FxHScrollBar
+//------------------------------
+*/
+
+FxHScrollBar
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxHScrollBarSkin');							
+}
+
+/*
+//------------------------------
+//  HSlider
+//------------------------------
+*/
+
+HSlider
+{
+	thumbDisabledSkin: 					Embed(source="cobalt/Slider_thumbDisabledSkin.png");
+	thumbDownSkin: 						Embed(source="cobalt/Slider_thumbDownSkin.png");
+	thumbOverSkin: 						Embed(source="cobalt/Slider_thumbOverSkin.png");
+	thumbUpSkin: 						Embed(source="cobalt/Slider_thumbUpSkin.png");
+	trackHighlightSkin: 				Embed(source="cobalt/Slider_trackHighlightSkin.png");
+	trackSkin: 							Embed(source="cobalt/Slider_trackSkin.png");
+}
+
+/*
+//------------------------------
+//  FxHSlider
+//------------------------------
+*/
+
+FxHSlider
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxHSliderSkin');							
+}
+
+/*
+//------------------------------
+//  FxDefaultItemRenderer
+//------------------------------
+*/
+
+FxDefaultItemRenderer
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxDefaultItemRenderer');							
+}
+
+/*
+//------------------------------
+//  FxDefaultComplexItemRenderer
+//------------------------------
+*/
+
+FxDefaultComplexItemRenderer
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxDefaultComplexItemRenderer');							
+}
+
+/*
+//------------------------------
+//  LinkButton
+//------------------------------
+*/
+
+LinkButton
+{
+	disabledSkin: 						Embed(source="cobalt/LinkButton_disabledSkin.png");
+	downSkin: 							Embed(source="cobalt/LinkButton_downSkin.png");
+	overSkin: 							Embed(source="cobalt/LinkButton_overSkin.png");
+	upSkin: 							Embed(source="cobalt/LinkButton_upSkin.png");
+	
+	color: 								#333333;
+	textRollOverColor: 					#FFFFFF;
+	textSelectedColor: 					#FFFFFF;
+}
+
+/*
+//------------------------------
+//  List
+//------------------------------
+*/
+
+List
+{
+	
+}
+
+/*
+//------------------------------
+//  FxList
+//------------------------------
+*/
+
+FxList
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxListSkin');							
+}
+
+/*
+//------------------------------
+//  Menu
+//------------------------------
+*/
+
+Menu
+{
+	branchDisabledIcon: 				Embed(source="cobalt/Menu_branchDisabledIcon.png");
+	branchIcon: 						Embed(source="cobalt/Menu_branchIcon.png");
+	checkDisabledIcon: 					Embed(source="cobalt/Menu_checkDisabledIcon.png");
+	checkIcon: 							Embed(source="cobalt/Menu_checkIcon.png");
+	radioDisabledIcon: 					Embed(source="cobalt/Menu_radioDisabledIcon.png");
+	radioIcon: 							Embed(source="cobalt/Menu_radioIcon.png");
+	separatorSkin: 						Embed(source="cobalt/Menu_separatorSkin.png");
+}
+
+/*
+//------------------------------
+//  MenuBar
+//------------------------------
+*/
+
+MenuBar
+{
+	backgroundSkin: 					Embed(source="cobalt/MenuBar_backgroundSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="90",
+											  scaleGridBottom="17");
+	itemDownSkin: 						Embed(source="cobalt/MenuBar_itemDownSkin.png");
+	itemOverSkin: 						Embed(source="cobalt/MenuBar_itemOverSkin.png");
+	itemUpSkin: 						Embed(source="cobalt/MenuBar_itemUpSkin.png");
+	
+	textRollOverColor:					#FFFFFF;
+	textSelectedColor:					#FFFFFF;
+}
+
+/*
+//------------------------------
+//  NumericStepper
+//------------------------------
+*/
+
+NumericStepper
+{
+	downArrowDisabledSkin: 				Embed(source="cobalt/NumericStepper_downArrowDisabledSkin.png");
+	downArrowDownSkin: 					Embed(source="cobalt/NumericStepper_downArrowDownSkin.png");
+	downArrowOverSkin: 					Embed(source="cobalt/NumericStepper_downArrowOverSkin.png");
+	downArrowUpSkin: 					Embed(source="cobalt/NumericStepper_downArrowUpSkin.png");
+	upArrowDisabledSkin: 				Embed(source="cobalt/NumericStepper_upArrowDisabledSkin.png");
+	upArrowDownSkin: 					Embed(source="cobalt/NumericStepper_upArrowDownSkin.png");
+	upArrowOverSkin: 					Embed(source="cobalt/NumericStepper_upArrowOverSkin.png");
+	upArrowUpSkin: 						Embed(source="cobalt/NumericStepper_upArrowUpSkin.png");
+}
+
+/*
+//------------------------------
+//  FxNumericStepper
+//------------------------------
+*/
+
+FxNumericStepper
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxNumericStepperSkin');							
+}
+
+/*
+//------------------------------
+//  Panel
+//------------------------------
+*/
+
+Panel
+{
+	titleBackgroundSkin: 				Embed(source="cobalt/Panel_titleBackgroundSkin.png",
+											  scaleGridTop="7",
+											  scaleGridLeft="7",
+											  scaleGridRight="264",
+											  scaleGridBottom="24"); 
+	closeButtonDisabledSkin: 			Embed(source="cobalt/Panel_closeButtonDisabledSkin.png");
+	closeButtonDownSkin: 				Embed(source="cobalt/Panel_closeButtonDownSkin.png");
+	closeButtonOverSkin: 				Embed(source="cobalt/Panel_closeButtonOverSkin.png");
+	closeButtonUpSkin: 					Embed(source="cobalt/Panel_closeButtonUpSkin.png");
+	borderThicknessTop: 				0;
+	borderThicknessBottom: 				0;
+	borderThicknessLeft: 				0;
+	borderThicknessRight: 				0;
+	titleStyleName: 					"titleStyle";
+	backgroundColor: 					#FFFFFF;
+	controlBarStyleName: 				"controlBarStyle";
+	headerHeight: 						32;
+}
+
+/*
+//------------------------------
+//  PopUpButton
+//------------------------------
+*/
+
+PopUpButton
+{
+	disabledSkin: 						Embed(source="cobalt/PopUpButton_disabledSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/PopUpButton_downSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/PopUpButton_overSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	popUpDownSkin: 						Embed(source="cobalt/PopUpButton_popUpDownSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	popUpOverSkin: 						Embed(source="cobalt/PopUpButton_popUpOverSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/PopUpButton_upSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+}
+
+/*
+//------------------------------
+//  PopUpMenuButton
+//------------------------------
+*/
+
+PopUpMenuButton
+{
+	disabledSkin: 						Embed(source="cobalt/PopUpButton_disabledSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/PopUpButton_downSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/PopUpButton_overSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	popUpDownSkin: 						Embed(source="cobalt/PopUpButton_popUpDownSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	popUpOverSkin: 						Embed(source="cobalt/PopUpButton_popUpOverSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/PopUpButton_upSkin.png",
+											  scaleGridRight="64",
+											  scaleGridLeft="5",
+											  scaleGridTop="5",
+											  scaleGridBottom="17");
+}
+
+/*
+//------------------------------
+//  ProgressBar
+//------------------------------
+*/
+
+ProgressBar
+{
+	barSkin: 							Embed(source="cobalt/ProgressBar_barSkin.png");
+	indeterminateSkin: 					Embed(source="cobalt/ProgressBar_indeterminateSkin.png");
+	trackSkin: 							Embed(source="cobalt/ProgressBar_trackSkin.png");
+}
+
+/*
+//------------------------------
+//  RadioButton
+//------------------------------
+*/
+
+RadioButton
+{
+	disabledIcon: 						Embed(source="cobalt/RadioButton_disabledIcon.png");
+	downIcon: 							Embed(source="cobalt/RadioButton_downIcon.png");
+	overIcon: 							Embed(source="cobalt/RadioButton_overIcon.png");
+	selectedDisabledIcon: 				Embed(source="cobalt/RadioButton_selectedDisabledIcon.png");
+	selectedDownIcon: 					Embed(source="cobalt/RadioButton_selectedDownIcon.png");
+	selectedOverIcon: 					Embed(source="cobalt/RadioButton_selectedOverIcon.png");
+	selectedUpIcon: 					Embed(source="cobalt/RadioButton_selectedUpIcon.png");
+	upIcon: 							Embed(source="cobalt/RadioButton_upIcon.png");
+	
+	color: 								#333333;
+	textRollOverColor: 					#333333;
+	textSelectedColor: 					#333333;
+}
+
+/*
+//------------------------------
+//  FxRadioButton
+//------------------------------
+*/
+
+FxRadioButton
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxRadioButtonSkin');							
+}
+
+/*
+//------------------------------
+//  FxSpinner
+//------------------------------
+*/
+
+FxSpinner
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxSpinnerSkin');							
+}
+
+/*
+//------------------------------
+//  SWFLoader
+//------------------------------
+*/
+
+SWFLoader
+{
+	brokenImageSkin: 					Embed(source="cobalt/SWFLoader_brokenImageSkin.png");
+}
+
+/*
+//------------------------------
+//  TabBar
+//------------------------------
+*/
+
+TabBar
+{
+	tabStyleName: 						"tabBarTab";
+	firstTabStyleName: 					"tabBarTab";
+	lastTabStyleName: 					"tabBarTab";
+	buttonStyleName: 					"tabBarTab";
+	firstButtonStyleName: 				"tabBarTab";
+	lastButtonStyleName: 				"tabBarTab";
+	color: #FFFFFF;
+	selectedTabTextStyleName: 			"selectedTabTextStyle";
+}
+
+.tabBarTab
+{
+	disabledSkin: 						Embed(source="cobalt/TabBar-tab_disabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	downSkin: 							Embed(source="cobalt/TabBar-tab_downSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	overSkin: 							Embed(source="cobalt/TabBar-tab_overSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	selectedDisabledSkin: 				Embed(source="cobalt/TabBar-tab_selectedDisabledSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	selectedOverSkin: 					Embed(source="cobalt/TabBar-tab_selectedOverSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	selectedUpSkin: 					Embed(source="cobalt/TabBar-tab_selectedUpSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+	upSkin: 							Embed(source="cobalt/TabBar-tab_upSkin.png",
+											  scaleGridTop="5",
+											  scaleGridLeft="5",
+											  scaleGridRight="46",
+											  scaleGridBottom="17");
+}
+
+.selectedTabTextStyle
+{
+	color: 								#333333;
+	textRollOverColor:					#333333;	
+}
+
+/*
+//------------------------------
+//  TextArea
+//------------------------------
+*/
+
+TextArea
+{
+	
+}
+
+/*
+//------------------------------
+//  FxTextArea
+//------------------------------
+*/
+
+FxTextArea
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxTextAreaSkin');							
+}
+
+/*
+//------------------------------
+//  TextInput
+//------------------------------
+*/
+
+TextInput
+{
+	
+}
+
+/*
+//------------------------------
+//  FxTextInput
+//------------------------------
+*/
+
+FxTextInput
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxTextInputSkin');							
+}
+
+/*
+//------------------------------
+//  FxToggleButton
+//------------------------------
+*/
+
+FxToggleButton
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxToggleButtonSkin');							
+}
+
+/*
+//------------------------------
+//  TextGraphicElement
+//------------------------------
+*/
+
+TextGraphicElement
+{
+    color: #000000;
+}
+
+/*
+//------------------------------
+//  TextView
+//------------------------------
+*/
+
+TextView
+{
+    color: #000000;
+}
+
+/*
+//------------------------------
+//  TitleWindow
+//------------------------------
+*/
+
+TitleWindow
+{
+	titleBackgroundSkin: 				Embed(source="cobalt/Panel_titleBackgroundSkin.png",
+											  scaleGridTop="7",
+											  scaleGridLeft="7",
+											  scaleGridRight="264",
+											  scaleGridBottom="24"); 
+	closeButtonDisabledSkin: 			Embed(source="cobalt/Panel_closeButtonDisabledSkin.png");
+	closeButtonDownSkin: 				Embed(source="cobalt/Panel_closeButtonDownSkin.png");
+	closeButtonOverSkin: 				Embed(source="cobalt/Panel_closeButtonOverSkin.png");
+	closeButtonUpSkin: 					Embed(source="cobalt/Panel_closeButtonUpSkin.png");
+	borderThicknessTop: 				0;
+	borderThicknessBottom: 				0;
+	borderThicknessLeft: 				0;
+	borderThicknessRight: 				0;
+	titleStyleName: 					"titleStyle";
+	backgroundColor: 					#FFFFFF;
+	controlBarStyleName: 				"controlBarStyle";
+	headerHeight: 						32;
+}
+
+.titleStyle
+{
+	color: 								#FFFFFF;
+}
+
+.controlBarStyle
+{
+	background-image: 					Embed(source="cobalt/Panel_controlBarBackgroundSkin.png",
+											  scaleGridTop="7",
+											  scaleGridLeft="7",
+											  scaleGridRight="264",
+											  scaleGridBottom="15");
+	background-size: 					"100%";
+	border-style: 						none;
+	color:								#FFFFFF;
+}
+
+/*
+//------------------------------
+//  ToolTip
+//------------------------------
+*/
+
+ToolTip
+{
+	borderSkin: 						Embed(source="cobalt/ToolTip_borderSkin.png",
+											  scaleGridTop="6",
+											  scaleGridLeft="6",
+											  scaleGridRight="74",
+											  scaleGridBottom="17");
+	color:								#FFFFFF;
+}
+
+/*
+//------------------------------
+//  Tree
+//------------------------------
+*/
+
+Tree
+{
+	defaultLeafIcon: 					Embed(source="cobalt/Tree_defaultLeafIcon.png");
+	disclosureClosedIcon: 				Embed(source="cobalt/Tree_disclosureClosedIcon.png");
+	disclosureOpenIcon: 				Embed(source="cobalt/Tree_disclosureOpenIcon.png");
+	folderClosedIcon: 					Embed(source="cobalt/Tree_folderClosedIcon.png");
+	folderOpenIcon: 					Embed(source="cobalt/Tree_folderOpenIcon.png");
+}
+
+/*
+//------------------------------
+//  VScrollBar
+//------------------------------
+*/
+
+VScrollBar
+{
+	downArrowDisabledSkin: 				Embed(source="cobalt/VScrollBar_downArrowDisabledSkin.png");
+	downArrowDownSkin: 					Embed(source="cobalt/VScrollBar_downArrowDownSkin.png");
+	downArrowOverSkin: 					Embed(source="cobalt/VScrollBar_downArrowOverSkin.png");
+	downArrowUpSkin: 					Embed(source="cobalt/VScrollBar_downArrowUpSkin.png");
+	thumbIcon: 							Embed(source="cobalt/VScrollBar_thumbIcon.png");
+	thumbDownSkin: 						Embed(source="cobalt/VScrollBar_thumbDownSkin.png",
+											  scaleGridTop="10",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	thumbOverSkin: 						Embed(source="cobalt/VScrollBar_thumbOverSkin.png",
+											  scaleGridTop="10",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	thumbUpSkin: 						Embed(source="cobalt/VScrollBar_thumbUpSkin.png",
+											  scaleGridTop="25",
+											  scaleGridLeft="7",
+											  scaleGridRight="8",
+											  scaleGridBottom="42");
+	trackDisabledSkin: 					Embed(source="cobalt/VScrollBar_trackDisabledSkin.png");
+	trackSkin: 							Embed(source="cobalt/VScrollBar_trackSkin.png");
+	upArrowDisabledSkin: 				Embed(source="cobalt/VScrollBar_upArrowDisabledSkin.png");
+	upArrowDownSkin: 					Embed(source="cobalt/VScrollBar_upArrowDownSkin.png");
+	upArrowOverSkin: 					Embed(source="cobalt/VScrollBar_upArrowOverSkin.png");
+	upArrowUpSkin: 						Embed(source="cobalt/VScrollBar_upArrowUpSkin.png");
+}
+
+/*
+//------------------------------
+//  FxVScrollBar
+//------------------------------
+*/
+
+FxVScrollBar
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxVScrollBarSkin');							
+}
+
+/*
+//------------------------------
+//  VSlider
+//------------------------------
+*/
+
+VSlider
+{
+	thumbDisabledSkin: 					Embed(source="cobalt/Slider_thumbDisabledSkin.png");
+	thumbDownSkin: 						Embed(source="cobalt/Slider_thumbDownSkin.png");
+	thumbOverSkin: 						Embed(source="cobalt/Slider_thumbOverSkin.png");
+	thumbUpSkin: 						Embed(source="cobalt/Slider_thumbUpSkin.png");
+	trackHighlightSkin: 				Embed(source="cobalt/Slider_trackHighlightSkin.png");
+	trackSkin: 							Embed(source="cobalt/Slider_trackSkin.png");
+}
+
+/*
+//------------------------------
+//  FxVSlider
+//------------------------------
+*/
+
+FxVSlider
+{
+	skinClass:							ClassReference('cobalt.gumbo.FxVSliderSkin');							
+}
