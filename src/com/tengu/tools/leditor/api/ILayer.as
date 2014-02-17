@@ -1,8 +1,7 @@
 package com.tengu.tools.leditor.api
 {
-	public interface ILayer
+	public interface ILayer extends ILayerInfo
 	{
-		function get type ():String;
 		function get focalIndex ():int;
 	}
 }

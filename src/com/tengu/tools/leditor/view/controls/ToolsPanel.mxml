@@ -11,5 +11,6 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
+	<s:DataGrid dataProvider="{}"/>
 	<s:Button click="Alert.show('Hello, world', 'title')" label="Say Hello"/>
 </s:Group>
