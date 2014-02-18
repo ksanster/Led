@@ -9,7 +9,6 @@
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
-		
 		import mx.events.FlexEvent;
 		
 		private var context:EditorContext;

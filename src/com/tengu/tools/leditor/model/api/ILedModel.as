@@ -10,6 +10,7 @@ package com.tengu.tools.leditor.model.api
 		function set activeLayer (value:IEditableLayer):void;
 		
 		function get layers ():IList/*IEditableLayer*/;
+		function get availableLayerTypes ():IList/*ILayerInfo*/;
 		
 	}
 }

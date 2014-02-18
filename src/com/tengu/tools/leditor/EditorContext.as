@@ -1,13 +1,15 @@
 package com.tengu.tools.leditor
 {
 	import com.tengu.glue.core.impl.Context;
-	import com.tengu.tools.leditor.view.controls.EditorCanvas;
+	import com.tengu.log.LogFactory;
+	import com.tengu.log.targets.TraceTarget;
+	import com.tengu.tools.leditor.view.EditorCanvas;
 	
 	import flash.display.Sprite;
 	
 	public class EditorContext extends Context
 	{
-		private var mainApp:LevelEditor;
+		private var mainApp:Led;
 		public function EditorContext()
 		{
 			super();
@@ -15,7 +17,8 @@ package com.tengu.tools.leditor
 		
 		protected override function initialize(contextView:Sprite):void
 		{
-			mainApp = (contextView as LevelEditor);
+			LogFactory.addTarget(new TraceTarget());
+			mainApp = (contextView as Led);
 			mainApp.canvas.addChild(new EditorCanvas());
 
 			super.initialize(contextView);

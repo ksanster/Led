@@ -1,4 +1,4 @@
-package com.tengu.tools.leditor.view.controls
+package com.tengu.tools.leditor.view
 {
 	import flash.display.Sprite;
 	
