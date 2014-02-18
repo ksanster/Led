@@ -13,6 +13,10 @@ package com.tengu.tools.leditor.model
 			infoName = name;
 		}
 		
+		public function set type(value:String):void 
+		{
+			infoType = value;
+		}
 		public function get type():String
 		{
 			return infoType;

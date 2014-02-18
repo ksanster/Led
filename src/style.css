@@ -31,6 +31,11 @@ s|Group
 	background-color: #333333;
 }
 
+s|DataRenderer:over
+{
+	color: #000000;
+}
+
 s|Button
 {
 	chromeColor: #44494b;

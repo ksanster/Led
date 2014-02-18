@@ -2,32 +2,107 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx">
+	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:Component id="defaultRenderer"> 
+			<s:DefaultGridItemRenderer /> 
+		</fx:Component>
+		<fx:Component id="customRenderer">
+			<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								xmlns:mx="library://ns.adobe.com/flex/mx" 
+								xmlns:s="library://ns.adobe.com/flex/spark">
+				
+				<s:states> 
+					<s:State name="normal"/> 
+					<s:State name="hovered"/> 
+				</s:states> 
+				<s:layout>
+					<s:HorizontalLayout verticalAlign="middle" paddingLeft="5" paddingRight="5"/>
+				</s:layout>
+				<s:Label id="labelDisplay" 
+						 color.hovered="#000000"
+						 />
+				<s:Spacer width="100%"/>
+				<s:Button label="remove" click="{outerDocument.onClickRemoveButton(data)}"/>
+			</s:GridItemRenderer>
+		</fx:Component>
 	</fx:Declarations>
+	
 	<fx:Script>
 		<![CDATA[
-			import com.tengu.log.LogFactory;
+			import com.tengu.tools.leditor.logic.api.IEditorController;
 			import com.tengu.tools.leditor.model.LayerInfo;
 			import com.tengu.tools.leditor.model.LedModel;
 			import com.tengu.tools.leditor.model.api.ILedModel;
 			
+			[Inject]
+			public var controller:IEditorController;
+			
 			[Bindable]
 			public var model:ILedModel = LedModel.instance;
 			
-			protected function onClickAddButton(event:MouseEvent):void
+			private function getRenderer(item:Object, column:GridColumn):ClassFactory
+			{
+				if (item == null) {
+					return this["defaultRenderer"];
+				}
+				return this["customRenderer"];
+			}
+			
+			private function onClickAddButton(event:MouseEvent):void
 			{
 				const info:LayerInfo = availableList.selectedItem as LayerInfo;
-				LogFactory.getLogger(this).info("Layer added: " + info.type);				
+				const zIndex:int = parseInt(zIndexInput.text);
+				
+				controller.addLayer(info.type, zIndex);
+				
+				zIndexInput.text = "";
+				availableList.selectedIndex = -1
+			}
+			
+			public function onClickRemoveButton(data:Object):void
+			{
+				const index:int = layerList.selectedIndex;
+				if (index == -1)
+				{
+					return;
+				}
+				controller.removeLayer(index);
+				layerList.selectedIndex = -1;
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:DataGrid dataProvider="{model.layers}" width="100%" height="150"/>
-	<s:Label text="Новый слой"/>
-	<s:HGroup width="100%" horizontalAlign="right">
-		<s:DropDownList id="availableList" dataProvider="{model.availableLayerTypes}" width="150"/>
-		<s:Button label="Добавить" click="onClickAddButton(event)" enabled="{availableList.selectedIndex != -1}"/>
+	<s:DataGrid id="layerList"
+				dataProvider="{model.layers}" 
+				width="100%" height="120" rowHeight="20" >
+		<s:rowSeparator>
+			<fx:Component>
+				<s:Rect/>
+			</fx:Component>
+		</s:rowSeparator>
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn 	dataField="type"
+								headerText="Layers" 
+								sortable="false" 
+								itemRendererFunction="getRenderer"
+								>
+				</s:GridColumn>
+			</s:ArrayList>
+		</s:columns>
+	</s:DataGrid>
+	<s:Label text="New layer"/>
+	<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+		<s:DropDownList id="availableList" 
+						dataProvider="{model.availableLayerTypes}" 
+						labelField="name"
+						width="150"/>
+		<s:TextInput id="zIndexInput" text="" 
+					 restrict="-[0-9]"
+					 widthInChars="5"/>
+		<s:Button label="Add" click="onClickAddButton(event)" 
+				  enabled="{availableList.selectedIndex != -1 &amp;&amp; zIndexInput.text != ''}"/>
 	</s:HGroup>
 </s:VGroup>

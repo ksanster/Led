@@ -16,6 +16,8 @@ package com.tengu.tools.leditor.model
 		private var ledLayers:ArrayCollection;
 		private var layer:IEditableLayer;
 		
+		private var cfgXml:XML;
+		
 		public function LedModel()
 		{
 			if (instance != null)
@@ -56,6 +58,16 @@ package com.tengu.tools.leditor.model
 		public function get availableLayerTypes ():IList 
 		{
 			return availableTypes;
+		}
+		
+		public function set config(value:XML):void 
+		{
+			cfgXml = value;
+		}
+		
+		public function get config():XML 
+		{
+			return cfgXml;
 		}
 	}
 }

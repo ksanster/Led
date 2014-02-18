@@ -3,6 +3,8 @@ package com.tengu.tools.leditor
 	import com.tengu.glue.core.impl.Context;
 	import com.tengu.log.LogFactory;
 	import com.tengu.log.targets.TraceTarget;
+	import com.tengu.tools.leditor.logic.EditorController;
+	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.view.EditorCanvas;
 	
 	import flash.display.Sprite;
@@ -27,6 +29,13 @@ package com.tengu.tools.leditor
 		protected override function configureInjector():void
 		{
 			super.configureInjector();
+			injector.map(IEditorController).toSingleton(EditorController);
+		}
+		
+		public override function start():void
+		{
+			injector.injectInto(mainApp.toolsPanel.layersPanel);
+			super.start();
 		}
 	}
 }

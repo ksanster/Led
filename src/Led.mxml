@@ -27,7 +27,7 @@
     <fx:Style source="style.css" />
 	
 	<s:layout>
-		<s:HorizontalLayout verticalAlign="middle" horizontalAlign="center" 
+		<s:HorizontalLayout verticalAlign="top" horizontalAlign="center" 
 							paddingLeft="5" paddingRight="5"
 							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
@@ -35,5 +35,5 @@
 	<s:BorderContainer width="500" height="600">
 		<s:SpriteVisualElement id="canvas" width="500" height="600"/>
 	</s:BorderContainer>
-	<controls:ToolsPanel width="300" height="100%"/>
+	<controls:ToolsPanel id="toolsPanel" width="300" height="100%"/>
 </s:WindowedApplication>

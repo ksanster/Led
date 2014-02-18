@@ -12,5 +12,8 @@ package com.tengu.tools.leditor.model.api
 		function get layers ():IList/*IEditableLayer*/;
 		function get availableLayerTypes ():IList/*ILayerInfo*/;
 		
+		function get config ():XML;
+		function set config (value:XML):void;
+		
 	}
 }
