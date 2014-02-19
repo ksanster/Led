@@ -3,17 +3,19 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:controls="com.tengu.tools.leditor.view.controls.*"
+			   frameRate="60"
                width="820" height="640" 
 			   left="5" top="5" bottom="5" right="5"
-			   creationComplete="onCreationComplete(event)" >
+			   addedToStage="onAddedToStage(event)" >
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
+		
 		import mx.events.FlexEvent;
 		
 		private var context:EditorContext;
 		
-		protected function onCreationComplete(event:FlexEvent):void
+		protected function onAddedToStage(event:Event):void
 		{
 			context = new EditorContext();
 			context.configure(this);

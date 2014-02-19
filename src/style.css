@@ -40,7 +40,7 @@ s|Button
 {
 	chromeColor: #44494b;
 	color: #bbbbbb;
-	cornerRadius: 2;
+	cornerRadius: 0;
 	focusColor: #334861;
 }
 
