@@ -4,7 +4,6 @@
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="scroll"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="scene"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="nd2d"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -19,9 +18,6 @@
   </compiler>
   <applications>
     <application path="Led.mxml">
-      <airExcludes/>
-    </application>
-    <application path="LevelEditor.mxml">
       <airExcludes/>
     </application>
   </applications>

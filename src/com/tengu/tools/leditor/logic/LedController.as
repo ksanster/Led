@@ -1,7 +1,8 @@
 package com.tengu.tools.leditor.logic
 {
 	import com.tengu.log.LogFactory;
-	import com.tengu.scroll.view.Screen2D;
+	import com.tengu.scene.api.IGameContainer;
+	import com.tengu.scene.api.IGameObject;
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
@@ -13,8 +14,8 @@ package com.tengu.tools.leditor.logic
 		private var model:ILedModel;
 		private var layerFactory:ILayerFactory;
 		
-		[Inject]
-		public var screen:Screen2D;
+		[Inject(name="mainScene")]
+		public var scene:IGameContainer;
 		
 		public function LedController()
 		{
@@ -35,6 +36,7 @@ package com.tengu.tools.leditor.logic
 			if (layer != null)
 			{
 				model.layers.addItem(layer);
+				scene.add(layer as IGameObject);				
 			}
 		}
 		
@@ -42,7 +44,8 @@ package com.tengu.tools.leditor.logic
 		{
 			LogFactory.getLogger(this).debug("remove", model.layers.getItemAt(index) );
 			
-			model.layers.removeItemAt(index);
+			const layer:IGameObject = model.layers.removeItemAt(index) as IGameObject;
+			scene.remove(layer);
 		}
 	}
 }

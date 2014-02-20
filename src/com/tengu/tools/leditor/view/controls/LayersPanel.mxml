@@ -30,10 +30,13 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.tengu.tools.leditor.api.IEditableLayer;
 			import com.tengu.tools.leditor.logic.api.IEditorController;
 			import com.tengu.tools.leditor.model.LayerInfo;
 			import com.tengu.tools.leditor.model.LedModel;
 			import com.tengu.tools.leditor.model.api.ILedModel;
+			
+			import spark.events.GridSelectionEvent;
 			
 			[Inject]
 			public var controller:IEditorController;
@@ -69,6 +72,20 @@
 				}
 				controller.removeLayer(index);
 				layerList.selectedIndex = -1;
+				model.activeLayer = null;
+			}
+			
+			protected function onChangeSelection(event:GridSelectionEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (layerList.selectedItem != null)
+				{
+					model.activeLayer = layerList.selectedItem as IEditableLayer;
+				}
+				else
+				{
+					model.activeLayer = null;
+				}
 			}
 			
 		]]>
@@ -76,7 +93,9 @@
 	
 	<s:DataGrid id="layerList"
 				dataProvider="{model.layers}" 
-				width="100%" height="120" rowHeight="20" >
+				width="100%" height="120" rowHeight="20"
+				selectionChange="onChangeSelection(event)"
+				>
 		<s:rowSeparator>
 			<fx:Component>
 				<s:Rect/>
