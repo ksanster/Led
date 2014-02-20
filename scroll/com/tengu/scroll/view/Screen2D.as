@@ -30,7 +30,6 @@ package com.tengu.scroll.view
 		{
             enableErrorChecking = true;
 			super(Context3DRenderMode.AUTO, 60, bounds );
-			sleep();
 		}
 		
 		public function configure ():void
@@ -44,7 +43,7 @@ package com.tengu.scroll.view
 		private function createSceneView ():void
 		{
             ndScene = new MainScene();
-//            setActiveScene(ndScene);
+            setActiveScene(ndScene);
 		}
 
         protected override function mainLoop(e:Event):void

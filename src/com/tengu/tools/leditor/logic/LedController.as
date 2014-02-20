@@ -1,18 +1,22 @@
 package com.tengu.tools.leditor.logic
 {
 	import com.tengu.log.LogFactory;
+	import com.tengu.scroll.view.Screen2D;
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.LedModel;
 	import com.tengu.tools.leditor.model.api.ILedModel;
 
-	public class EditorController implements IEditorController
+	public class LedController implements IEditorController
 	{
 		private var model:ILedModel;
 		private var layerFactory:ILayerFactory;
 		
-		public function EditorController()
+		[Inject]
+		public var screen:Screen2D;
+		
+		public function LedController()
 		{
 			initialize();
 		}

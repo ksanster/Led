@@ -46,7 +46,7 @@ package com.tengu.scroll.view
 
             sceneViewport.update((xCoord - viewport.centerX),
                                  (yCoord - viewport.centerY),
-                                  dZoom);
+                                 dZoom);
 
 			oldX = xCoord;
 			oldY = yCoord;

@@ -4,10 +4,9 @@ package com.tengu.tools.leditor
 	import com.tengu.log.LogFactory;
 	import com.tengu.log.targets.TraceTarget;
 	import com.tengu.scroll.view.Screen2D;
-	import com.tengu.tools.leditor.logic.EditorController;
+	import com.tengu.tools.leditor.logic.LedController;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	
-	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
@@ -30,7 +29,7 @@ package com.tengu.tools.leditor
 			mainApp = (contextView as Led);
 			screen2D = new Screen2D(ndBounds);
 			
-			holder.stage.addChild(screen2D);
+			holder.addChild(screen2D);
 		}
 		
 		protected override function initialize(contextView:Sprite):void
@@ -44,7 +43,7 @@ package com.tengu.tools.leditor
 		protected override function configureInjector():void
 		{
 			super.configureInjector();
-			injector.map(IEditorController).toSingleton(EditorController);
+			injector.map(IEditorController).toSingleton(LedController);
 			injector.map(Screen2D).toValue(screen2D);
 		}
 		
