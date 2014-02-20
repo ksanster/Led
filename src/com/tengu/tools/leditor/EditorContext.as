@@ -13,9 +13,13 @@ package com.tengu.tools.leditor
 	import com.tengu.scroll.display.views.SceneDisplayView;
 	import com.tengu.tools.leditor.logic.LedController;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
+	import com.tengu.tools.leditor.model.LedModel;
+	import com.tengu.tools.leditor.model.api.ILedModel;
 	
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
+	import flash.display.Stage;
 	import flash.geom.Rectangle;
 	
 	public class EditorContext extends Context
@@ -65,10 +69,14 @@ package com.tengu.tools.leditor
 		{
 			super.configureInjector();
 			injector.map(IEditorController).toSingleton(LedController);
+			injector.map(ILedModel).toValue(LedModel.instance);
+			
 			injector.map(ICallLaterManager).toValue(callLaterManager);
 			
+			injector.map(Stage).toValue(parentView.stage);
 			injector.map(IViewFactory).toValue(viewFactory);
 			injector.map(IGameContainer, "mainScene").toValue(scene);
+			injector.map(DisplayObject, "canvas").toValue(mainApp.canvas);
 			injector.map(IViewport).toValue(sceneView.viewport);
 		}
 		
@@ -76,6 +84,8 @@ package com.tengu.tools.leditor
 		{
 			injector.injectInto(mainApp.toolsPanel.layersPanel);
 			injector.injectInto(viewFactory);
+			
+			require(MouseExtension);
 			super.start();
 		}
 	}
