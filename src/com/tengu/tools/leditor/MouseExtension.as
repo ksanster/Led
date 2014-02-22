@@ -6,19 +6,29 @@ package com.tengu.tools.leditor
 	import com.tengu.tools.leditor.model.api.ILedModel;
 	
 	import flash.display.DisplayObject;
+	import flash.display.Shape;
 	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
 	
 	public class MouseExtension implements IFrameworkExtension
 	{
+		private static const TWEEN_EASING:Number = .85;
+		private static const MIN:Number = .1;
+		private const shape:Shape = new Shape(); 
+
 		private var oldX:Number;
 		private var oldY:Number;
+
+		private var tweenX:Number;
+		private var tweenY:Number;
+		
+		private var isTween:Boolean = false;
 		
 		[Inject]
 		public var stage:Stage;
 		
-		[Inject (name="canvas")]
+		[Inject (name="canvasHolder")]
 		public var canvas:DisplayObject;
 		
 		[Inject]
@@ -29,6 +39,7 @@ package com.tengu.tools.leditor
 		
 		public function MouseExtension()
 		{
+			super();
 		}
 		
 		public function configure(context:IContext):void
@@ -47,11 +58,31 @@ package com.tengu.tools.leditor
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		}
 		
+		private function startTween ():void
+		{
+			if (shape.hasEventListener(Event.ENTER_FRAME))
+			{
+				return;
+			}
+			shape.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		}
+		
+		private function stopTween ():void
+		{
+			if (!shape.hasEventListener(Event.ENTER_FRAME))
+			{
+				return;
+			}
+			tweenX = 0;
+			tweenY = 0;
+			shape.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+		}
+		
 		private function onMouseDown(event:MouseEvent):void
 		{
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
-
+			
 			if (!inBounds(x, y))
 			{
 				return;
@@ -74,7 +105,12 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			viewport.moveBy(x - oldX, y - oldY);
+			tweenX = oldX - x;
+			tweenY = oldY - y;
+			
+			trace("onMouseMove", tweenX, tweenY);
+			
+			viewport.moveBy(tweenX, tweenY);
 			
 			oldX = x;
 			oldY = y;
@@ -96,6 +132,34 @@ package com.tengu.tools.leditor
 			}
 
 			endDrag();
+			
+			if (tweenX != 0 || tweenY != 0)
+			{
+				startTween();
+			}
 		}
+		
+		
+		private function onEnterFrame(event:Event):void
+		{
+			tweenX = tweenX * TWEEN_EASING;
+			tweenY = tweenY * TWEEN_EASING;
+			
+			viewport.moveBy(tweenX, tweenY);
+			
+			if (Math.abs(tweenX) < MIN)
+			{
+				tweenX = 0;
+			}
+			if (Math.abs(tweenY) < MIN)
+			{
+				tweenY = 0;
+			}
+			if (tweenX == 0 && tweenY == 0)
+			{
+				stopTween();
+			}
+		}
+
 	}
 }

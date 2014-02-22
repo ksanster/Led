@@ -3,6 +3,7 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.log.LogFactory;
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.api.IGameObject;
+	import com.tengu.scene.api.IViewport;
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
@@ -16,6 +17,9 @@ package com.tengu.tools.leditor.logic
 		
 		[Inject(name="mainScene")]
 		public var scene:IGameContainer;
+		
+		[Inject]
+		public var viewport:IViewport;
 		
 		public function LedController()
 		{
@@ -46,6 +50,11 @@ package com.tengu.tools.leditor.logic
 			
 			const layer:IGameObject = model.layers.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
+		}
+		
+		public function moveCameraToCenter():void
+		{
+			viewport.moveTo(0, 0);
 		}
 	}
 }

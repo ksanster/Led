@@ -6,39 +6,88 @@ package com.tengu.scroll.display.views
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.api.IGameObject;
 	import com.tengu.scene.api.IViewFactory;
-	import com.tengu.scene.api.IViewport;
 	import com.tengu.scene.events.GameContainerEvent;
-	import com.tengu.scene.objects.GameContainer;
-	import com.tengu.scroll.display.DisplayViewport;
+	
+	import flash.display.Sprite;
 	
 	public class BaseDisplayContainerView extends BaseDisplayView implements IContainerView, ICameraView
 	{
 		protected var viewFactory:IViewFactory;
 		protected var container:IGameContainer;
 		
+		protected var holder:Sprite;
+		
+		protected var cameraX:Number = 0;
+		protected var cameraY:Number = 0;
+		
+		protected var cameraScale:Number 	= 1;
+		protected var cameraRotation:Number = 0;
+		
+		protected var cameraWidth:uint = 0;
+		protected var cameraHeight:uint = 0; 
+		protected var cameraHalfWidth:uint  = 0;
+		protected var cameraHalfHeight:uint = 0; 
+		
 		public function BaseDisplayContainerView()
 		{
 			super();
 		}
 		
+		protected override function initialize():void
+		{
+			super.initialize();
+			holder = new Sprite();
+			holder.mouseEnabled = false;
+			addChild(holder);
+			
+			awake();
+		}
+		
+		protected override function updatePosition():void
+		{
+			holder.x = - cameraX * cameraScale + cameraWidth - cameraHalfWidth * cameraScale;
+			holder.y = - cameraY * cameraScale + cameraHeight - cameraHalfHeight * cameraScale;
+		}
+		
+		protected override function updateScale():void
+		{
+			holder.scaleX = cameraScale;
+			holder.scaleY = cameraScale;
+		}
+		
+		protected override function updateRotation():void
+		{
+			rotation = cameraRotation;
+		}
+		
 		public function setCameraScale (value:Number):void
 		{
-			//Abstract
+			cameraScale = value;
+			invalidate(VALIDATION_FLAG_SCALE);
 		}
 		
 		public function setCameraSize (width:uint, height:uint):void
 		{
-			//Abstract
+			cameraWidth  = width;
+			cameraHeight = height; 
+			
+			cameraHalfWidth  = width * .5;
+			cameraHalfHeight = height * .5;
+			
+			invalidate(VALIDATION_FLAG_COORDS);
 		}
 		
 		public function setCameraRotation (angle:Number):void
 		{
-			//Abstract
+			cameraRotation = angle;
+			invalidate(VALIDATION_FLAG_ROTATION);
 		}
 		
 		public function moveCamera (x:Number, y:Number):void
 		{
-			//Abstract
+			cameraX = x;
+			cameraY = y;
+			invalidate(VALIDATION_FLAG_COORDS);
 		}
 		
 		public override function assignObject(value:IGameObject):void
@@ -66,6 +115,8 @@ package com.tengu.scroll.display.views
 		
 		public function setVisibleBounds(value:IntRectangle):void
 		{
+			setCameraSize(value.width, value.height);
+			moveCamera(value.x, value.y);
 		}
 		
 		public function setViewFactory(value:IViewFactory):void

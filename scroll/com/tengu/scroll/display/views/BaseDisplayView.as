@@ -12,8 +12,10 @@ package com.tengu.scroll.display.views
 		public static const VALIDATION_FLAG_ALL:uint 		= 0xFF;
 		public static const VALIDATION_FLAG_COORDS:uint 	= 0x1;
 		public static const VALIDATION_FLAG_BOUNDS:uint 	= 0x2;
-		public static const VALIDATION_FLAG_VIEWPORT:uint 	= 0x4;
-		public static const VALIDATION_FLAG_SORT:uint 		= 0x8;
+		public static const VALIDATION_FLAG_SCALE:uint 		= 0x4;
+		public static const VALIDATION_FLAG_ROTATION:uint 	= 0x8;
+		public static const VALIDATION_FLAG_VIEWPORT:uint 	= 0x10;
+		public static const VALIDATION_FLAG_SORT:uint 		= 0x20;
 
 		private var validating:Boolean  = false;
 
@@ -34,7 +36,6 @@ package com.tengu.scroll.display.views
 		protected function initialize():void
 		{
 			mouseEnabled = false;
-			mouseChildren = false;
 			
 		}
 		
@@ -69,6 +70,16 @@ package com.tengu.scroll.display.views
 		}
 		
 		protected function updateBounds():void
+		{
+			// Abstract
+		}
+		
+		protected function updateScale():void
+		{
+			// Abstract
+		}
+		
+		protected function updateRotation():void
 		{
 			// Abstract
 		}
@@ -145,6 +156,8 @@ package com.tengu.scroll.display.views
 		{
 			const coordsInvalid:Boolean = isInvalid(VALIDATION_FLAG_COORDS);
 			const boundsInvalid:Boolean = isInvalid(VALIDATION_FLAG_BOUNDS);
+			const scaleInvalid:Boolean = isInvalid(VALIDATION_FLAG_SCALE);
+			const angleInvalid:Boolean = isInvalid(VALIDATION_FLAG_ROTATION);
 			const viewportInvalid:Boolean = isInvalid(VALIDATION_FLAG_VIEWPORT);
 			
 			if (coordsInvalid)
@@ -157,6 +170,18 @@ package com.tengu.scroll.display.views
 			{
 				updateBounds();
 				unsetValidationFlag(VALIDATION_FLAG_BOUNDS);
+			}
+
+			if (scaleInvalid)
+			{
+				updateScale();
+				unsetValidationFlag(VALIDATION_FLAG_SCALE);
+			}
+
+			if (angleInvalid)
+			{
+				updateRotation();
+				unsetValidationFlag(VALIDATION_FLAG_ROTATION);
 			}
 			
 			if (viewportInvalid)

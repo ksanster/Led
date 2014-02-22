@@ -11,8 +11,6 @@
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
 		
-		import mx.events.FlexEvent;
-		
 		private var context:EditorContext;
 		
 		protected function onAddedToStage(event:Event):void
@@ -34,8 +32,9 @@
 							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
 
-	<s:BorderContainer width="500" height="600">
+	<s:BorderContainer width="500" height="600" id="canvasHolder">
 		<s:SpriteVisualElement id="canvas" width="500" height="600"/>
 	</s:BorderContainer>
+		
 	<controls:ToolsPanel id="toolsPanel" width="300" height="100%"/>
 </s:WindowedApplication>

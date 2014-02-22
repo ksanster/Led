@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:controls="com.tengu.tools.leditor.view.controls.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:controls="com.tengu.tools.leditor.view.controls.*"
+		 horizontalAlign="center">
 	<fx:Script>
 		<![CDATA[
-			import mx.controls.Alert;
+			import com.tengu.tools.leditor.logic.api.IEditorController;
+			
+			[Inject]
+			public var controller:IEditorController;
+
+			protected function onCLick(event:MouseEvent):void
+			{
+				controller.moveCameraToCenter();
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -12,5 +23,5 @@
 	</fx:Declarations>
 	
 	<controls:LayersPanel id="layersPanel" width="100%" />
-	<s:Button click="Alert.show('Hello, world', 'title')" label="Say Hello"/>
+	<s:Button click="onCLick(event)" label="Center camera"/>
 </s:VGroup>

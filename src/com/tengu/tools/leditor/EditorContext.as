@@ -76,14 +76,18 @@ package com.tengu.tools.leditor
 			injector.map(Stage).toValue(parentView.stage);
 			injector.map(IViewFactory).toValue(viewFactory);
 			injector.map(IGameContainer, "mainScene").toValue(scene);
+			injector.map(DisplayObject, "canvasHolder").toValue(mainApp.canvasHolder);
 			injector.map(DisplayObject, "canvas").toValue(mainApp.canvas);
 			injector.map(IViewport).toValue(sceneView.viewport);
 		}
 		
 		public override function start():void
 		{
+			injector.injectInto(mainApp.toolsPanel);
 			injector.injectInto(mainApp.toolsPanel.layersPanel);
 			injector.injectInto(viewFactory);
+			
+			sceneView.viewport.setSize(mainApp.canvas.width, mainApp.canvas.height);
 			
 			require(MouseExtension);
 			super.start();
