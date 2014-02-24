@@ -22,6 +22,8 @@ package com.tengu.tools.leditor
 	import flash.display.Stage;
 	import flash.geom.Rectangle;
 	
+	import spark.components.Group;
+	
 	public class EditorContext extends Context
 	{
 		private var mainApp:Led;
@@ -77,6 +79,7 @@ package com.tengu.tools.leditor
 			injector.map(IViewFactory).toValue(viewFactory);
 			injector.map(IGameContainer, "mainScene").toValue(scene);
 			injector.map(DisplayObject, "canvasHolder").toValue(mainApp.canvasHolder);
+			injector.map(Group, "layerControlsHolder").toValue(mainApp.toolsPanel.layerControlsHolder);
 			injector.map(DisplayObject, "canvas").toValue(mainApp.canvas);
 			injector.map(IViewport).toValue(sceneView.viewport);
 		}

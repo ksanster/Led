@@ -9,6 +9,8 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.LedModel;
 	import com.tengu.tools.leditor.model.api.ILedModel;
+	
+	import spark.components.Group;
 
 	public class LedController implements IEditorController
 	{
@@ -20,6 +22,9 @@ package com.tengu.tools.leditor.logic
 		
 		[Inject]
 		public var viewport:IViewport;
+		
+		[Inject(name="layerControlsHolder")]
+		public var layerControlsHolder:Group;
 		
 		public function LedController()
 		{
@@ -42,6 +47,9 @@ package com.tengu.tools.leditor.logic
 				model.layers.addItem(layer);
 				scene.add(layer as IGameObject);				
 			}
+			
+			layerControlsHolder.removeChildren();
+			
 		}
 		
 		public function removeLayer (index:int):void
@@ -50,6 +58,8 @@ package com.tengu.tools.leditor.logic
 			
 			const layer:IGameObject = model.layers.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
+			
+			layerControlsHolder.removeChildren();
 		}
 		
 		public function moveCameraToCenter():void

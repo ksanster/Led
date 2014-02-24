@@ -24,4 +24,5 @@
 	
 	<controls:LayersPanel id="layersPanel" width="100%" />
 	<s:Button click="onCLick(event)" label="Center camera"/>
+	<s:Group id="layerControlsHolder"/>
 </s:VGroup>
