@@ -5,12 +5,11 @@ package com.tengu.tools.leditor.assets.api
 
 	public interface IAssetManager
 	{
+		function get assetList ():Vector.<IAssetData>;
+		
 		function setPreviewSize (width:uint, height:uint):void;
 		
-		function addBitmap (id:String, bitmap:BitmapData):void;
-		
-		function getBitmap (id:String):Bitmap;
-		function getBitmapPreview (id:String):Bitmap;
-		
+		function addAsset (id:String, bitmapData:BitmapData):void;
+		function getAsset (id:String):IAssetData;
 	}
 }

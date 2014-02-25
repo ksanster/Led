@@ -4,11 +4,14 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.api.IGameObject;
 	import com.tengu.scene.api.IViewport;
+	import com.tengu.tools.leditor.api.IEditableLayer;
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.LedModel;
 	import com.tengu.tools.leditor.model.api.ILedModel;
+	
+	import mx.core.UIComponent;
 	
 	import spark.components.Group;
 
@@ -47,9 +50,6 @@ package com.tengu.tools.leditor.logic
 				model.layers.addItem(layer);
 				scene.add(layer as IGameObject);				
 			}
-			
-			layerControlsHolder.removeChildren();
-			
 		}
 		
 		public function removeLayer (index:int):void
@@ -58,8 +58,25 @@ package com.tengu.tools.leditor.logic
 			
 			const layer:IGameObject = model.layers.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
-			
+		}
+		
+		public function setActiveLayer (layer:IEditableLayer):void
+		{
 			layerControlsHolder.removeChildren();
+			if (layer != null)
+			{
+				model.activeLayer = layer;
+				const controls:UIComponent = layerFactory.createControls(layer.type);
+				if (controls != null)
+				{
+					controls.percentWidth = 100;
+					layerControlsHolder.addElement(controls);
+				}
+			}
+			else
+			{
+				model.activeLayer = null;
+			}
 		}
 		
 		public function moveCameraToCenter():void

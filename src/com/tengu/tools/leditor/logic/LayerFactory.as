@@ -6,6 +6,7 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.enum.LayerType;
+	import com.tengu.tools.leditor.view.controls.InfinityBitmapSettings;
 	
 	import mx.core.UIComponent;
 	
@@ -13,6 +14,8 @@ package com.tengu.tools.leditor.logic
 	{
 		private var layerClasses:Object;
 		private var controlClasses:Object;
+		
+		
 		public function LayerFactory()
 		{
 			initialize();
@@ -24,8 +27,7 @@ package com.tengu.tools.leditor.logic
 			controlClasses = {};
 			
 			layerClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapLayer;
-
-			layerClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapLayer;
+			controlClasses[LayerType.INFINITE_BITMAP] = new InfinityBitmapSettings();
 		}
 		
 		public function create(layerType:String, zIndex:int):ILayer
@@ -47,7 +49,7 @@ package com.tengu.tools.leditor.logic
 		
 		public function createControls (layerType:String):UIComponent
 		{
-			
+			return controlClasses[layerType];
 		}
 	}
 }

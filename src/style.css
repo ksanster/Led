@@ -44,6 +44,14 @@ s|Button
 	focusColor: #334861;
 }
 
+s|Label.rendererCaption
+{
+	color:#FFFFFF;
+	fontSize:10;
+	backgroundAlpha:0.3;
+	backgroundColor:#000000;
+}
+
 mx|Alert 
 {
 	color: #000000;

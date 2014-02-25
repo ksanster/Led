@@ -11,6 +11,9 @@ package com.tengu.tools.leditor
 	import com.tengu.scene.objects.GameContainer;
 	import com.tengu.scroll.display.NativeViewFactory;
 	import com.tengu.scroll.display.views.SceneDisplayView;
+	import com.tengu.tools.leditor.assets.AssetManager;
+	import com.tengu.tools.leditor.assets.EmbeddedResources;
+	import com.tengu.tools.leditor.assets.api.IAssetManager;
 	import com.tengu.tools.leditor.logic.LedController;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.model.LedModel;
@@ -32,6 +35,7 @@ package com.tengu.tools.leditor
 		private var sceneView:SceneDisplayView;
 		private var viewFactory:IViewFactory;
 		
+		private var assetManager:AssetManager;
 		private var callLaterManager:ICallLaterManager;
 		
 		public function EditorContext()
@@ -59,11 +63,18 @@ package com.tengu.tools.leditor
 			holder.addChild(sceneView);
 		}
 		
+		private function configureAssets():void
+		{
+			assetManager = AssetManager.instance;
+			assetManager.importEmbedded(EmbeddedResources);
+		}
+		
 		protected override function initialize(contextView:Sprite):void
 		{
 			LogFactory.addTarget(new TraceTarget());
 
 			createScene(contextView);
+			configureAssets();
 			super.initialize(contextView);
 		}
 		
@@ -82,6 +93,8 @@ package com.tengu.tools.leditor
 			injector.map(Group, "layerControlsHolder").toValue(mainApp.toolsPanel.layerControlsHolder);
 			injector.map(DisplayObject, "canvas").toValue(mainApp.canvas);
 			injector.map(IViewport).toValue(sceneView.viewport);
+
+			injector.map(IAssetManager).toValue(assetManager);
 		}
 		
 		public override function start():void

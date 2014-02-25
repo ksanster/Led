@@ -77,16 +77,9 @@
 			
 			protected function onChangeSelection(event:GridSelectionEvent):void
 			{
-				// TODO Auto-generated method stub
-				if (layerList.selectedItem != null)
-				{
-					model.activeLayer = layerList.selectedItem as IEditableLayer;
-				}
-				else
-				{
-					model.activeLayer = null;
-				}
+				controller.setActiveLayer(layerList.selectedItem as IEditableLayer);
 			}
+			
 			
 		]]>
 	</fx:Script>

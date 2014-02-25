@@ -108,8 +108,6 @@ package com.tengu.tools.leditor
 			tweenX = oldX - x;
 			tweenY = oldY - y;
 			
-			trace("onMouseMove", tweenX, tweenY);
-			
 			viewport.moveBy(tweenX, tweenY);
 			
 			oldX = x;
