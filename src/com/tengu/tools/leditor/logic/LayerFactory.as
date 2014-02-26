@@ -27,7 +27,7 @@ package com.tengu.tools.leditor.logic
 			controlClasses = {};
 			
 			layerClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapLayer;
-			controlClasses[LayerType.INFINITE_BITMAP] = new InfinityBitmapSettings();
+			controlClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapSettings;
 		}
 		
 		public function create(layerType:String, zIndex:int):ILayer
@@ -49,7 +49,8 @@ package com.tengu.tools.leditor.logic
 		
 		public function createControls (layerType:String):UIComponent
 		{
-			return controlClasses[layerType];
+			const componentClass:Class = controlClasses[layerType];
+			return new componentClass();
 		}
 	}
 }

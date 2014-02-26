@@ -2,18 +2,22 @@ package com.tengu.scroll.layers
 {
 	import com.tengu.scene.api.IGameContainer;
 	
+	import flash.display.BitmapData;
+	import flash.events.Event;
+	
 	public class InfinityBitmapLayer extends BaseLayer implements IGameContainer
 	{
-		private var bitmapName:String;
+		private var bitmapData:BitmapData;
 		
-		public function set bitmap(value:String):void 
+		public function set bitmap(value:BitmapData):void 
 		{
-			bitmapName = value;
+			bitmapData = value;
+			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
-		public function get bitmap():String 
+		public function get bitmap():BitmapData 
 		{
-			return bitmapName;
+			return bitmapData;
 		}
 		
 		public function InfinityBitmapLayer()

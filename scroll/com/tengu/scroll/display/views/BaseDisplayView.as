@@ -10,7 +10,7 @@ package com.tengu.scroll.display.views
 	public class BaseDisplayView extends Sprite implements IDeferredCaller
 	{
 		public static const VALIDATION_FLAG_ALL:uint 		= 0xFF;
-		public static const VALIDATION_FLAG_COORDS:uint 	= 0x1;
+		public static const VALIDATION_FLAG_POSITION:uint 	= 0x1;
 		public static const VALIDATION_FLAG_BOUNDS:uint 	= 0x2;
 		public static const VALIDATION_FLAG_SCALE:uint 		= 0x4;
 		public static const VALIDATION_FLAG_ROTATION:uint 	= 0x8;
@@ -154,7 +154,7 @@ package com.tengu.scroll.display.views
 		
 		public function validate():void
 		{
-			const coordsInvalid:Boolean = isInvalid(VALIDATION_FLAG_COORDS);
+			const coordsInvalid:Boolean = isInvalid(VALIDATION_FLAG_POSITION);
 			const boundsInvalid:Boolean = isInvalid(VALIDATION_FLAG_BOUNDS);
 			const scaleInvalid:Boolean = isInvalid(VALIDATION_FLAG_SCALE);
 			const angleInvalid:Boolean = isInvalid(VALIDATION_FLAG_ROTATION);
@@ -163,7 +163,7 @@ package com.tengu.scroll.display.views
 			if (coordsInvalid)
 			{
 				updatePosition();
-				unsetValidationFlag(VALIDATION_FLAG_COORDS);
+				unsetValidationFlag(VALIDATION_FLAG_POSITION);
 			}
 
 			if (boundsInvalid)
@@ -211,7 +211,7 @@ package com.tengu.scroll.display.views
 		
 		protected function onCoordsChanged(event:GameObjectEvent):void
 		{
-			invalidate(VALIDATION_FLAG_COORDS);
+			invalidate(VALIDATION_FLAG_POSITION);
 		}
 		
 		protected function onBoundsChanged(event:GameObjectEvent):void

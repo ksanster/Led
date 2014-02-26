@@ -9,6 +9,7 @@ package com.tengu.tools.leditor.assets
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
 	import flash.utils.describeType;
 	
 	import mx.collections.ArrayCollection;
@@ -23,8 +24,8 @@ package com.tengu.tools.leditor.assets
 		public static const instance:AssetManager = new AssetManager();
 		
 		private var assets:Vector.<IAssetData>;
-		
 		private var assetsById:Object;
+		private var indices:Dictionary;		
 		
 		[Bindable]
 		public var previewWidth:uint	= DEFAULT_SIZE;
@@ -49,6 +50,7 @@ package com.tengu.tools.leditor.assets
 			assets = new Vector.<IAssetData>();
 			assetsById  = {};
 			assetCollection = new ArrayCollection();
+			indices = new Dictionary();
 		}
 		
 		public final function setPreviewSize(width:uint, height:uint):void
@@ -62,20 +64,30 @@ package com.tengu.tools.leditor.assets
 			const asset:IAssetData = new AssetData(	id, 
 													bitmapData,
 													generatePreview(bitmapData));
-			
-			assetsById[id] = asset;
-			if (assets.indexOf(id) == -1)
+			var index:int = assets.indexOf(id);
+			if (index == -1)
 			{
-				assets[assets.length] = asset;
+				index = assets.length;
+				assets[index] = asset;
 				assetCollection.addItem(asset);
 			}
-			
+			indices[bitmapData] = index;
+			assetsById[id] = asset;
 			LogFactory.getLogger(this).debug("bitmap added: " + id);
 		}
 		
 		public final function getAsset (id:String):IAssetData
 		{
 			return assetsById[id] || DEFAULT_ASSET;
+		}
+		
+		public function getIndexByBitmap (bitmap:BitmapData):int
+		{
+			if (indices[bitmap] == null)
+			{
+				return -1;
+			}
+			return indices[bitmap];
 		}
 		
 		public function importEmbedded (sourceClass:Class):void

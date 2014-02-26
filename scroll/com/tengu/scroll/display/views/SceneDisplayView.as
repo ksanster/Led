@@ -1,16 +1,18 @@
 package com.tengu.scroll.display.views
 {
 	import com.tengu.scene.api.IGameObject;
+	import com.tengu.scene.api.IScrolledViewport;
 	import com.tengu.scene.api.IViewport;
 	import com.tengu.scene.events.GameContainerEvent;
 	import com.tengu.scroll.display.DisplayViewport;
+	import com.tengu.tools.leditor.api.ILayer;
 	
 	import flash.utils.Dictionary;
 
 	public class SceneDisplayView extends BaseDisplayContainerView
 	{
 		protected var children:Dictionary;
-		protected var sceneViewport:IViewport;
+		protected var sceneViewport:IScrolledViewport;
 		
 		public function get viewport():IViewport 
 		{
@@ -27,16 +29,18 @@ package com.tengu.scroll.display.views
 			children = new Dictionary();
 			
 			sceneViewport = new DisplayViewport(this);
+			sceneViewport.focalLength = 300;
 		}
 		
 		protected override function onChildAdded(event:GameContainerEvent):void
 		{
 			const child:IGameObject = event.gameObject;
+			const focalIndex:int = (child as ILayer).focalIndex;
 			const view:BaseDisplayContainerView = viewFactory.createView(child) as BaseDisplayContainerView;
 			if (view != null)
 			{
 				children[child] = view;
-				sceneViewport.addSceneView(view);
+				sceneViewport.addSceneView(view, focalIndex, focalIndex);
 			}
 		}
 		

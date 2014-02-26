@@ -74,7 +74,7 @@ package com.tengu.scroll.display.views
 			cameraHalfWidth  = width * .5;
 			cameraHalfHeight = height * .5;
 			
-			invalidate(VALIDATION_FLAG_COORDS);
+			invalidate(VALIDATION_FLAG_POSITION);
 		}
 		
 		public function setCameraRotation (angle:Number):void
@@ -87,7 +87,7 @@ package com.tengu.scroll.display.views
 		{
 			cameraX = x;
 			cameraY = y;
-			invalidate(VALIDATION_FLAG_COORDS);
+			invalidate(VALIDATION_FLAG_POSITION);
 		}
 		
 		public override function assignObject(value:IGameObject):void

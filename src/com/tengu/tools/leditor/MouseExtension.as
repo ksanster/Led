@@ -105,8 +105,8 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			tweenX = oldX - x;
-			tweenY = oldY - y;
+			tweenX = x - oldX;
+			tweenY = y - oldY;
 			
 			viewport.moveBy(tweenX, tweenY);
 			

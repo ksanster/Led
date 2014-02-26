@@ -2,11 +2,11 @@ package com.tengu.scene.render
 {
     import com.tengu.scene.api.ICameraView;
     import com.tengu.scene.api.IContainerView;
-    import com.tengu.scene.api.IViewport;
+    import com.tengu.scene.api.IScrolledViewport;
     
     import flash.utils.Dictionary;
 
-    public class ParallaxViewport implements IViewport
+    public class ParallaxViewport implements IScrolledViewport
 	{
         private static const DUMP:Number = .1;
 

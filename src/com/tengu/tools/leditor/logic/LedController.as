@@ -62,7 +62,7 @@ package com.tengu.tools.leditor.logic
 		
 		public function setActiveLayer (layer:IEditableLayer):void
 		{
-			layerControlsHolder.removeChildren();
+			layerControlsHolder.removeAllElements();
 			if (layer != null)
 			{
 				model.activeLayer = layer;
