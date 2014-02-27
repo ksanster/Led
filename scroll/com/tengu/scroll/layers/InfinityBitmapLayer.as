@@ -24,5 +24,15 @@ package com.tengu.scroll.layers
 		{
 			super();
 		}
+		
+		public override function load(value:XML):void
+		{
+			
+		}
+		
+		public override function save():XML
+		{
+			
+		}
 	}
 }

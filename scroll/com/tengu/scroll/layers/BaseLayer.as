@@ -3,8 +3,6 @@ package com.tengu.scroll.layers
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.objects.GameContainer;
 	import com.tengu.tools.leditor.api.IEditableLayer;
-	import com.tengu.tools.leditor.api.ILayer;
-	import com.tengu.tools.leditor.api.ILayerInfo;
 	
 	public class BaseLayer extends GameContainer implements IGameContainer, IEditableLayer
 	{
@@ -43,6 +41,5 @@ package com.tengu.scroll.layers
 		{
 			//Abstract
 		}
-
 	}
 }
