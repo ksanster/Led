@@ -17,6 +17,17 @@ package com.tengu.tools.leditor.model
 		private var layer:IEditableLayer;
 		
 		private var cfgXml:XML;
+		private var fileName:String;
+		
+		public function set projectFileName(value:String):void 
+		{
+			fileName = value;
+		}
+		
+		public function get projectFileName():String 
+		{
+			return fileName;
+		}
 		
 		public function LedModel()
 		{

@@ -6,6 +6,9 @@ package com.tengu.tools.leditor.model.api
 
 	public interface ILedModel
 	{
+		function set projectFileName(value:String):void; 
+		function get projectFileName():String;
+
 		function get activeLayer ():IEditableLayer;
 		function set activeLayer (value:IEditableLayer):void;
 		
