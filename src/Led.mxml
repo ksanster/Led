@@ -6,12 +6,17 @@
 			   frameRate="60"
                width="820" height="640" 
 			   left="5" top="5" bottom="5" right="5"
-			   addedToStage="onAddedToStage(event)" >
+			   addedToStage="onAddedToStage(event)" 
+			   closing="onClosing(event)">
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
+		import com.tengu.tools.leditor.model.LedModel;
 		
 		private var context:EditorContext;
+		
+		[Bindable]
+		private var model:LedModel = LedModel.instance;
 		
 		protected function onAddedToStage(event:Event):void
 		{
@@ -21,20 +26,26 @@
 			context.start();
 		}
 		
+		protected function onClosing(event:Event):void
+		{
+			mainMenu.showClosingAlert();
+		}
+		
 	]]>
     </fx:Script>
 
     <fx:Style source="style.css" />
 	
 	<s:layout>
-		<s:HorizontalLayout verticalAlign="top" horizontalAlign="center" 
-							paddingLeft="5" paddingRight="5"
+		<s:VerticalLayout  paddingLeft="5" paddingRight="5"
 							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
-
-	<s:BorderContainer width="500" height="600" id="canvasHolder">
-		<s:SpriteVisualElement id="canvas" width="500" height="600"/>
-	</s:BorderContainer>
-		
-	<controls:ToolsPanel id="toolsPanel" width="300" height="100%"/>
+	<controls:MainMenu id="mainMenu" width="100%"/>
+	<s:HGroup verticalAlign="top" horizontalAlign="center">
+		<s:BorderContainer width="{model.screenSettings.viewportWidth}" height="{model.screenSettings.viewportHeight}" id="canvasHolder">
+			<s:SpriteVisualElement id="canvas" width="500" height="600"/>
+		</s:BorderContainer>
+			
+		<controls:ToolsPanel id="toolsPanel" width="300" height="100%"/>
+	</s:HGroup>
 </s:WindowedApplication>

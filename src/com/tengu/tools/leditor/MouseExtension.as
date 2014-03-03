@@ -3,7 +3,7 @@ package com.tengu.tools.leditor
 	import com.tengu.glue.core.api.IContext;
 	import com.tengu.glue.core.api.IFrameworkExtension;
 	import com.tengu.scene.api.IViewport;
-	import com.tengu.tools.leditor.model.api.ILedModel;
+	import com.tengu.tools.leditor.model.LedModel;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -32,7 +32,7 @@ package com.tengu.tools.leditor
 		public var canvas:DisplayObject;
 		
 		[Inject]
-		public var model:ILedModel;
+		public var model:LedModel;
 		
 		[Inject]
 		public var viewport:IViewport;
@@ -94,9 +94,9 @@ package com.tengu.tools.leditor
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			
-			if (model.activeLayer != null)
+			if (model.layers.activeLayer != null)
 			{
-				model.activeLayer.mouseDown(x, y);
+				model.layers.activeLayer.mouseDown(x, y);
 			}
 		}
 		
@@ -113,9 +113,9 @@ package com.tengu.tools.leditor
 			oldX = x;
 			oldY = y;
 
-			if (model.activeLayer != null)
+			if (model.layers.activeLayer != null)
 			{
-				model.activeLayer.mouseMove(x, y);
+				model.layers.activeLayer.mouseMove(x, y);
 			}
 		}
 		
@@ -124,9 +124,9 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 
-			if (model.activeLayer != null)
+			if (model.layers.activeLayer != null)
 			{
-				model.activeLayer.mouseUp(x, y);
+				model.layers.activeLayer.mouseUp(x, y);
 			}
 
 			endDrag();

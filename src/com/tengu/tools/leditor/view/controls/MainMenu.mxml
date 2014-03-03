@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:MenuBar xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			xmlns:s="library://ns.adobe.com/flex/spark" 
+			xmlns:mx="library://ns.adobe.com/flex/mx"
+			labelField="@label"
+			dataProvider="{applicationMenu}"
+			itemClick="onClickItem(event)">
+	<fx:Declarations>
+		<fx:XMLList id="applicationMenu">
+			<menuitem label="File">
+				<menuitem label="New" data="{NEW_PROJECT}" />
+				<menuitem label="Save" data="{SAVE_PROJECT}" enabled="{!model.files.saved}"/>
+				<menuitem type="separator"/>
+				<menuitem label="Quit" data="{QUIT}" enabled="{model.files.saved}"/>
+			</menuitem>
+			<menuitem label="View">
+				<menuitem label="Design view" type="radio" groupName="view" toggled="true" data="MainWindow"/>
+				<menuitem label="Source code" type="radio" groupName="view" data="CodeWindow"/>
+				<menuitem label="Refresh" data="Refresh"/>
+			</menuitem>
+			<menuitem type="separator"/>
+			<menuitem label="Help">
+				<menuitem label="About" data="About" />
+			</menuitem >
+		</fx:XMLList>
+	</fx:Declarations>
+
+	<fx:Script>
+		<![CDATA[
+			import com.tengu.tools.leditor.logic.LedController;
+			import com.tengu.tools.leditor.model.LedModel;
+			
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.events.MenuEvent;
+
+			private static const NEW_PROJECT:String 	= "new";
+			private static const SAVE_PROJECT:String 	= "save";
+			private static const QUIT:String 			= "quit";
+
+			[Inject]
+			public var controller:LedController;
+			
+			[Inject]
+			public var model:LedModel;
+
+			[Inject]
+			public var mainApp:Led;
+			
+			public function showClosingAlert():void
+			{
+				if (!model.files.saved)
+				{
+					Alert.show("Сохранить изменения?", "", Alert.YES && Alert.NO, this, onSaveRequest);
+				}
+				else
+				{
+					try
+					{
+						mainApp.close();
+					}
+					catch (error:Error)
+					{
+						//Ignore
+					}
+				}
+			}
+			
+			private function onClickItem(event:MenuEvent):void
+			{
+				var menuItem:String = event.item.@data; 
+				
+				switch (menuItem) 
+				{
+					case NEW_PROJECT:
+						break;
+					case SAVE_PROJECT:
+						controller.saveProject();
+						break;
+					case QUIT:
+						showClosingAlert();
+						break;
+				}
+			}
+			
+			private function onSaveRequest(event:CloseEvent):void
+				
+			{
+				if (event.detail == Alert.YES)
+				{
+					controller.saveProject();
+				}
+				mainApp.close();
+			}
+			
+		]]>
+	</fx:Script>
+</mx:MenuBar>

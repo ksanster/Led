@@ -34,7 +34,6 @@
 			import com.tengu.tools.leditor.logic.api.IEditorController;
 			import com.tengu.tools.leditor.model.LayerInfo;
 			import com.tengu.tools.leditor.model.LedModel;
-			import com.tengu.tools.leditor.model.api.ILedModel;
 			
 			import spark.events.GridSelectionEvent;
 			
@@ -42,7 +41,7 @@
 			public var controller:IEditorController;
 			
 			[Bindable]
-			public var model:ILedModel = LedModel.instance;
+			public var model:LedModel = LedModel.instance;
 			
 			private function getRenderer(item:Object, column:GridColumn):ClassFactory
 			{
@@ -72,7 +71,7 @@
 				}
 				controller.removeLayer(index);
 				layerList.selectedIndex = -1;
-				model.activeLayer = null;
+				model.layers.activeLayer = null;
 			}
 			
 			protected function onChangeSelection(event:GridSelectionEvent):void
@@ -85,7 +84,7 @@
 	</fx:Script>
 	
 	<s:DataGrid id="layerList"
-				dataProvider="{model.layers}" 
+				dataProvider="{model.layers.layerList}" 
 				width="100%" height="120" rowHeight="20"
 				selectionChange="onChangeSelection(event)"
 				>
@@ -108,7 +107,7 @@
 	<s:Label text="New layer"/>
 	<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
 		<s:DropDownList id="availableList" 
-						dataProvider="{model.availableLayerTypes}" 
+						dataProvider="{model.layers.availableLayerTypes}" 
 						labelField="name"
 						width="150"/>
 		<s:TextInput id="zIndexInput" text="" 

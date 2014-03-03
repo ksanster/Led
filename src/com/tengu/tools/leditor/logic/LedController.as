@@ -9,7 +9,6 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.LedModel;
-	import com.tengu.tools.leditor.model.api.ILedModel;
 	
 	import mx.core.UIComponent;
 	
@@ -17,7 +16,7 @@ package com.tengu.tools.leditor.logic
 
 	public class LedController implements IEditorController
 	{
-		private var model:ILedModel;
+		private var model:LedModel;
 		private var layerFactory:ILayerFactory;
 		
 		[Inject(name="mainScene")]
@@ -47,16 +46,16 @@ package com.tengu.tools.leditor.logic
 			const layer:ILayer = layerFactory.create(layerType, zIndex);
 			if (layer != null)
 			{
-				model.layers.addItem(layer);
+				model.layers.layerList.addItem(layer);
 				scene.add(layer as IGameObject);				
 			}
 		}
 		
 		public function removeLayer (index:int):void
 		{
-			LogFactory.getLogger(this).debug("remove", model.layers.getItemAt(index) );
+			LogFactory.getLogger(this).debug("remove", model.layers.layerList.getItemAt(index) );
 			
-			const layer:IGameObject = model.layers.removeItemAt(index) as IGameObject;
+			const layer:IGameObject = model.layers.layerList.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
 		}
 		
@@ -65,7 +64,7 @@ package com.tengu.tools.leditor.logic
 			layerControlsHolder.removeAllElements();
 			if (layer != null)
 			{
-				model.activeLayer = layer;
+				model.layers.activeLayer = layer;
 				const controls:UIComponent = layerFactory.createControls(layer.type);
 				if (controls != null)
 				{
@@ -75,13 +74,23 @@ package com.tengu.tools.leditor.logic
 			}
 			else
 			{
-				model.activeLayer = null;
+				model.layers.activeLayer = null;
 			}
 		}
 		
 		public function moveCameraToCenter():void
 		{
 			viewport.moveTo(0, 0);
+		}
+		
+		public function clearAll():void
+		{
+			
+		}
+		
+		public function saveProject ():void
+		{
+			
 		}
 	}
 }

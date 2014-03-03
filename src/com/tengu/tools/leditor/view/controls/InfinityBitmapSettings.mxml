@@ -13,9 +13,7 @@
 			import com.tengu.scroll.layers.InfinityBitmapLayer;
 			import com.tengu.tools.leditor.assets.AssetManager;
 			import com.tengu.tools.leditor.assets.api.IAssetData;
-			import com.tengu.tools.leditor.assets.api.IAssetManager;
 			import com.tengu.tools.leditor.model.LedModel;
-			import com.tengu.tools.leditor.model.api.ILedModel;
 			
 			import spark.events.IndexChangeEvent;
 			
@@ -28,7 +26,7 @@
 			
 			protected function onAddedToStage(event:Event):void
 			{
-				layer = model.activeLayer as InfinityBitmapLayer;
+				layer = model.layers.activeLayer as InfinityBitmapLayer;
 				imageSelector.selectedIndex = manager.getIndexByBitmap(layer.bitmap);
 			}
 			

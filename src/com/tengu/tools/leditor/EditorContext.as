@@ -17,7 +17,6 @@ package com.tengu.tools.leditor
 	import com.tengu.tools.leditor.logic.LedController;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.model.LedModel;
-	import com.tengu.tools.leditor.model.api.ILedModel;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -82,11 +81,13 @@ package com.tengu.tools.leditor
 		{
 			super.configureInjector();
 			injector.map(IEditorController).toSingleton(LedController);
-			injector.map(ILedModel).toValue(LedModel.instance);
+			injector.map(LedModel).toValue(LedModel.instance);
 			
 			injector.map(ICallLaterManager).toValue(callLaterManager);
 			
 			injector.map(Stage).toValue(parentView.stage);
+			injector.map(Led).toValue(mainApp);
+			
 			injector.map(IViewFactory).toValue(viewFactory);
 			injector.map(IGameContainer, "mainScene").toValue(scene);
 			injector.map(DisplayObject, "canvasHolder").toValue(mainApp.canvasHolder);
@@ -101,6 +102,7 @@ package com.tengu.tools.leditor
 		{
 			injector.injectInto(mainApp.toolsPanel);
 			injector.injectInto(mainApp.toolsPanel.layersPanel);
+			injector.injectInto(mainApp.mainMenu);
 			injector.injectInto(viewFactory);
 			
 			sceneView.viewport.setSize(mainApp.canvas.width, mainApp.canvas.height);
