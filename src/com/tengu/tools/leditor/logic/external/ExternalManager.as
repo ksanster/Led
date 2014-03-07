@@ -1,13 +1,19 @@
 package com.tengu.tools.leditor.logic.external
 {
+	import com.tengu.di.api.IInjector;
 	import com.tengu.log.LogFactory;
 	import com.tengu.tools.leditor.api.ILayer;
+	import com.tengu.tools.leditor.model.enum.LayerType;
 	
 	import mx.collections.IList;
 	
 	public class ExternalManager implements IExternalManager
 	{
 		private var serializers:Object;
+		
+		[Inject]
+		public var injector:IInjector;
+		
 		public function ExternalManager()
 		{
 			initialize();
@@ -16,6 +22,15 @@ package com.tengu.tools.leditor.logic.external
 		private function initialize():void
 		{
 			serializers = {};			
+		}
+		
+		[PostConstruct]
+		public function postConstruct():void
+		{
+			var serializer:ILayerSerializer;
+			
+			serializer = injector.makeInstance(IBSerializer) as ILayerSerializer;
+			addSerializer(LayerType.INFINITE_BITMAP, serializer);
 		}
 		
 		public function exportLayers(layersList:IList):XML
@@ -63,9 +78,9 @@ package com.tengu.tools.leditor.logic.external
 			return result;
 		}
 		
-		public function addSerializer(layerType:String, exporter:ILayerSerializer):void
+		public function addSerializer(layerType:String, serializer:ILayerSerializer):void
 		{
-			serializers[layerType] = exporter;
+			serializers[layerType] = serializer;
 		}
 	}
 }
