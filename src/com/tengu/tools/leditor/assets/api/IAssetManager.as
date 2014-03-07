@@ -11,5 +11,6 @@ package com.tengu.tools.leditor.assets.api
 		
 		function addAsset (id:String, bitmapData:BitmapData):void;
 		function getAsset (id:String):IAssetData;
+		function getAssetByBitmap (bitmap:BitmapData):IAssetData
 	}
 }

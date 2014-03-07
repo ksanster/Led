@@ -14,8 +14,10 @@ package com.tengu.tools.leditor
 	import com.tengu.tools.leditor.assets.AssetManager;
 	import com.tengu.tools.leditor.assets.EmbeddedResources;
 	import com.tengu.tools.leditor.assets.api.IAssetManager;
+	import com.tengu.tools.leditor.logic.LayerFactory;
 	import com.tengu.tools.leditor.logic.LedController;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
+	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.LedModel;
 	
 	import flash.display.DisplayObject;
@@ -82,6 +84,7 @@ package com.tengu.tools.leditor
 			super.configureInjector();
 			injector.map(IEditorController).toSingleton(LedController);
 			injector.map(LedModel).toValue(LedModel.instance);
+			injector.map(ILayerFactory).toSingleton(LayerFactory);
 			
 			injector.map(ICallLaterManager).toValue(callLaterManager);
 			

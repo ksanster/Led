@@ -84,7 +84,7 @@ package com.tengu.tools.leditor.assets
 			return assetsById[id] || DEFAULT_ASSET;
 		}
 		
-		public function getAssetByBitmap (bitmap:BitmapData):AssetData
+		public function getAssetByBitmap (bitmap:BitmapData):IAssetData
 		{
 			return  assetsHash[bitmap];
 		}

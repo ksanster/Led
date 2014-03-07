@@ -21,12 +21,14 @@ package com.tengu.tools.leditor.logic
 
 	public class LedController implements IEditorController
 	{
-		private var layerFactory:ILayerFactory;
 		private var fileManager:FileManager;
 		private var externalManager:ExternalManager;
 
 		[Inject]
 		public var injector:IInjector;
+		
+		[Inject]
+		public var layerFactory:ILayerFactory;
 		
 		[Inject]
 		public var model:LedModel;
@@ -64,7 +66,6 @@ package com.tengu.tools.leditor.logic
 		[PostConstruct]
 		public function postConstruct ():void
 		{
-			layerFactory = injector.makeInstance(LayerFactory) as LayerFactory;
 			fileManager = injector.makeInstance(FileManager) as FileManager;
 			externalManager = injector.makeInstance(ExternalManager) as ExternalManager;
 		}

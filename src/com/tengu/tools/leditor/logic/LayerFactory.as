@@ -15,7 +15,6 @@ package com.tengu.tools.leditor.logic
 		private var layerClasses:Object;
 		private var controlClasses:Object;
 		
-		
 		public function LayerFactory()
 		{
 			initialize();
