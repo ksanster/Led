@@ -5,6 +5,6 @@ package com.tengu.tools.leditor.logic.external
 	public interface ILayerSerializer
 	{
 		function exportLayer (value:ILayer):XML;
-		function importLayer (value:XML):void;
+		function importLayer (value:XML):ILayer;
 	}
 }

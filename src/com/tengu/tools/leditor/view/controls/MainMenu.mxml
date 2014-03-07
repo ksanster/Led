@@ -10,6 +10,7 @@
 			<menuitem label="File">
 				<menuitem label="New" data="{NEW_PROJECT}" />
 				<menuitem label="Save" data="{SAVE_PROJECT}" enabled="{!model.files.saved}"/>
+				<menuitem label="Save as" data="{SAVE_PROJECT_AS}" enabled="{model.layers.layerList.length > 0}"/>
 				<menuitem type="separator"/>
 				<menuitem label="Quit" data="{QUIT}" enabled="{model.files.saved}"/>
 			</menuitem>
@@ -36,12 +37,14 @@
 
 			private static const NEW_PROJECT:String 	= "new";
 			private static const SAVE_PROJECT:String 	= "save";
+			private static const SAVE_PROJECT_AS:String = "save_as";
 			private static const QUIT:String 			= "quit";
 
 			[Inject]
 			public var controller:LedController;
 			
 			[Inject]
+			[Bindable]
 			public var model:LedModel;
 
 			[Inject]
@@ -49,21 +52,19 @@
 			
 			public function showClosingAlert():void
 			{
+				Alert.show("Сохранить изменения?", "", Alert.YES && Alert.NO, this, onSaveRequest);
+			}
+			
+			public function showClearAlert():void
+			{
+				Alert.show("Сохранить изменения?", "", Alert.YES && Alert.NO, this, onSaveRequest1);
 				if (!model.files.saved)
 				{
-					Alert.show("Сохранить изменения?", "", Alert.YES && Alert.NO, this, onSaveRequest);
 				}
 				else
 				{
-					try
-					{
-						mainApp.close();
-					}
-					catch (error:Error)
-					{
-						//Ignore
-					}
-				}
+					controller.clearAll();
+				}				
 			}
 			
 			private function onClickItem(event:MenuEvent):void
@@ -73,24 +74,50 @@
 				switch (menuItem) 
 				{
 					case NEW_PROJECT:
+						if (!model.files.saved)
+						{
+							Alert.show("Сохранить изменения?", "", Alert.YES && Alert.NO, this, onSaveRequest1);
+						}
+						else
+						{
+							controller.clearAll();
+						}				
 						break;
 					case SAVE_PROJECT:
 						controller.saveProject();
 						break;
+					case SAVE_PROJECT_AS:
+						controller.saveProject(true);
+						break;
 					case QUIT:
-						showClosingAlert();
+						if (!model.files.saved)
+						{
+							showClosingAlert();
+						}
+						else
+						{
+							mainApp.close();
+						}
 						break;
 				}
 			}
 			
 			private function onSaveRequest(event:CloseEvent):void
-				
 			{
 				if (event.detail == Alert.YES)
 				{
 					controller.saveProject();
 				}
 				mainApp.close();
+			}
+
+			private function onSaveRequest1(event:CloseEvent):void
+			{
+				if (event.detail == Alert.YES)
+				{
+					controller.saveProject();
+				}
+				controller.clearAll();
 			}
 			
 		]]>

@@ -74,6 +74,14 @@ package com.tengu.scene.objects
 			}
 		}
 		
+		public function removeAll ():void
+		{
+			for (var i:int = childList.length - 1; i >= 0; i--)
+			{
+				remove(childList[i]);
+			}
+		}
+		
 		protected function onCoordsChanged(event:GameObjectEvent):void
 		{
 			dispatchGameObjectEvent(GameContainerEvent.CHILD_COORDS_CHANGED, event.target as IGameObject);

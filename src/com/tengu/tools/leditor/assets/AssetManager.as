@@ -25,7 +25,8 @@ package com.tengu.tools.leditor.assets
 		
 		private var assets:Vector.<IAssetData>;
 		private var assetsById:Object;
-		private var indices:Dictionary;		
+		private var indicesHash:Dictionary;		
+		private var assetsHash:Dictionary;		
 		
 		[Bindable]
 		public var previewWidth:uint	= DEFAULT_SIZE;
@@ -50,7 +51,8 @@ package com.tengu.tools.leditor.assets
 			assets = new Vector.<IAssetData>();
 			assetsById  = {};
 			assetCollection = new ArrayCollection();
-			indices = new Dictionary();
+			indicesHash = new Dictionary();
+			assetsHash = new Dictionary();
 		}
 		
 		public final function setPreviewSize(width:uint, height:uint):void
@@ -71,7 +73,8 @@ package com.tengu.tools.leditor.assets
 				assets[index] = asset;
 				assetCollection.addItem(asset);
 			}
-			indices[bitmapData] = index;
+			indicesHash[bitmapData] = index;
+			assetsHash[bitmapData] = asset;
 			assetsById[id] = asset;
 			LogFactory.getLogger(this).debug("bitmap added: " + id);
 		}
@@ -81,13 +84,18 @@ package com.tengu.tools.leditor.assets
 			return assetsById[id] || DEFAULT_ASSET;
 		}
 		
+		public function getAssetByBitmap (bitmap:BitmapData):AssetData
+		{
+			return  assetsHash[bitmap];
+		}
+		
 		public function getIndexByBitmap (bitmap:BitmapData):int
 		{
-			if (indices[bitmap] == null)
+			if (indicesHash[bitmap] == null)
 			{
 				return -1;
 			}
-			return indices[bitmap];
+			return indicesHash[bitmap];
 		}
 		
 		public function importEmbedded (sourceClass:Class):void

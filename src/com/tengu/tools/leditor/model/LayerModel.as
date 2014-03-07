@@ -8,8 +8,8 @@ package com.tengu.tools.leditor.model
 
 	public class LayerModel
 	{
-		private var availableTypes:ArrayCollection;
-		private var ledLayers:ArrayCollection;
+		private var availableTypes:IList;
+		private var ledLayers:IList;
 		private var layer:IEditableLayer;
 		
 		[Bindable]
@@ -24,12 +24,22 @@ package com.tengu.tools.leditor.model
 		}
 		
 		[Bindable]
+		public function set layerList(value:IList):void 
+		{
+			ledLayers = value;
+		}
+		
 		public function get layerList():IList
 		{
 			return ledLayers;
 		}
 		
 		[Bindable]
+		public function set availableLayerTypes(value:IList):void 
+		{
+			availableTypes = value;
+		}
+		
 		public function get availableLayerTypes ():IList 
 		{
 			return availableTypes;

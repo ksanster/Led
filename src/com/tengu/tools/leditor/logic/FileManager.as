@@ -1,75 +1,124 @@
 package com.tengu.tools.leditor.logic
 {
+	import com.tengu.net.LoaderProcess;
 	import com.tengu.net.XMLLoader;
 	import com.tengu.net.api.ILoaderProcess;
+	import com.tengu.net.contents.LoaderContent;
 	import com.tengu.net.contents.XMLLoaderContent;
 	import com.tengu.net.errors.LoaderErrorInfo;
+	import com.tengu.tools.leditor.logic.external.FileLoaderProcess;
 	import com.tengu.tools.leditor.model.LedModel;
 	
+	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
-	import flash.system.ApplicationDomain;
-	
-	import mx.collections.XMLListCollection;
+	import flash.net.FileFilter;
 
 	public class FileManager
 	{
 		private var model:LedModel = LedModel.instance;
-		private var fillsConfig:XML = null;
-		private var swfConfig:ApplicationDomain = null;
-		private var cssConfig:String = null;
-		private var markupConfig:XML = null;
 		
+		private var fileOpenDialog:File;
+		private var fileSaveDialog:File;
+		private var fileFilter:FileFilter
+		
+		private var loaderProcess:FileLoaderProcess;
 		public function FileManager()
 		{
-			//Empty
-		}
-		
-		public function saveConfigs():void
-		{
-			var file:File = null;
-			var stream:FileStream = null;
-			file = new File(model.projectFileName);
-			stream = new FileStream();
-			stream.open(file, FileMode.WRITE);
-			stream.writeUTFBytes(new XML("<components>" + model.currentMarkup.toXMLString() + "</components>"));		
-			stream.close();
-		}
-		
-		public function loadConfigs():void
-		{
-			var file:File = null;
+			fileFilter = new FileFilter("Config", "*.xml");
+			fileOpenDialog = File.applicationDirectory;
+			fileSaveDialog = File.applicationDirectory;
 
-			file = new File(model.projectFileName);
+			fileOpenDialog.addEventListener(Event.SELECT, onSelectFileForOpen);
+			fileSaveDialog.addEventListener(Event.SELECT, onSelectFileForSave);
+		}
+		
+		public function saveConfigs(configs:XML):void
+		{
+			model.files.content = configs;
+			if (model.files.projectFileName == null)
+			{
+				fileSaveDialog.browseForOpen("Select file", [fileFilter]);
+				return;
+			}
+			save();
+		}
+		
+		public function loadConfigs():ILoaderProcess
+		{
+			if (loaderProcess != null)
+			{
+				loaderProcess.completeWithError("New process started");
+			}
+			model.files.projectFileName = null;
+
+			loaderProcess = new FileLoaderProcess();
+			fileOpenDialog.browseForOpen("Select file for open", [fileFilter]);
+			
+			return loaderProcess;
+		}
+		
+		private function load ():void
+		{
+			var loader:XMLLoader;
+			var file:File = null;
+			
+			if (model.files.projectFileName == null)
+			{
+				loaderProcess.completeWithError("File not selected");
+				loaderProcess = null;
+				return;
+			}
+		
+			file = new File(model.files.projectFileName);
 			if (file.exists)
 			{
-				loadProjectConfig(file.url);
+				loader = new XMLLoader();
+				loader.addCompleteHandler(onLoadComplete);
+				loader.loadURL(file.url);
 			}
 			else
 			{
-				model.currentMarkup = new XMLListCollection();
+				loaderProcess.completeWithError("File not exists");
+				loaderProcess = null;
 			}
+			
 		}
 		
-		private function loadProjectConfig(url:String):void
+		private function save ():void
 		{
-			var loader:XMLLoader = new XMLLoader();
-			loader.loadURL(url);
-			loader.addCompleteHandler(onCompleteProject);
+			var file:File = new File(model.files.projectFileName);
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			stream.writeUTFBytes(new XML("<components>" + model.files.content.toXMLString() + "</components>"));		
+			stream.close();
 		}
 		
-		private function onCompleteProject(process:ILoaderProcess, content:XMLLoaderContent, error:LoaderErrorInfo):void
+		private function onSelectFileForOpen(event:Event):void
 		{
-			process.removeCompleteHandler(onCompleteProject);
+			model.files.projectFileName = fileOpenDialog.nativePath;
+			load();
+		}
+		
+		private function onSelectFileForSave(event:Event):void
+		{
+			model.files.projectFileName = fileSaveDialog.nativePath;
+			save();
+		}
+		
+		
+		private function onLoadComplete(process:ILoaderProcess, content:XMLLoaderContent, error:LoaderErrorInfo):void
+		{
 			if (error != null)
 			{
-				throw new Error(error.message);
+				loaderProcess.completeWithError(error.message);
 			}
-			model.currentMarkup = new XMLListCollection(content.xml.children());
-			markupConfig = content.xml;
-			checkIsAllComplete();
-		}		
-
+			else
+			{
+				loaderProcess.completeWithSuccess(content);
+			}
+			loaderProcess = null;
+		}
 	}
 }

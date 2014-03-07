@@ -3,9 +3,10 @@ package com.tengu.tools.leditor.logic.external
 	import com.tengu.log.LogFactory;
 	import com.tengu.tools.leditor.api.ILayer;
 	
+	import mx.collections.IList;
+	
 	public class ExternalManager implements IExternalManager
 	{
-		public static const LAYER_TYPE:String = "layer-type";
 		private var serializers:Object;
 		public function ExternalManager()
 		{
@@ -17,16 +18,16 @@ package com.tengu.tools.leditor.logic.external
 			serializers = {};			
 		}
 		
-		public function exportLayers(layersList:Vector.<ILayer>):XML
+		public function exportLayers(layersList:IList):XML
 		{
-			var xml:XML = <layers></layers>;
+			var xml:XML = new XML("<" + XMLProtocol.LAYERS + "></" + XMLProtocol.LAYERS + ">" );
 			var layer:ILayer;
 			var exporter:ILayerSerializer;
 			var count:uint = layersList.length;
 			
 			for (var i:int = 0; i < count; i++)
 			{
-				layer = layersList[i];
+				layer = layersList.getItemAt(i) as ILayer;
 				exporter = serializers[layer.type];
 				if (exporter == null)
 				{
@@ -50,7 +51,7 @@ package com.tengu.tools.leditor.logic.external
 			for (var i:int = 0; i < count; i++)
 			{
 				node = list[i];
-				layerType = node.@[LAYER_TYPE];
+				layerType = node.@[XMLProtocol.LAYER_TYPE];
 				importer = serializers[layerType];
 				if (importer == null)
 				{
@@ -62,7 +63,7 @@ package com.tengu.tools.leditor.logic.external
 			return result;
 		}
 		
-		public function addExporter(layerType:String, exporter:ILayerSerializer):void
+		public function addSerializer(layerType:String, exporter:ILayerSerializer):void
 		{
 			serializers[layerType] = exporter;
 		}

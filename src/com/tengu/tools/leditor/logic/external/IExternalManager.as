@@ -1,12 +1,14 @@
 package com.tengu.tools.leditor.logic.external
 {
 	import com.tengu.tools.leditor.api.ILayer;
+	
+	import mx.collections.IList;
 
 	public interface IExternalManager
 	{
-		function exportLayers (layersList:Vector.<ILayer>):XML;
+		function exportLayers (layersList:IList):XML;
 		function importLayers (value:XML):Vector.<ILayer>;
 		
-		function addExporter (layerType:String, exporter:ILayerSerializer):void;
+		function addSerializer (layerType:String, serializer:ILayerSerializer):void;
 	}
 }

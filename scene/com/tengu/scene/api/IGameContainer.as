@@ -6,5 +6,6 @@ package com.tengu.scene.api
 
 		function add (child:IGameObject):void;
 		function remove (child:IGameObject):void
+		function removeAll ():void
 	}
 }

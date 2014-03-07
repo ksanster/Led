@@ -28,7 +28,12 @@
 		
 		protected function onClosing(event:Event):void
 		{
-			mainMenu.showClosingAlert();
+			if (!model.files.saved)
+			{
+				mainMenu.showClosingAlert();
+				event.preventDefault();
+				event.stopImmediatePropagation();
+			}
 		}
 		
 	]]>

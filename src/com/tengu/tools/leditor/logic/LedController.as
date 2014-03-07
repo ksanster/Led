@@ -1,6 +1,10 @@
 package com.tengu.tools.leditor.logic
 {
+	import com.tengu.di.api.IInjector;
 	import com.tengu.log.LogFactory;
+	import com.tengu.net.api.ILoaderProcess;
+	import com.tengu.net.contents.XMLLoaderContent;
+	import com.tengu.net.errors.LoaderErrorInfo;
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.api.IGameObject;
 	import com.tengu.scene.api.IViewport;
@@ -8,6 +12,7 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
+	import com.tengu.tools.leditor.logic.external.ExternalManager;
 	import com.tengu.tools.leditor.model.LedModel;
 	
 	import mx.core.UIComponent;
@@ -16,8 +21,15 @@ package com.tengu.tools.leditor.logic
 
 	public class LedController implements IEditorController
 	{
-		private var model:LedModel;
 		private var layerFactory:ILayerFactory;
+		private var fileManager:FileManager;
+		private var externalManager:ExternalManager;
+
+		[Inject]
+		public var injector:IInjector;
+		
+		[Inject]
+		public var model:LedModel;
 		
 		[Inject(name="mainScene")]
 		public var scene:IGameContainer;
@@ -35,8 +47,26 @@ package com.tengu.tools.leditor.logic
 		
 		private function initialize():void
 		{
-			model = LedModel.instance;
-			layerFactory = new LayerFactory();
+			//empty
+		}
+		
+		private function importLayers(xml:XML):void
+		{
+			const layers:Vector.<ILayer> = externalManager.importLayers(xml);	
+			
+			for each (var layer:ILayer in layers)
+			{
+				model.layers.layerList.addItem(layer);
+				scene.add(layer as IGameObject);				
+			}
+		}
+		
+		[PostConstruct]
+		public function postConstruct ():void
+		{
+			layerFactory = injector.makeInstance(LayerFactory) as LayerFactory;
+			fileManager = injector.makeInstance(FileManager) as FileManager;
+			externalManager = injector.makeInstance(ExternalManager) as ExternalManager;
 		}
 		
 		public function addLayer (layerType:String, zIndex:int):void
@@ -85,12 +115,38 @@ package com.tengu.tools.leditor.logic
 		
 		public function clearAll():void
 		{
-			
+			model.layers.layerList.removeAll();
+			scene.removeAll();
 		}
 		
-		public function saveProject ():void
+		public function saveProject (saveAs:Boolean = false):void
 		{
-			
+			const xml:XML = externalManager.exportLayers(model.layers.layerList);
+			if (saveAs)
+			{
+				model.files.projectFileName = null;
+			}
+			fileManager.saveConfigs(xml);
 		}
+		
+		public function loadProject ():void
+		{
+			const process:ILoaderProcess = fileManager.loadConfigs();
+			if (process != null)
+			{
+				process.addCompleteHandler(onCompleteLoad);
+			}
+		}
+		
+		private function onCompleteLoad(process:ILoaderProcess, content:XMLLoaderContent, error:LoaderErrorInfo):void
+		{
+			process.removeCompleteHandler(onCompleteLoad);
+			if (error != null)
+			{
+				throw new Error(error.message);
+			}
+			
+			importLayers(content.xml);
+		}		
 	}
 }
