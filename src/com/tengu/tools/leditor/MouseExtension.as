@@ -83,10 +83,12 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			if (!inBounds(x, y))
+			if (!inBounds(x, y) || model.screenSettings.locked)
 			{
 				return;
 			}
+			tweenX = 0;
+			tweenY = 0;
 			
 			oldX = x;
 			oldY = y;

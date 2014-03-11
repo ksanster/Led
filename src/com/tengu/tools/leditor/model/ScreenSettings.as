@@ -8,6 +8,9 @@ package com.tengu.tools.leditor.model
 		[Bindable]
 		public var viewportHeight:uint = 600;
 		
+		[Bindable]
+		public var locked:Boolean = false;
+		
 		public function ScreenSettings()
 		{
 			//Empty

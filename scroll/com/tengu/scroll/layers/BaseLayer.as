@@ -22,6 +22,12 @@ package com.tengu.scroll.layers
 			return layerType;
 		}
 		
+		public function set focalIndex(value:int):void 
+		{
+			zCoord = value;
+			dispatchGameObjectEvent("focalIndexChanged", this);
+		}
+		
 		public function get focalIndex():int 
 		{
 			return int(zCoord);

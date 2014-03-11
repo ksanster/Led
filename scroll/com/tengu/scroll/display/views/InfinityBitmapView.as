@@ -31,7 +31,7 @@ package com.tengu.scroll.display.views
 			var graphix:Graphics = shape.graphics;
 			graphix.clear();
 			
-			if (bitmapLayer == null )
+			if (bitmapLayer == null ||  bitmapLayer.bitmap == null)
 			{
 				return;
 			}
@@ -72,7 +72,7 @@ package com.tengu.scroll.display.views
 		
 		protected override function updateScale():void
 		{
-			//Empty
+			updateFill();
 		}
 		
 		protected override function initialize():void

@@ -26,7 +26,7 @@ package com.tengu.tools.leditor.logic
 		private var loaderProcess:FileLoaderProcess;
 		public function FileManager()
 		{
-			fileFilter = new FileFilter("Config", "*.xml");
+			fileFilter = new FileFilter("Config (.xml)", "*.xml");
 			fileOpenDialog = File.applicationDirectory;
 			fileSaveDialog = File.applicationDirectory;
 
@@ -39,7 +39,7 @@ package com.tengu.tools.leditor.logic
 			model.files.content = configs;
 			if (model.files.projectFileName == null)
 			{
-				fileSaveDialog.browseForOpen("Select file", [fileFilter]);
+				fileSaveDialog.browseForSave("Select file");
 				return;
 			}
 			save();
@@ -93,6 +93,7 @@ package com.tengu.tools.leditor.logic
 			stream.open(file, FileMode.WRITE);
 			stream.writeUTFBytes(new XML("<components>" + model.files.content.toXMLString() + "</components>"));		
 			stream.close();
+			model.files.saved = true;
 		}
 		
 		private function onSelectFileForOpen(event:Event):void

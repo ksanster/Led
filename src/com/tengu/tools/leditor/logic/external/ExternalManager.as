@@ -58,7 +58,7 @@ package com.tengu.tools.leditor.logic.external
 		public function importLayers(value:XML):Vector.<ILayer>
 		{
 			var result:Vector.<ILayer> = new Vector.<ILayer>();
-			var list:XMLList = value.children();
+			var list:XMLList = value[XMLProtocol.LAYERS].children();
 			var count:uint = list.length();
 			var node:XML;
 			var layerType:String;

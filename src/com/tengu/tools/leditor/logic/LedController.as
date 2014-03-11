@@ -79,6 +79,8 @@ package com.tengu.tools.leditor.logic
 			{
 				model.layers.layerList.addItem(layer);
 				scene.add(layer as IGameObject);				
+				
+				model.files.saved = false;
 			}
 		}
 		
@@ -88,6 +90,7 @@ package com.tengu.tools.leditor.logic
 			
 			const layer:IGameObject = model.layers.layerList.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
+			model.files.saved = false;
 		}
 		
 		public function setActiveLayer (layer:IEditableLayer):void
@@ -116,6 +119,7 @@ package com.tengu.tools.leditor.logic
 		
 		public function clearAll():void
 		{
+			layerControlsHolder.removeAllElements();
 			model.layers.layerList.removeAll();
 			scene.removeAll();
 		}
@@ -148,6 +152,7 @@ package com.tengu.tools.leditor.logic
 			}
 			
 			importLayers(content.xml);
+			model.files.saved = true;
 		}		
 	}
 }

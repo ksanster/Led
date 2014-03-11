@@ -22,6 +22,7 @@
 			
 			private var model:LedModel = LedModel.instance;
 			
+			[Bindable]
 			private var layer:InfinityBitmapLayer;
 			
 			protected function onAddedToStage(event:Event):void
@@ -42,6 +43,10 @@
 		]]>
 	</fx:Script>
 	
+	<s:Label text="Set focal index"/>
+	<s:TextInput id="zIndexInput" text="{layer.focalIndex}" 
+				 restrict="-[0-9]"
+				 widthInChars="5"/>
 	<s:Label text="Select bitmap"/>
 	<selector:ImageSelector id="imageSelector"
 							dataProvider="{manager.assetCollection}" 

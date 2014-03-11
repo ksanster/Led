@@ -29,7 +29,7 @@ package com.tengu.tools.leditor.logic.external
 			xml.@[XMLProtocol.Z_INDEX] = value.focalIndex;
 			xml.@[XMLProtocol.BITMAP] = assetId;
 			
-			return null;
+			return xml;
 		}
 		
 		public function importLayer(value:XML):ILayer

@@ -46,8 +46,8 @@
 							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
 	<controls:MainMenu id="mainMenu" width="100%"/>
-	<s:HGroup verticalAlign="top" horizontalAlign="center">
-		<s:BorderContainer width="{model.screenSettings.viewportWidth}" height="{model.screenSettings.viewportHeight}" id="canvasHolder">
+	<s:HGroup verticalAlign="top" horizontalAlign="center" id="canvasHolder">
+		<s:BorderContainer width="{model.screenSettings.viewportWidth}" height="{model.screenSettings.viewportHeight}">
 			<s:SpriteVisualElement id="canvas" width="500" height="600"/>
 		</s:BorderContainer>
 			

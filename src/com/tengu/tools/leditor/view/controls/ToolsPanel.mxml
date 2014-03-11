@@ -10,11 +10,6 @@
 			[Inject]
 			public var controller:IEditorController;
 
-			protected function onCLick(event:MouseEvent):void
-			{
-				controller.moveCameraToCenter();
-				
-			}
 			
 		]]>
 	</fx:Script>
@@ -23,6 +18,5 @@
 	</fx:Declarations>
 	
 	<controls:LayersPanel id="layersPanel" width="100%" />
-	<s:Button click="onCLick(event)" label="Center camera"/>
 	<s:Group id="layerControlsHolder" width="100%"/>
 </s:VGroup>

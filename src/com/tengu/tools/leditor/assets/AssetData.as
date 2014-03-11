@@ -18,14 +18,32 @@ package com.tengu.tools.leditor.assets
 			assetPreview = preview;
 		}
 		
+		[Bindable]
+		public function set id(value:String):void 
+		{
+			assetId = value;
+		}
+		
 		public function get id():String
 		{
 			return assetId;
 		}
 		
+		[Bindable]
+		public function set bitmap(value:BitmapData):void 
+		{
+			assetBitmap = value;
+		}
+		
 		public function get bitmap():BitmapData
 		{
 			return assetBitmap;
+		}
+		
+		[Bindable]
+		public function set preview(value:BitmapData):void 
+		{
+			assetPreview = value;
 		}
 		
 		public function get preview():BitmapData
