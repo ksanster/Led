@@ -90,7 +90,11 @@ package com.tengu.tools.leditor.logic
 			
 			const layer:IGameObject = model.layers.layerList.removeItemAt(index) as IGameObject;
 			scene.remove(layer);
-			model.files.saved = false;
+			if (model.layers.activeLayer == layer)
+			{
+				setActiveLayer(null);
+			}
+			model.files.saved = (model.layers.layerList.length > 0);
 		}
 		
 		public function setActiveLayer (layer:IEditableLayer):void

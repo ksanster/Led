@@ -3,8 +3,6 @@ package com.tengu.scene.render
     import com.tengu.scene.api.ICameraView;
     import com.tengu.scene.api.IContainerView;
     import com.tengu.scene.api.IScrolledViewport;
-    
-    import flash.utils.Dictionary;
 
     public class ParallaxViewport implements IScrolledViewport
 	{
@@ -23,9 +21,6 @@ package com.tengu.scene.render
 		private var viewportWidth:int = 0;
 		private var viewportHeight:int = 0;
 
-        private var focalXs:Dictionary;
-        private var focalYs:Dictionary;
-
         public function set focalLength (value:int):void
         {
             mapFocalLength = value;
@@ -40,22 +35,18 @@ package com.tengu.scene.render
 		protected function initialize ():void
 		{
 			scenes = new Vector.<IContainerView>();
-            focalXs = new Dictionary();
-            focalYs = new Dictionary();
 		}
 		
 		protected function updateCameraPosition ():void
 		{
-            var focalX:int;
-            var focalY:int;
+            var focalDistance:int;
             var xCoord:Number;
             var yCoord:Number;
 			for each (var sceneView:ICameraView in scenes)
 			{
-                focalX = focalXs[sceneView];
-                focalY = focalYs[sceneView];
-				xCoord = cameraX * mapFocalLength / (mapFocalLength + focalX);
-				yCoord = cameraY * mapFocalLength / (mapFocalLength + focalY);
+				focalDistance = sceneView.object.z;
+				xCoord = cameraX * mapFocalLength / (mapFocalLength + focalDistance);
+				yCoord = cameraY * mapFocalLength / (mapFocalLength + focalDistance);
                 sceneView.moveCamera(xCoord, yCoord);
 			}
 		}
@@ -93,8 +84,8 @@ package com.tengu.scene.render
             value.moveCamera(cameraX, cameraY);
 			
 			scenes[scenes.length] = value;
-			focalXs[value] = focalX;
-			focalYs[value] = focalY;
+//			focalXs[value] = focalX;
+//			focalYs[value] = focalY;
 
 			addToContainer(value);
 		}
@@ -107,9 +98,6 @@ package com.tengu.scene.render
 				scenes.splice(idx, 1);
 			}
 			
-			delete focalXs[value];
-			delete focalYs[value];
-
 			removeFromContainer(value);
 		}
 									  
@@ -119,8 +107,7 @@ package com.tengu.scene.render
             {
                 return;
             }
-            var focalX:int;
-            var focalY:int;
+            var focalDistance:int;
             var newScale:Number = cameraScale + scaleFactor;
 
             cameraScale += (newScale - cameraScale) * DUMP * .8;
@@ -129,10 +116,10 @@ package com.tengu.scene.render
 
             for each (var sceneView:ICameraView in scenes)
             {
-                focalX = focalXs[sceneView];
-                focalY = focalYs[sceneView];
+				focalDistance = sceneView.object.z;
                 sceneView.setCameraScale(cameraScale);
-                sceneView.moveCamera(cameraX * mapFocalLength / (mapFocalLength + focalX), cameraY * mapFocalLength / (mapFocalLength + focalY));
+                sceneView.moveCamera(cameraX * mapFocalLength / (mapFocalLength + focalDistance), 
+									 cameraY * mapFocalLength / (mapFocalLength + focalDistance));
             }
 
         }

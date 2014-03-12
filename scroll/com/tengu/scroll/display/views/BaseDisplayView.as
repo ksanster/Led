@@ -94,6 +94,11 @@ package com.tengu.scroll.display.views
 			return isSleeping;
 		}
 		
+		public function get object():IGameObject 
+		{
+			return gameObject;
+		}
+		
 		public function assignObject(value:IGameObject):void
 		{
 			removeObject();

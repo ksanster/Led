@@ -22,6 +22,17 @@ package com.tengu.scroll.layers
 			return layerType;
 		}
 		
+		[Bindable]
+		public function set focalIndexAsString (value:String):void
+		{
+			focalIndex = parseInt(value);
+		}
+		
+		public function get focalIndexAsString():String 
+		{
+			return String(focalIndex);
+		}
+		
 		public function set focalIndex(value:int):void 
 		{
 			zCoord = value;

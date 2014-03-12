@@ -44,7 +44,7 @@
 	</fx:Script>
 	
 	<s:Label text="Set focal index"/>
-	<s:TextInput id="zIndexInput" text="{layer.focalIndex}" 
+	<s:TextInput id="zIndexInput" text="@{layer.focalIndexAsString}" 
 				 restrict="-[0-9]"
 				 widthInChars="5"/>
 	<s:Label text="Select bitmap"/>
