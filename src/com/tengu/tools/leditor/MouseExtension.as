@@ -87,6 +87,13 @@ package com.tengu.tools.leditor
 			{
 				return;
 			}
+			
+			if (model.layers.activeLayer != null &&
+				model.layers.activeLayer.mouseDown(x, y) )
+			{
+				return;
+			}
+
 			tweenX = 0;
 			tweenY = 0;
 			
@@ -96,10 +103,6 @@ package com.tengu.tools.leditor
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			
-			if (model.layers.activeLayer != null)
-			{
-				model.layers.activeLayer.mouseDown(x, y);
-			}
 		}
 		
 		private function onMouseMove(event:MouseEvent):void

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  addedToStage="onAddedToStage(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.tengu.scroll.layers.ImageTileLayer;
+			import com.tengu.tools.leditor.assets.AssetManager;
+			import com.tengu.tools.leditor.model.LedModel;
+			
+			[Bindable]
+			private var manager:AssetManager = AssetManager.instance;
+			
+			private var model:LedModel = LedModel.instance;
+			
+			[Bindable]
+			private var layer:ImageTileLayer;
+			
+			protected function onAddedToStage(event:Event):void
+			{
+				layer = model.layers.activeLayer as ImageTileLayer;
+			}
+		]]>
+	</fx:Script>
+	<s:Label text="Set focal index"/>
+	<s:TextInput id="zIndexInput" text="@{layer.focalIndexAsString}" 
+				 restrict="-[0-9]"
+				 widthInChars="5"/>
+	<s:Label text="Set tile size"/>
+	<s:Form>
+		<s:layout>
+			<s:HorizontalLayout/>
+		</s:layout>
+		<s:FormItem label="width:">
+			<s:TextInput text="@{layer.tileWidthAsString}" 
+						 restrict="[0-9]"
+						 widthInChars="3"/>
+		</s:FormItem>		
+		<s:FormItem label="height:">
+			<s:TextInput text="@{layer.tileHeightAsString}"
+						 restrict="[0-9]"
+						 widthInChars="3"/>
+		</s:FormItem>		
+	</s:Form>
+
+</s:VGroup>

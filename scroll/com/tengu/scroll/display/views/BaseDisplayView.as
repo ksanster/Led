@@ -2,6 +2,8 @@ package com.tengu.scroll.display.views
 {
 	import com.tengu.calllater.api.ICallLaterManager;
 	import com.tengu.calllater.api.IDeferredCaller;
+	import com.tengu.log.LogFactory;
+	import com.tengu.log.Logger;
 	import com.tengu.scene.api.IGameObject;
 	import com.tengu.scene.events.GameObjectEvent;
 	
@@ -19,6 +21,8 @@ package com.tengu.scroll.display.views
 
 		private var validating:Boolean  = false;
 
+		protected var logger:Logger = LogFactory.getLogger(this);
+		
 		protected var validationFlags:uint 	= 0;
 		protected var isSleeping:Boolean 	= true;
 		

@@ -2,10 +2,12 @@ package com.tengu.tools.leditor.logic
 {
 	import com.tengu.log.LogFactory;
 	import com.tengu.scene.api.IGameContainer;
+	import com.tengu.scroll.layers.ImageTileLayer;
 	import com.tengu.scroll.layers.InfinityBitmapLayer;
 	import com.tengu.tools.leditor.api.ILayer;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.model.enum.LayerType;
+	import com.tengu.tools.leditor.view.controls.ImageTileLayerSettings;
 	import com.tengu.tools.leditor.view.controls.InfinityBitmapSettings;
 	
 	import mx.core.UIComponent;
@@ -27,6 +29,9 @@ package com.tengu.tools.leditor.logic
 			
 			layerClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapLayer;
 			controlClasses[LayerType.INFINITE_BITMAP] = InfinityBitmapSettings;
+
+			layerClasses[LayerType.IMAGE_TILES] = ImageTileLayer;
+			controlClasses[LayerType.IMAGE_TILES] = ImageTileLayerSettings;
 		}
 		
 		public function create(layerType:String, zIndex:int):ILayer

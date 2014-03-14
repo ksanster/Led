@@ -44,9 +44,9 @@ package com.tengu.scroll.layers
 			return int(zCoord);
 		}
 		
-		public function mouseDown (xCoord:Number, yCoord:Number):void
+		public function mouseDown (xCoord:Number, yCoord:Number):Boolean
 		{
-			//Abstract
+			return false;
 		}
 		
 		public function mouseMove (dx:Number, dy:Number):void

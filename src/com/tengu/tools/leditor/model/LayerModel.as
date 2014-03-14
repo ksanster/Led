@@ -56,7 +56,6 @@ package com.tengu.tools.leditor.model
 			ledLayers = new ArrayCollection();
 			
 			availableTypes.addItem( new LayerInfo(LayerType.INFINITE_BITMAP, "Looped bitmap") );
-			availableTypes.addItem( new LayerInfo(LayerType.BITMAP, "Bitmap") );
 			availableTypes.addItem( new LayerInfo(LayerType.IMAGE_TILES, "Image tiles") );
 			availableTypes.addItem( new LayerInfo(LayerType.OBJECTS, "Objects") );
 		}
