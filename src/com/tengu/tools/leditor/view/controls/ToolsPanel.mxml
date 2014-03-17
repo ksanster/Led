@@ -9,7 +9,6 @@
 			
 			[Inject]
 			public var controller:IEditorController;
-
 			
 		]]>
 	</fx:Script>

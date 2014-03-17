@@ -52,6 +52,12 @@ s|Label.rendererCaption
 	backgroundColor:#000000;
 }
 
+s|ButtonBar.iconBar
+{
+	skinClass:ClassReference("com.tengu.tools.leditor.view.controls.buttonbar.IconButtonBarSkin");
+	buttonWidth:21;
+}
+
 mx|Alert 
 {
 	color: #000000;

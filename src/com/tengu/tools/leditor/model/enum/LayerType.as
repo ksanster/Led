@@ -4,7 +4,7 @@ package com.tengu.tools.leditor.model.enum
 
 	public class LayerType
 	{
-		public static const INFINITE_BITMAP:String = "infiniteBitmap";
+		public static const INFINITE_BITMAP:String  = "infiniteBitmap";
 		public static const IMAGE_TILES:String 		= "imageTiles";
 		public static const OBJECTS:String 			= "objects";
 		

@@ -4,10 +4,10 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:controls="com.tengu.tools.leditor.view.controls.*"
 			   frameRate="60"
-               width="820" height="640" 
+               width="820" height="670" 
 			   left="5" top="5" bottom="5" right="5"
 			   addedToStage="onAddedToStage(event)" 
-			   closing="onClosing(event)">
+			   closing="onClosing(event)" xmlns:view="com.tengu.tools.leditor.view.*">
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;
@@ -46,6 +46,7 @@
 							paddingTop="5" paddingBottom="5"/>
 	</s:layout>
 	<controls:MainMenu id="mainMenu" width="100%"/>
+	<view:MainButtonBar />
 	<s:HGroup verticalAlign="top" horizontalAlign="center" id="canvasHolder">
 		<s:BorderContainer width="{model.screenSettings.viewportWidth}" height="{model.screenSettings.viewportHeight}">
 			<s:SpriteVisualElement id="canvas" width="500" height="600"/>
