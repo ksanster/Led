@@ -13,6 +13,7 @@ package com.tengu.tools.leditor.logic
 	import com.tengu.tools.leditor.logic.api.IEditorController;
 	import com.tengu.tools.leditor.logic.api.ILayerFactory;
 	import com.tengu.tools.leditor.logic.external.ExternalManager;
+	import com.tengu.tools.leditor.model.ActionModel;
 	import com.tengu.tools.leditor.model.LedModel;
 	
 	import mx.core.UIComponent;
@@ -35,6 +36,9 @@ package com.tengu.tools.leditor.logic
 		
 		[Inject(name="mainScene")]
 		public var scene:IGameContainer;
+		
+		[Inject]
+		public var mainApp:Led;
 		
 		[Inject]
 		public var viewport:IViewport;
@@ -109,10 +113,12 @@ package com.tengu.tools.leditor.logic
 					controls.percentWidth = 100;
 					layerControlsHolder.addElement(controls);
 				}
+				mainApp.mainButtonBar.currentState = layer.type;
 			}
 			else
 			{
 				model.layers.activeLayer = null;
+				mainApp.mainButtonBar.currentState = ActionModel.DEFAULT_BUTTONBAR_STATE;
 			}
 		}
 		
@@ -123,6 +129,7 @@ package com.tengu.tools.leditor.logic
 		
 		public function clearAll():void
 		{
+			mainApp.mainButtonBar.currentState = ActionModel.DEFAULT_BUTTONBAR_STATE;
 			layerControlsHolder.removeAllElements();
 			model.layers.layerList.removeAll();
 			scene.removeAll();

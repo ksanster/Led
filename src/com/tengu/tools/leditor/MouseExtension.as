@@ -49,7 +49,7 @@ package com.tengu.tools.leditor
 		
 		private function inBounds (x:Number, y:Number):Boolean
 		{
-			return (x > 0) && (y > 0) && (x < canvas.width) && (y < canvas.height);
+			return (x > 0) && (y > 0) && (x < model.screenSettings.viewportWidth) && (y < model.screenSettings.viewportHeight);
 		}
 		
 		private function endDrag():void
@@ -102,7 +102,6 @@ package com.tengu.tools.leditor
 			
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			
 		}
 		
 		private function onMouseMove(event:MouseEvent):void
@@ -110,9 +109,39 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
+			const newCenterX:Number = viewport.centerX + x - oldX; 
+			const newCenterY:Number = viewport.centerY + y - oldY; 
+			
+			const levelHalfWidth:Number = model.screenSettings.levelWidth * .5;
+			const viewportHalfWidth:Number = model.screenSettings.viewportWidth * .5;
+			const levelHalfHeight:Number = model.screenSettings.levelHeight * .5;
+			const viewportHalfHeight:Number = model.screenSettings.viewportHeight * .5;
+			
+			const leftXBound:Number = - levelHalfWidth + viewportHalfWidth;
+			const rightXBound:Number = levelHalfWidth - viewportHalfWidth;
+			const topYBound:Number = - levelHalfHeight + viewportHalfHeight;
+			const bottomYBound:Number = levelHalfHeight - viewportHalfHeight;
+			
+			if (newCenterX < leftXBound)
+			{
+				oldX = x - (leftXBound - viewport.centerX);
+			}
+			if (newCenterX > rightXBound)
+			{
+				oldX = x - (rightXBound - viewport.centerX);
+			}
+			if (newCenterY < topYBound)
+			{
+				oldY = y - (topYBound - viewport.centerY);
+			}
+			if (newCenterY > bottomYBound)
+			{
+				oldY = y - (bottomYBound - viewport.centerY);
+			}
+			
 			tweenX = x - oldX;
 			tweenY = y - oldY;
-			
+
 			viewport.moveBy(tweenX, tweenY);
 			
 			oldX = x;
@@ -147,7 +176,6 @@ package com.tengu.tools.leditor
 		{
 			tweenX = tweenX * TWEEN_EASING;
 			tweenY = tweenY * TWEEN_EASING;
-			
 			viewport.moveBy(tweenX, tweenY);
 			
 			if (Math.abs(tweenX) < MIN)

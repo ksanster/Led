@@ -106,6 +106,7 @@ package com.tengu.tools.leditor
 			injector.injectInto(mainApp.toolsPanel);
 			injector.injectInto(mainApp.toolsPanel.layersPanel);
 			injector.injectInto(mainApp.mainMenu);
+			injector.injectInto(mainApp.mainButtonBar);
 			injector.injectInto(viewFactory);
 			
 			sceneView.viewport.setSize(mainApp.canvas.width, mainApp.canvas.height);

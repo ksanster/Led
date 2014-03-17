@@ -11,6 +11,8 @@ package com.tengu.tools.leditor.model
 	{
 		public static const instance:LedModel = new LedModel();
 		
+		[Bindable]
+		public var actions:ActionModel;
 
 		[Bindable]
 		public var files:FileModel;
@@ -32,6 +34,9 @@ package com.tengu.tools.leditor.model
 		
 		private function initialize():void
 		{
+			actions = new ActionModel();
+			actions.buttonBarState = ActionModel.DEFAULT_BUTTONBAR_STATE;
+			
 			files = new FileModel();
 			screenSettings = new ScreenSettings();
 			layers = new LayerModel();

@@ -152,7 +152,6 @@ package com.tengu.scene.render
 		
 		public function moveBy (dx:Number, dy:Number):void
 		{
-//			trace(cameraY, dy);
 			cameraX += dx;
 			cameraY += dy;
 			updateCameraPosition();
