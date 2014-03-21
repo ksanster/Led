@@ -3,11 +3,13 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:controls="com.tengu.tools.leditor.view.controls.*"
+			   xmlns:buttonbar="com.tengu.tools.leditor.view.controls.buttonbar.*"
+			   xmlns:view="com.tengu.tools.leditor.view.*"
 			   frameRate="60"
                width="820" height="670" 
 			   left="5" top="5" bottom="5" right="5"
 			   addedToStage="onAddedToStage(event)" 
-			   closing="onClosing(event)" xmlns:view="com.tengu.tools.leditor.view.*" xmlns:buttonbar="com.tengu.tools.leditor.view.controls.buttonbar.*">
+			   closing="onClosing(event)"  >
 
     <fx:Script><![CDATA[
 		import com.tengu.tools.leditor.EditorContext;

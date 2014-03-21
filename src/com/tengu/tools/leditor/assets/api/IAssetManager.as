@@ -6,6 +6,7 @@ package com.tengu.tools.leditor.assets.api
 	public interface IAssetManager
 	{
 		function get assetList ():Vector.<IAssetData>;
+		function get tileList ():Vector.<IAssetData>;
 		
 		function setPreviewSize (width:uint, height:uint):void;
 		

@@ -25,6 +25,9 @@ package com.tengu.tools.leditor.assets
 		
 		private var assets:Vector.<IAssetData>;
 		private var assetsById:Object;
+		
+		private var tiles:Vector.<IAssetData>;
+		
 		private var indicesHash:Dictionary;		
 		private var assetsHash:Dictionary;		
 		
@@ -42,12 +45,18 @@ package com.tengu.tools.leditor.assets
 			return assets;
 		}
 		
+		public final function get tileList():Vector.<IAssetData> 
+		{
+			return tiles;
+		}
+		
 		public function AssetManager()
 		{
 			if (instance != null)
 			{
 				throw new SingletonConstructError(this);
 			}
+			tiles  = new Vector.<IAssetData>();
 			assets = new Vector.<IAssetData>();
 			assetsById  = {};
 			assetCollection = new ArrayCollection();
@@ -98,7 +107,7 @@ package com.tengu.tools.leditor.assets
 			return indicesHash[bitmap];
 		}
 		
-		public function importEmbedded (sourceClass:Class):void
+		public function importEmbedded (sourceClass:Class, isTile:Boolean = false):void
 		{
 			const typeXml:XML = describeType(sourceClass);
 			var childNode:XML;
@@ -110,6 +119,10 @@ package com.tengu.tools.leditor.assets
 				bitmapClass = sourceClass[childNode.@name];
 				bitmap = new bitmapClass();
 				addAsset(childNode.@name, bitmap.bitmapData);
+				if (isTile)
+				{
+					tiles[tiles.length] = String(childNode.@name);
+				}
 			}
 			
 			for each (childNode in typeXml.variable.(@type == "Class"))
@@ -117,6 +130,11 @@ package com.tengu.tools.leditor.assets
 				bitmapClass = sourceClass[childNode.@name];
 				bitmap = new bitmapClass();
 				addAsset(childNode.@name, bitmap.bitmapData);
+				if (isTile)
+				{
+					tiles[tiles.length] = String(childNode.@name);
+				}
+
 			}
 		}
 		

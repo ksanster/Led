@@ -10,6 +10,11 @@ package com.tengu.tools.leditor.logic.external
 		public static const LAYER:String = "layer";
 		public static const Z_INDEX:String = "z-index";
 
+		public static const WIDTH:String  = "width";
+		public static const HEIGHT:String = "height";
+		public static const TILE_WIDTH:String  = "tile-width";
+		public static const TILE_HEIGHT:String = "tile-height";
+
 		public static const BITMAP:String = "bitmap";
 
 		public function XMLProtocol()

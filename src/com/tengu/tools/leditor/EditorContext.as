@@ -68,6 +68,7 @@ package com.tengu.tools.leditor
 		{
 			assetManager = AssetManager.instance;
 			assetManager.importEmbedded(EmbeddedResources);
+			assetManager.importEmbedded(EmbeddedResources, true);
 		}
 		
 		protected override function initialize(contextView:Sprite):void

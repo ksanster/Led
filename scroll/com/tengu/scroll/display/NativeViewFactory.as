@@ -5,8 +5,10 @@ package com.tengu.scroll.display
 	import com.tengu.scene.api.IObjectView;
 	import com.tengu.scene.api.IViewFactory;
 	import com.tengu.scene.render.ViewFactory;
+	import com.tengu.scroll.display.views.ImageTileContainerView;
 	import com.tengu.scroll.display.views.ImageTileView;
 	import com.tengu.scroll.display.views.InfinityBitmapView;
+	import com.tengu.scroll.layers.ImageTile;
 	import com.tengu.scroll.layers.ImageTileLayer;
 	import com.tengu.scroll.layers.InfinityBitmapLayer;
 	
@@ -20,7 +22,8 @@ package com.tengu.scroll.display
 			super();
 			
 			registerView(InfinityBitmapLayer, InfinityBitmapView);
-			registerView(ImageTileLayer, ImageTileView);
+			registerView(ImageTileLayer, ImageTileContainerView);
+			registerView(ImageTile, ImageTileView);
 		}
 		
 		public override function createView(object:IGameObject):IObjectView

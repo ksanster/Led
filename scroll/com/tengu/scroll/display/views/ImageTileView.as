@@ -1,118 +1,58 @@
 package com.tengu.scroll.display.views
 {
 	import com.tengu.scene.api.IGameObject;
-	import com.tengu.scroll.layers.ImageTileLayer;
+	import com.tengu.scroll.layers.ImageTile;
 	
-	import flash.display.Graphics;
-	import flash.display.Shape;
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.Event;
 
-	public class ImageTileView extends BaseDisplayContainerView
+	public class ImageTileView extends BaseDisplayView
 	{
-		private var shape:Shape;
-		private var tileLayer:ImageTileLayer;
+		private var bitmap:Bitmap;
+		private var tile:ImageTile;
 		
 		public function ImageTileView()
 		{
 			super();
 		}
 		
-		private function drawGrid():void
+		private function updateBitmap():void
 		{
-			var i:int;
-			var xCoord:int;
-			var yCoord:int;
-			var tileWidth:int;
-			var tileHeight:int;
-			var tilesByX:int;
-			var tilesByY:int;
-			var graphix:Graphics = shape.graphics;
-			
-			graphix.clear();
-			
-			if (tileLayer == null || tileLayer.tileWidth == 0 || tileLayer.tileHeight == 0)
+			if (tile == null)
 			{
 				return;
 			}
-//			shape.x = - cameraHalfWidth;
-//			shape.y = - cameraHalfHeight;
-			
-			graphix.lineStyle(0, 0xcccccc, .5);
-			tileWidth  = tileLayer.tileWidth;
-			tileHeight = tileLayer.tileHeight;
-			xCoord = cameraX % tileWidth;
-			yCoord = cameraY % tileHeight;
-			tilesByX = xCoord + cameraWidth;
-			tilesByY = yCoord + cameraHeight;
-			
-//			logger.debug("grid [" + xCoord + "," + yCoord + "]");
-			for (i = xCoord; i < tilesByX; i += tileWidth)
-			{
-				if (i < 0)
-				{
-					continue;
-				}
-				graphix.moveTo(i, 0);
-				graphix.lineTo(i, cameraHeight);
-			}
-			
-			for (i = yCoord; i < tilesByY; i += tileHeight)
-			{
-				if (i < 0)
-				{
-					continue;
-				}
-				graphix.moveTo(0, i);
-				graphix.lineTo(cameraWidth, i);
-			}
+			bitmap.bitmapData = tile.bitmap;
+			bitmap.x = - tile.bounds.width * .5;
+			bitmap.y = - tile.bounds.height * .5;
 		}
 		
-		protected override function updateViewport():void
-		{
-			super.updateViewport();
-			drawGrid();
-		}
-		
-		protected override function updatePosition():void
-		{
-//			super.updatePosition();
-			drawGrid();
-		}
-		
-		protected override function updateScale():void
-		{
-			drawGrid();
-		}
-
 		protected override function initialize():void
 		{
 			super.initialize();
-			
-			shape = new Shape();
-			holder.addChild(shape);
+			bitmap = new Bitmap();
+			addChild(bitmap);
 		}
-		
+
 		public override function assignObject(value:IGameObject):void
 		{
 			super.assignObject(value);
-			tileLayer = value as ImageTileLayer;
-			tileLayer.addEventListener("tileSizeChanged", onChangeTileSize);
+			tile = value as ImageTile;
+			tile.addEventListener(Event.CHANGE, onChangeBitmap);
+			updateBitmap();
 		}
 		
 		public override function removeObject():void
 		{
-			if (tileLayer != null)
-			{
-				tileLayer.removeEventListener("tileSizeChanged", onChangeTileSize);
-				tileLayer = null;
-			}
+			tile.removeEventListener(Event.CHANGE, onChangeBitmap);
+			tile = null;
 			super.removeObject();
 		}
-
 		
-		private function onChangeTileSize(event:Event):void
+		private function onChangeBitmap(event:Event):void
 		{
-			invalidate(VALIDATION_FLAG_VIEWPORT, VALIDATION_FLAG_POSITION);
+			updateBitmap();			
 		}
 	}
 }

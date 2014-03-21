@@ -3,6 +3,7 @@ package com.tengu.tools.leditor.logic.external
 	import com.tengu.di.api.IInjector;
 	import com.tengu.log.LogFactory;
 	import com.tengu.tools.leditor.api.ILayer;
+	import com.tengu.tools.leditor.model.LedModel;
 	import com.tengu.tools.leditor.model.enum.LayerType;
 	
 	import mx.collections.IList;
@@ -13,6 +14,9 @@ package com.tengu.tools.leditor.logic.external
 		
 		[Inject]
 		public var injector:IInjector;
+		
+		[Inject]
+		public var model:LedModel;
 		
 		public function ExternalManager()
 		{
@@ -31,6 +35,9 @@ package com.tengu.tools.leditor.logic.external
 			
 			serializer = injector.makeInstance(IBSerializer) as ILayerSerializer;
 			addSerializer(LayerType.INFINITE_BITMAP, serializer);
+			
+			serializer = injector.makeInstance(ImageTileSerializer) as ILayerSerializer;
+			addSerializer(LayerType.IMAGE_TILES, serializer);
 		}
 		
 		public function exportLayers(layersList:IList):XML
@@ -39,6 +46,9 @@ package com.tengu.tools.leditor.logic.external
 			var layer:ILayer;
 			var exporter:ILayerSerializer;
 			var count:uint = layersList.length;
+			
+			xml.@[XMLProtocol.WIDTH] = model.screenSettings.levelWidth;
+			xml.@[XMLProtocol.HEIGHT] = model.screenSettings.levelHeight;
 			
 			for (var i:int = 0; i < count; i++)
 			{
@@ -63,6 +73,10 @@ package com.tengu.tools.leditor.logic.external
 			var node:XML;
 			var layerType:String;
 			var importer:ILayerSerializer;
+			
+			model.screenSettings.levelWidth  = parseInt(String(value.@[XMLProtocol.WIDTH]));
+			model.screenSettings.levelHeight = parseInt(String(value.@[XMLProtocol.HEIGHT]));
+			
 			for (var i:int = 0; i < count; i++)
 			{
 				node = list[i];

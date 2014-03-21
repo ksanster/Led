@@ -83,13 +83,16 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
+			
 			if (!inBounds(x, y) || model.screenSettings.locked)
 			{
 				return;
 			}
 			
 			if (model.layers.activeLayer != null &&
-				model.layers.activeLayer.mouseDown(x, y) )
+				model.layers.activeLayer.mouseDown(layerX, layerY) )
 			{
 				return;
 			}
@@ -109,6 +112,9 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
+
 			const newCenterX:Number = viewport.centerX + x - oldX; 
 			const newCenterY:Number = viewport.centerY + y - oldY; 
 			
@@ -149,7 +155,7 @@ package com.tengu.tools.leditor
 
 			if (model.layers.activeLayer != null)
 			{
-				model.layers.activeLayer.mouseMove(x, y);
+				model.layers.activeLayer.mouseMove(layerX, layerY);
 			}
 		}
 		
@@ -157,10 +163,13 @@ package com.tengu.tools.leditor
 		{
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
+			
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
 
 			if (model.layers.activeLayer != null)
 			{
-				model.layers.activeLayer.mouseUp(x, y);
+				model.layers.activeLayer.mouseUp(layerX, layerY);
 			}
 
 			endDrag();
