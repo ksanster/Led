@@ -55,23 +55,13 @@ package com.tengu.scroll.display.views
 		
 		protected override function updateViewport():void
 		{
-			super.updateViewport();
-			updateFill();
-		}
-		
-		protected override function updatePosition():void
-		{
 			var yCoord:Number = cameraY % rectHalfHeight;
 			if (yCoord > 0)
 			{
 				yCoord = yCoord - rectHalfHeight;
 			}
-
+			
 			shape.y = yCoord;
-		}
-		
-		protected override function updateScale():void
-		{
 			updateFill();
 		}
 		
