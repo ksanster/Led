@@ -5,11 +5,12 @@ package com.tengu.scroll.display.views
 	import com.tengu.log.LogFactory;
 	import com.tengu.log.Logger;
 	import com.tengu.scene.api.IGameObject;
+	import com.tengu.scene.api.IObjectView;
 	import com.tengu.scene.events.GameObjectEvent;
 	
 	import flash.display.Sprite;
 	
-	public class BaseDisplayView extends Sprite implements IDeferredCaller
+	public class BaseDisplayView extends Sprite implements IDeferredCaller, IObjectView
 	{
 		public static const VALIDATION_FLAG_ALL:uint 		= 0xFF;
 		public static const VALIDATION_FLAG_POSITION:uint 	= 0x1;

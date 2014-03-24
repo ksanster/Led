@@ -13,6 +13,7 @@ package com.tengu.tools.leditor
 	import com.tengu.scroll.display.views.SceneDisplayView;
 	import com.tengu.tools.leditor.assets.AssetManager;
 	import com.tengu.tools.leditor.assets.EmbeddedResources;
+	import com.tengu.tools.leditor.assets.EmbeddedTilesets;
 	import com.tengu.tools.leditor.assets.api.IAssetManager;
 	import com.tengu.tools.leditor.logic.LayerFactory;
 	import com.tengu.tools.leditor.logic.LedController;
@@ -68,7 +69,7 @@ package com.tengu.tools.leditor
 		{
 			assetManager = AssetManager.instance;
 			assetManager.importEmbedded(EmbeddedResources);
-			assetManager.importEmbedded(EmbeddedResources, true);
+			assetManager.importEmbedded(EmbeddedTilesets);
 		}
 		
 		protected override function initialize(contextView:Sprite):void

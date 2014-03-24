@@ -8,12 +8,15 @@ package com.tengu.scroll.layers
 	import com.tengu.tools.leditor.model.LedModel;
 	import com.tengu.tools.leditor.model.enum.ActionType;
 	
+	import flash.display.BitmapData;
+	
 	import mx.containers.Tile;
 
 	public class ImageTileLayer extends TileLayer implements IGameContainer, IEditableLayer
 	{
 		private var isDrawMode:Boolean = false;
 		private var brushAssetId:String;
+		private var brushIndex:int;
 		
 		private var tilesHash:Object;
 		private var lastCoordUid:String;
@@ -33,6 +36,16 @@ package com.tengu.scroll.layers
 		{
 			return brushAssetId;
 		}
+		
+		public function set tileIndex (value:int):void 
+		{
+			brushIndex = value;
+		}
+		
+		public function get tileIndex():int 
+		{
+			return brushIndex;
+		}
 
 		public function ImageTileLayer()
 		{
@@ -46,6 +59,7 @@ package com.tengu.scroll.layers
 			const tileY:int = yCoord / tileHeight + tileHeight * .5;
 			const uid:uint = SceneUtils.getCoordsUid(tileX, tileY);
 			var tile:ImageTile = tilesHash[uid];
+			var tileList:Vector.<BitmapData>;
 			
 			if (lastCoordUid == String(uid))
 			{
@@ -60,9 +74,14 @@ package com.tengu.scroll.layers
 			}
 			if (model.actions.actionType == ActionType.DRAW)
 			{
+				tileList = assetManager.getTileList(brushAssetId, tileWidth, tileHeight);
+				if (brushIndex < 0 || brushIndex >= tileList.length)
+				{
+					return;
+				}
 				tile = new ImageTile();
 				tile.move(tileX, tileY);
-				tile.bitmap = assetManager.getAsset(brushAssetId).bitmap;
+				tile.bitmap = tileList[brushIndex];
 				add(tile);
 			}
 			

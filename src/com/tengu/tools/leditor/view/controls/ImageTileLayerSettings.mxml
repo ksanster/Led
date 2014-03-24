@@ -2,7 +2,7 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
-		  addedToStage="onAddedToStage(event)">
+		  addedToStage="onAddedToStage(event)" xmlns:selector="com.tengu.tools.leditor.view.controls.selector.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -10,21 +10,63 @@
 	<fx:Script>
 		<![CDATA[
 			import com.tengu.scroll.layers.ImageTileLayer;
+			import com.tengu.tools.leditor.assets.AssetData;
 			import com.tengu.tools.leditor.assets.AssetManager;
+			import com.tengu.tools.leditor.assets.api.IAssetData;
 			import com.tengu.tools.leditor.model.LedModel;
 			
-			[Bindable]
-			private var manager:AssetManager = AssetManager.instance;
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.IndexChangeEvent;
 			
 			private var model:LedModel = LedModel.instance;
-			
+			[Bindable]
+			private var manager:AssetManager = AssetManager.instance;
+
 			[Bindable]
 			private var layer:ImageTileLayer;
+			
+			[Bindable]
+			private var tilesetCollection:ArrayCollection;
+			
+			[Bindable]
+			private var tileCollection:ArrayCollection;
 			
 			protected function onAddedToStage(event:Event):void
 			{
 				layer = model.layers.activeLayer as ImageTileLayer;
+				tilesetCollection = manager.assetCollection;
+				tileCollection = new ArrayCollection();
 			}
+			
+			protected function onChangeTileset(event:IndexChangeEvent):void
+			{
+				var tilesetId:String;
+				var asset:IAssetData;
+				var bitmap:BitmapData;
+				var list:Vector.<BitmapData>;
+				var count:uint;
+				tileCollection.removeAll();
+				if (tilesetSelector.selectedIndex == -1)
+				{
+					return;
+				}
+				list = manager.getTileList(tilesetSelector.selectedItem.id, layer.tileWidth, layer.tileHeight);
+				count = list.length;
+				for (var i:int = 0; i < count; i++)
+				{
+					bitmap = list[i];
+					asset = new AssetData(String(i), bitmap, bitmap);
+					tileCollection.addItem(asset);
+				}
+				layer.brush = tilesetSelector.selectedItem.id;
+			}
+			
+			protected function onChangeImage(event:IndexChangeEvent):void
+			{
+				layer.tileIndex = tileSelector.selectedIndex;
+			}
+			
 		]]>
 	</fx:Script>
 	<s:Label text="Set focal index"/>
@@ -47,5 +89,21 @@
 						 widthInChars="3"/>
 		</s:FormItem>		
 	</s:Form>
+	<s:Label text="Select tileset"/>
+	<s:DropDownList id="tilesetSelector" width="100%"
+					dataProvider="{tilesetCollection}"
+					labelField="id"
+					change="onChangeTileset(event)"/>
+	
+	<selector:ImageSelector id="tileSelector"
+							dataProvider="{tileCollection}" 
+							width="100%"
+							rowCount="3"
+							columnCount="7"
+							rowHeight="{layer.tileHeight}"
+							columnWidth="{layer.tileWidth}"
+							height="{layer.tileHeight * 3 + 15}" 
+							change="onChangeImage(event)"/>
+
 
 </s:VGroup>

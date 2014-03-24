@@ -5,9 +5,9 @@ package com.tengu.scroll.layers
 
 	public class TileLayer extends BaseLayer implements IGameContainer, IEditableLayer
 	{
-		private var lTileWidth:uint;
-		private var lTileHeight:uint;
-
+		private var lTileWidth:uint = 32;
+		private var lTileHeight:uint = 32;
+		[Bindable]
 		public function set tileWidth(value:uint):void 
 		{
 			lTileWidth = value;
@@ -18,7 +18,7 @@ package com.tengu.scroll.layers
 		{
 			return lTileWidth;
 		}
-		
+		[Bindable]
 		public function set tileHeight(value:uint):void 
 		{
 			lTileHeight = value;

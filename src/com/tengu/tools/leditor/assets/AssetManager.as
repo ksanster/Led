@@ -26,7 +26,7 @@ package com.tengu.tools.leditor.assets
 		private var assets:Vector.<IAssetData>;
 		private var assetsById:Object;
 		
-		private var tiles:Vector.<IAssetData>;
+		private var tiles:Object;
 		
 		private var indicesHash:Dictionary;		
 		private var assetsHash:Dictionary;		
@@ -45,20 +45,15 @@ package com.tengu.tools.leditor.assets
 			return assets;
 		}
 		
-		public final function get tileList():Vector.<IAssetData> 
-		{
-			return tiles;
-		}
-		
 		public function AssetManager()
 		{
 			if (instance != null)
 			{
 				throw new SingletonConstructError(this);
 			}
-			tiles  = new Vector.<IAssetData>();
 			assets = new Vector.<IAssetData>();
 			assetsById  = {};
+			tiles  = {};
 			assetCollection = new ArrayCollection();
 			indicesHash = new Dictionary();
 			assetsHash = new Dictionary();
@@ -107,7 +102,7 @@ package com.tengu.tools.leditor.assets
 			return indicesHash[bitmap];
 		}
 		
-		public function importEmbedded (sourceClass:Class, isTile:Boolean = false):void
+		public function importEmbedded (sourceClass:Class):void
 		{
 			const typeXml:XML = describeType(sourceClass);
 			var childNode:XML;
@@ -119,10 +114,6 @@ package com.tengu.tools.leditor.assets
 				bitmapClass = sourceClass[childNode.@name];
 				bitmap = new bitmapClass();
 				addAsset(childNode.@name, bitmap.bitmapData);
-				if (isTile)
-				{
-					tiles[tiles.length] = String(childNode.@name);
-				}
 			}
 			
 			for each (childNode in typeXml.variable.(@type == "Class"))
@@ -130,12 +121,50 @@ package com.tengu.tools.leditor.assets
 				bitmapClass = sourceClass[childNode.@name];
 				bitmap = new bitmapClass();
 				addAsset(childNode.@name, bitmap.bitmapData);
-				if (isTile)
-				{
-					tiles[tiles.length] = String(childNode.@name);
-				}
-
 			}
+		}
+		
+		public function getTileList (assetId:String, tileWidth:uint, tileHeight:uint):Vector.<BitmapData>
+		{
+			const tilesetId:String = assetId + "_" + tileWidth + "_" + tileHeight;
+			var tileset:Vector.<BitmapData> = tiles[tilesetId];
+			if (tileset == null)
+			{
+				tileset = generateTileset(assetId, tileWidth, tileHeight);
+				tiles[tilesetId] = tileset;
+			}
+			return tileset;
+		}
+		
+		private function generateTileset(assetId:String, tileWidth:uint, tileHeight:uint):Vector.<BitmapData>
+		{
+			var result:Vector.<BitmapData> = new Vector.<BitmapData>();
+			var asset:IAssetData = getAsset(assetId);
+			var rect:Rectangle = new Rectangle(0, 0, tileWidth, tileHeight);
+			var tile:BitmapData;
+			var source:BitmapData;
+			var sourceWidth:uint;
+			var sourceHeight:uint;
+			if (asset != null)
+			{
+				source = asset.bitmap;
+				
+				sourceWidth = source.width;
+				sourceHeight = source.height;
+				
+				for (var x:uint = 0; x < sourceWidth; x += tileWidth)
+				{
+					for (var y:uint = 0; y < sourceHeight; y += tileHeight)
+					{
+						rect.x = x;
+						rect.y = y;
+						tile = new BitmapData(tileWidth, tileHeight, true, 0x00FFFFFF);
+						tile.copyPixels(source, rect, POINT, null, null, true);
+						result[result.length] = tile;
+					}
+				}
+			}
+			return result;
 		}
 		
 		private function generatePreview(bitmapData:BitmapData):BitmapData

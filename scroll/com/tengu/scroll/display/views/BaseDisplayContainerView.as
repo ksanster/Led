@@ -28,6 +28,8 @@ package com.tengu.scroll.display.views
 		protected var cameraHalfWidth:uint  = 0;
 		protected var cameraHalfHeight:uint = 0; 
 		
+		protected var screenBounds:IntRectangle;
+		
 		public function BaseDisplayContainerView()
 		{
 			super();
@@ -40,13 +42,9 @@ package com.tengu.scroll.display.views
 			holder.mouseEnabled = false;
 			addChild(holder);
 			
+			screenBounds = new IntRectangle();
+			
 			awake();
-		}
-		
-		protected override function updatePosition():void
-		{
-			holder.x = - cameraX * cameraScale + cameraWidth - cameraHalfWidth * cameraScale;
-			holder.y = - cameraY * cameraScale + cameraHeight - cameraHalfHeight * cameraScale;
 		}
 		
 		protected override function updateScale():void
@@ -55,9 +53,25 @@ package com.tengu.scroll.display.views
 			holder.scaleY = cameraScale;
 		}
 		
+		protected override function updateViewport():void
+		{
+			screenBounds.x = cameraX - cameraHalfWidth / cameraScale;
+			screenBounds.y = cameraY - cameraHalfHeight / cameraScale;
+			screenBounds.width  = cameraWidth  / cameraScale;
+			screenBounds.height = cameraHeight / cameraScale;
+			
+			holder.x = - cameraX * cameraScale + cameraWidth - cameraHalfWidth * cameraScale;
+			holder.y = - cameraY * cameraScale + cameraHeight - cameraHalfHeight * cameraScale;
+		}
+		
 		protected override function updateRotation():void
 		{
 			rotation = cameraRotation;
+		}
+		
+		protected function updateSort ():void
+		{
+			
 		}
 		
 		public function setCameraScale (value:Number):void
@@ -117,6 +131,7 @@ package com.tengu.scroll.display.views
 		{
 			setCameraSize(value.width, value.height);
 			moveCamera(value.x, value.y);
+			invalidate(VALIDATION_FLAG_VIEWPORT);
 		}
 		
 		public function setViewFactory(value:IViewFactory):void

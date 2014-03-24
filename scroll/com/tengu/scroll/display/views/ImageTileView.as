@@ -45,8 +45,11 @@ package com.tengu.scroll.display.views
 		
 		public override function removeObject():void
 		{
-			tile.removeEventListener(Event.CHANGE, onChangeBitmap);
-			tile = null;
+			if (tile != null)
+			{
+				tile.removeEventListener(Event.CHANGE, onChangeBitmap);
+				tile = null;
+			}
 			super.removeObject();
 		}
 		

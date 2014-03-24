@@ -51,6 +51,8 @@
 	<selector:ImageSelector id="imageSelector"
 							dataProvider="{manager.assetCollection}" 
 							width="100%"
+							rowCount="1"
+							columnCount="6"
 							rowHeight="{manager.previewHeight}"
 							columnWidth="{manager.previewWidth}"
 							height="{manager.previewHeight + 5}" 

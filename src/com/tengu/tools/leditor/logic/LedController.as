@@ -81,6 +81,7 @@ package com.tengu.tools.leditor.logic
 			const layer:ILayer = layerFactory.create(layerType, zIndex);
 			if (layer != null)
 			{
+				injector.injectInto(layer);
 				model.layers.layerList.addItem(layer);
 				scene.add(layer as IGameObject);				
 				

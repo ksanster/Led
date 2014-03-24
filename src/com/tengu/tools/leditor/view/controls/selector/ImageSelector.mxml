@@ -12,11 +12,17 @@
 			
 			[Bindable]
 			public var columnWidth:uint;
+			
+			[Bindable]
+			public var columnCount:uint = 7;
+			
+			[Bindable]
+			public var rowCount:uint = 1;
 		]]>
 	</fx:Script>
 	<s:layout>
 		<s:TileLayout clipAndEnableScrolling="true" 
-					  requestedColumnCount="3" requestedRowCount="1"
+					  requestedColumnCount="{columnCount}" requestedRowCount="{rowCount}"
 					  rowHeight="{rowHeight}"
 					  columnWidth="{columnWidth}"
 					  horizontalAlign="justify" />
