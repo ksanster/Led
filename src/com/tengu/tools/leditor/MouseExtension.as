@@ -23,6 +23,8 @@ package com.tengu.tools.leditor
 		private var tweenX:Number;
 		private var tweenY:Number;
 		
+		private var moveStarted:Boolean;
+		
 		private var isTween:Boolean = false;
 		
 		[Inject]
@@ -54,6 +56,7 @@ package com.tengu.tools.leditor
 		
 		private function endDrag():void
 		{
+			moveStarted = false;
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		}
@@ -83,19 +86,16 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
-			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) + viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) + viewport.centerY;
 			
 			if (!inBounds(x, y) || model.screenSettings.locked)
 			{
 				return;
 			}
 			
-			if (model.layers.activeLayer != null &&
-				model.layers.activeLayer.mouseDown(layerX, layerY) )
-			{
-				return;
-			}
+			moveStarted = !(model.layers.activeLayer != null &&
+							model.layers.activeLayer.mouseDown(layerX, layerY) );
 
 			tweenX = 0;
 			tweenY = 0;
@@ -112,8 +112,8 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
-			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) + viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) + viewport.centerY;
 
 			const newCenterX:Number = viewport.centerX + x - oldX; 
 			const newCenterY:Number = viewport.centerY + y - oldY; 
@@ -145,13 +145,16 @@ package com.tengu.tools.leditor
 				oldY = y - (bottomYBound - viewport.centerY);
 			}
 			
-			tweenX = x - oldX;
-			tweenY = y - oldY;
-
-			viewport.moveBy(tweenX, tweenY);
-			
-			oldX = x;
-			oldY = y;
+			if (moveStarted)
+			{
+				tweenX = x - oldX;
+				tweenY = y - oldY;
+	
+				viewport.moveBy(- tweenX, - tweenY);
+				
+				oldX = x;
+				oldY = y;
+			}
 
 			if (model.layers.activeLayer != null)
 			{
@@ -164,20 +167,20 @@ package com.tengu.tools.leditor
 			const x:Number = event.stageX - canvas.x;
 			const y:Number = event.stageY - canvas.y;
 			
-			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) - viewport.centerX;
-			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) - viewport.centerY;
+			const layerX:Number = (x - model.screenSettings.viewportWidth * .5) + viewport.centerX;
+			const layerY:Number = (y - model.screenSettings.viewportHeight * .5) + viewport.centerY;
 
 			if (model.layers.activeLayer != null)
 			{
 				model.layers.activeLayer.mouseUp(layerX, layerY);
 			}
 
-			endDrag();
-			
-			if (tweenX != 0 || tweenY != 0)
+			if (moveStarted && (tweenX != 0 || tweenY != 0))
 			{
 				startTween();
 			}
+
+			endDrag();
 		}
 		
 		
@@ -185,7 +188,7 @@ package com.tengu.tools.leditor
 		{
 			tweenX = tweenX * TWEEN_EASING;
 			tweenY = tweenY * TWEEN_EASING;
-			viewport.moveBy(tweenX, tweenY);
+			viewport.moveBy(- tweenX, - tweenY);
 			
 			if (Math.abs(tweenX) < MIN)
 			{
@@ -200,6 +203,5 @@ package com.tengu.tools.leditor
 				stopTween();
 			}
 		}
-
 	}
 }

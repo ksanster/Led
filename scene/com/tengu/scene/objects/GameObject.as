@@ -1,7 +1,6 @@
 package com.tengu.scene.objects
 {
 
-    import com.tengu.math.IntRectangle;
     import com.tengu.scene.api.IGameContainer;
     import com.tengu.scene.api.IGameObject;
     import com.tengu.scene.events.GameObjectEvent;
@@ -14,22 +13,10 @@ package com.tengu.scene.objects
 	{
 		protected var parentContainer:IGameContainer = null;
 
-		protected var objectBounds:IntRectangle = null;
-		
 		protected var xCoord:Number = 0;
 		protected var yCoord:Number = 0;
 		protected var zCoord:Number = 0;
 		
-		public function set bounds(value:IntRectangle):void
-		{
-			objectBounds = value;
-		}
-
-		public function get bounds():IntRectangle
-		{
-			return objectBounds;
-		}
-
 		public function set parent(value:IGameContainer):void
 		{
 			parentContainer = value;
@@ -63,12 +50,12 @@ package com.tengu.scene.objects
 		
 		protected function initialize ():void
 		{
-			bounds = new IntRectangle();
+			//Abstract
 		}
 		
 		protected function dispose ():void
 		{
-			//Empty
+			//Abstract
 		}
 		
 		public function move (x:Number = 0, y:Number = 0, z:Number = 0):void
@@ -77,11 +64,6 @@ package com.tengu.scene.objects
 			yCoord = y;
 			zCoord = z;
 			dispatchGameObjectEvent(GameObjectEvent.OBJECT_COORDS_CHANGED);
-		}
-		
-		public function setSize (width:int = 0, length:int = 0, height:int = 0):void
-		{
-			//Abstract
 		}
 		
 		public final function finalize ():void

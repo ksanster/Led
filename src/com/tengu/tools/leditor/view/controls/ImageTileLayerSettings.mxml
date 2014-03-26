@@ -2,7 +2,9 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
-		  addedToStage="onAddedToStage(event)" xmlns:selector="com.tengu.tools.leditor.view.controls.selector.*">
+		  xmlns:selector="com.tengu.tools.leditor.view.controls.selector.*"
+		  addedToStage="onAddedToStage(event)" 
+		  removedFromStage="onRemovedFromStage(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -13,7 +15,9 @@
 			import com.tengu.tools.leditor.assets.AssetData;
 			import com.tengu.tools.leditor.assets.AssetManager;
 			import com.tengu.tools.leditor.assets.api.IAssetData;
+			import com.tengu.tools.leditor.model.ActionModel;
 			import com.tengu.tools.leditor.model.LedModel;
+			import com.tengu.tools.leditor.model.enum.ActionType;
 			
 			import mx.collections.ArrayCollection;
 			
@@ -37,7 +41,15 @@
 				layer = model.layers.activeLayer as ImageTileLayer;
 				tilesetCollection = manager.assetCollection;
 				tileCollection = new ArrayCollection();
+				
+				model.actions.addEventListener(ActionModel.ACTION_CHANGED, onActionChanged);
 			}
+			
+			protected function onRemovedFromStage(event:Event):void
+			{
+				model.actions.removeEventListener(ActionModel.ACTION_CHANGED, onActionChanged);
+			}
+
 			
 			protected function onChangeTileset(event:IndexChangeEvent):void
 			{
@@ -65,6 +77,18 @@
 			protected function onChangeImage(event:IndexChangeEvent):void
 			{
 				layer.tileIndex = tileSelector.selectedIndex;
+				if (tileSelector.selectedIndex != -1)
+				{
+					model.actions.actionType = ActionType.DRAW;
+				}
+			}
+			
+			private function onActionChanged(event:Event):void
+			{
+				if (model.actions.actionType != ActionType.DRAW)
+				{
+					tileSelector.selectedIndex = -1;
+				}
 			}
 			
 		]]>

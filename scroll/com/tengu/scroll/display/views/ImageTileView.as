@@ -4,7 +4,6 @@ package com.tengu.scroll.display.views
 	import com.tengu.scroll.layers.ImageTile;
 	
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.events.Event;
 
 	public class ImageTileView extends BaseDisplayView
@@ -24,8 +23,8 @@ package com.tengu.scroll.display.views
 				return;
 			}
 			bitmap.bitmapData = tile.bitmap;
-			bitmap.x = - tile.bounds.width * .5;
-			bitmap.y = - tile.bounds.height * .5;
+			bitmap.x = - tile.width * .5;
+			bitmap.y = - tile.height * .5;
 		}
 		
 		protected override function initialize():void

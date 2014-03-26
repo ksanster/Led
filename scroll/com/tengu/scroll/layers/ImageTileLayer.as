@@ -52,15 +52,23 @@ package com.tengu.scroll.layers
 			super();
 		}
 		
-		private function drawWithBrush(xCoord:int, yCoord:int):void
+		private function translateToTileCoord (coord:Number, tileSize:uint):int
+		{
+			const sign:int = (coord < 0) ? -1 : 1;
+			const absTileCoord:int = Math.abs(coord) / tileSize + .5;
+			
+			return sign * absTileCoord;
+		}
+		
+		private function drawWithBrush(xCoord:Number, yCoord:Number):void
 		{
 			const actionType:String = model.actions.actionType;
-			const tileX:int = xCoord / tileWidth + tileWidth * .5;
-			const tileY:int = yCoord / tileHeight + tileHeight * .5;
+			const tileX:int = translateToTileCoord(xCoord, tileWidth);
+			const tileY:int = translateToTileCoord(yCoord, tileHeight);
 			const uid:uint = SceneUtils.getCoordsUid(tileX, tileY);
 			var tile:ImageTile = tilesHash[uid];
 			var tileList:Vector.<BitmapData>;
-			
+
 			if (lastCoordUid == String(uid))
 			{
 				return;
@@ -68,7 +76,7 @@ package com.tengu.scroll.layers
 			
 			lastCoordUid = String(uid);
 			
-			if ((tile != null && actionType == ActionType.DRAW) || actionType == ActionType.ERASE)
+			if (tile != null && (actionType == ActionType.DRAW || actionType == ActionType.ERASE))
 			{
 				remove(tile);
 			}
@@ -80,9 +88,11 @@ package com.tengu.scroll.layers
 					return;
 				}
 				tile = new ImageTile();
-				tile.move(tileX, tileY);
+				tile.setSize(tileWidth, tileHeight);
+				tile.move(tileX * tileWidth, tileY * tileHeight);
 				tile.bitmap = tileList[brushIndex];
 				add(tile);
+				tilesHash[uid] = tile;
 			}
 			
 		}

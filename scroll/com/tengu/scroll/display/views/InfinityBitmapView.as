@@ -13,7 +13,6 @@ package com.tengu.scroll.display.views
 		private var bitmapLayer:InfinityBitmapLayer;
 		
 		private var shape:Shape;
-		private var rectHeight:uint = 1;
 		private var rectHalfHeight:uint = 1;
 		
 		private var rect:Rectangle;
@@ -43,9 +42,8 @@ package com.tengu.scroll.display.views
 				count += 1;
 			}
 			rectHalfHeight = count * bitmapHeight;
-			rectHeight = 2 * rectHalfHeight;
 			graphix.beginBitmapFill(bitmapLayer.bitmap);
-			graphix.drawRect(0, 0, cameraWidth, rectHeight);
+			graphix.drawRect(0, 0, cameraWidth, 2 * rectHalfHeight);
 			graphix.endFill();
 			
 			rect.width  = cameraWidth - 1;
@@ -55,7 +53,7 @@ package com.tengu.scroll.display.views
 		
 		protected override function updateViewport():void
 		{
-			var yCoord:Number = cameraY % rectHalfHeight;
+			var yCoord:Number = - cameraY % rectHalfHeight;
 			if (yCoord > 0)
 			{
 				yCoord = yCoord - rectHalfHeight;

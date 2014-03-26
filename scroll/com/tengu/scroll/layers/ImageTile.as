@@ -1,12 +1,12 @@
 package com.tengu.scroll.layers
 {
-	import com.tengu.scene.api.IGameObject;
-	import com.tengu.scene.objects.GameObject;
+	import com.tengu.scene.api.IPlainObject;
+	import com.tengu.scene.objects.PlainObject;
 	
 	import flash.display.BitmapData;
 	import flash.events.Event;
 	
-	public class ImageTile extends GameObject implements IGameObject
+	public class ImageTile extends PlainObject implements IPlainObject
 	{
 		private var bitmapData:BitmapData;
 		

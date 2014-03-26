@@ -2,12 +2,14 @@ package com.tengu.scroll.display.views
 {
 	import com.tengu.scene.api.IGameObject;
 	import com.tengu.scene.api.IObjectView;
+	import com.tengu.scene.api.IPlainObject;
 	import com.tengu.scene.events.GameContainerEvent;
 	import com.tengu.scroll.layers.ImageTileLayer;
 	
 	import flash.display.Graphics;
 	import flash.display.Shape;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 
 	public class ImageTileContainerView extends BaseDisplayContainerView
@@ -56,9 +58,9 @@ package com.tengu.scroll.display.views
 		
 		private function validateVisibleBounds():void
 		{
-			for each (var object:IGameObject in objects)
+			for each (var object:IPlainObject in objects)
 			{
-				if (screenBounds.intersects(object.bounds))
+				if (visibleBounds.intersectsBounds(object.x, object.y, object.width, object.height))
 				{
 					addChildView(object);
 				}
@@ -88,37 +90,37 @@ package com.tengu.scroll.display.views
 			}
 			
 			graphix.lineStyle(0, 0xcccccc, .5);
+			graphix.drawCircle(cameraHalfWidth, cameraHalfHeight, 2);
+			
 			tileWidth  = tileLayer.tileWidth;
 			tileHeight = tileLayer.tileHeight;
-			xCoord = cameraX % tileWidth;
-			yCoord = cameraY % tileHeight;
+			xCoord = cameraHalfWidth - tileWidth * .5 - int( (cameraHalfWidth - tileWidth * .5) / tileWidth ) * tileWidth;
+			yCoord = cameraHalfHeight - tileHeight * .5 - int( (cameraHalfHeight - tileHeight * .5) / tileHeight ) * tileHeight;
+			
+			xCoord -= cameraX % tileWidth;
+			yCoord -= cameraY % tileHeight;			
+
 			tilesByX = xCoord + cameraWidth;
 			tilesByY = yCoord + cameraHeight;
 			
 			for (i = xCoord; i < tilesByX; i += tileWidth)
 			{
-				if (i < 0)
-				{
-					continue;
-				}
 				graphix.moveTo(i, 0);
-				graphix.lineTo(i, cameraHeight);
+				graphix.lineTo(i, cameraHeight - 1);
 			}
 			
 			for (i = yCoord; i < tilesByY; i += tileHeight)
 			{
-				if (i < 0)
-				{
-					continue;
-				}
 				graphix.moveTo(0, i);
-				graphix.lineTo(cameraWidth, i);
+				graphix.lineTo(cameraWidth - 1, i);
 			}
 		}
 		
 		protected override function updateViewport():void
 		{
 			super.updateViewport();
+//			shape.x = holder.x;
+//			shape.y = holder.y;
 			drawGrid();
 			validateVisibleBounds();
 		}
@@ -130,13 +132,11 @@ package com.tengu.scroll.display.views
 		
 		protected override function updatePosition():void
 		{
-			//			super.updatePosition();
-//			drawGrid();
 		}
 		
 		protected override function updateBounds():void
 		{
-			
+			scrollRect = new Rectangle(0, 0, cameraWidth, cameraHeight);
 		}
 
 		protected override function initialize():void
@@ -148,7 +148,7 @@ package com.tengu.scroll.display.views
 			objectHash = new Dictionary();
 			
 			shape = new Shape();
-			holder.addChild(shape);
+			addChild(shape);
 		}
 		
 		public override function assignObject(value:IGameObject):void
@@ -175,13 +175,13 @@ package com.tengu.scroll.display.views
 		
 		protected override function onChildAdded(event:GameContainerEvent):void
 		{
-			const child:IGameObject = event.gameObject;
+			const child:IPlainObject = event.gameObject as IPlainObject;
 			if (objectHash[child] == null)
 			{
 				objects[objects.length] = child;
 				objectHash[child] = true;
 			}
-			if (screenBounds.intersects(child.bounds))
+			if (visibleBounds.intersectsBounds(child.x, child.y, child.width, child.height))
 			{
 				addChildView(child);
 				invalidate(BaseDisplayView.VALIDATION_FLAG_SORT);

@@ -76,7 +76,7 @@ package com.tengu.scroll.display.views
 		
 		protected function updateBounds():void
 		{
-			// Abstract
+			
 		}
 		
 		protected function updateScale():void

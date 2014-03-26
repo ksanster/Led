@@ -142,6 +142,57 @@ package com.tengu.math
 			return false;
 		}
 		
+		public function intersectsBounds(rectX:int, rectY:int, rectWidth:int, rectHeight:int):Boolean
+		{
+			const rectRight:int = rectX + rectWidth;
+			const rectBottom:int = rectY + rectHeight;
+			
+			if (   (rX <= rectX && rectX <= rRight)
+				|| (rX <= rectRight && rectRight <= rRight))
+			{ 
+				
+				if (rectY <= rY && rY <= rectBottom)
+				{
+					return true;
+				}                      
+				if (rectY <= rBottom && rBottom <= rectBottom)
+				{
+					return true;
+				}      
+			}
+
+			if (    (rY <= rectY && rectY <= rBottom)  
+				|| (rY <= rectBottom && rectBottom <= rBottom) )
+			{
+				
+				if (rectX <= rX && rX <= rectRight)
+				{
+					return true;
+				}
+				if (rectX <= rRight && rRight <= rectRight)
+				{
+					return true;
+				}
+			}
+			
+			if (   (rX <= rectX && rY <= rectY) 
+				&& (rectRight <= rRight) 
+				&& (rectBottom <= rBottom))
+			{
+				return true;
+			}
+			
+			if (   (rectX <= rX && rectY <= rY) 
+				&& (rRight <= rectRight) 
+				&& (rBottom <= rectBottom))
+			{
+				return true;
+			}
+
+
+			return false;
+		}
+		
 		public function contains(rect:IntRectangle):Boolean
 		{
 			if (   (rX <= rect.rX && rY <= rect.rY) 
