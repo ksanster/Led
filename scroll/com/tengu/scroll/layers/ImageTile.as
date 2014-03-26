@@ -9,6 +9,17 @@ package com.tengu.scroll.layers
 	public class ImageTile extends PlainObject implements IPlainObject
 	{
 		private var bitmapData:BitmapData;
+		private var bitmapIndex:int;
+		
+		public function set index(value:int):void 
+		{
+			bitmapIndex = value;
+		}
+		
+		public function get index():int 
+		{
+			return bitmapIndex;
+		}
 		
 		public function set bitmap(value:BitmapData):void 
 		{

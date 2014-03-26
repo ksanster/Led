@@ -91,6 +91,7 @@ package com.tengu.scroll.layers
 				tile.setSize(tileWidth, tileHeight);
 				tile.move(tileX * tileWidth, tileY * tileHeight);
 				tile.bitmap = tileList[brushIndex];
+				tile.index = brushIndex;
 				add(tile);
 				tilesHash[uid] = tile;
 			}
