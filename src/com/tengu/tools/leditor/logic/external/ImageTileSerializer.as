@@ -10,7 +10,7 @@ package com.tengu.tools.leditor.logic.external
 	
 	import flash.display.BitmapData;
 	
-	import mx.containers.Tile;
+	import mx.collections.IList;
 	
 	public class ImageTileSerializer implements ILayerSerializer
 	{
@@ -22,6 +22,7 @@ package com.tengu.tools.leditor.logic.external
 
 		public function ImageTileSerializer()
 		{
+			//Empty
 		}
 		
 		public function exportLayer(value:ILayer):XML
@@ -43,13 +44,7 @@ package com.tengu.tools.leditor.logic.external
 			
 			for each (child in children)
 			{
-				childNode = new XML("<" + XMLProtocol.CHILD + "></" + XMLProtocol.CHILD + ">" );
-				childNode.@[XMLProtocol.X] = child.x;
-				childNode.@[XMLProtocol.Y] = child.y;
-				childNode.@[XMLProtocol.WIDTH] = child.width;
-				childNode.@[XMLProtocol.HEIGHT] = child.height;
-				childNode.@[XMLProtocol.TILE_INDEX] = child.index;
-				
+				childNode = exportTile(child);
 				xml.appendChild(childNode);
 			}
 			
@@ -67,11 +62,6 @@ package com.tengu.tools.leditor.logic.external
 			var tileList:Vector.<BitmapData>;
 			var child:ImageTile;
 			var childNode:XML;
-			var w:int;
-			var h:int;
-			var x:int;
-			var y:int;
-			var index:int;
 			
 			tileWidth  = parseInt(String(value.@[XMLProtocol.TILE_WIDTH]));
 			tileHeight = parseInt(String(value.@[XMLProtocol.TILE_HEIGHT]));
@@ -85,15 +75,9 @@ package com.tengu.tools.leditor.logic.external
 			for (var i:int = 0; i < childCount; i++)
 			{
 				childNode = nodeList[i];
-				x = parseInt(String(childNode.@[XMLProtocol.X]));
-				y = parseInt(String(childNode.@[XMLProtocol.Y]));
-				w = parseInt(String(childNode.@[XMLProtocol.Y]));
-				h = parseInt(String(childNode.@[XMLProtocol.Y]));
 				
-				child = new ImageTile();
+				child = importTile(childNode);
 				child.setSize(tileWidth, tileHeight);
-				child.move(x, y);
-				child.index = parseInt(String(childNode.@[XMLProtocol.TILE_INDEX]));
 				child.bitmap = tileList[child.index];
 
 				result.add(child);
@@ -101,5 +85,62 @@ package com.tengu.tools.leditor.logic.external
 			
 			return result;
 		}
+		
+		private function exportTile (child:ImageTile):XML
+		{
+			const properties:IList = child.properties;
+			const count:uint = properties.length;
+			var property:Object;
+			var node:XML;
+			var result:XML = new XML("<" + 	XMLProtocol.CHILD + "><" + 
+											XMLProtocol.PROPERTIES + "/></" + 
+											XMLProtocol.CHILD + ">" );
+			result.@[XMLProtocol.X] = child.x;
+			result.@[XMLProtocol.Y] = child.y;
+			result.@[XMLProtocol.WIDTH] = child.width;
+			result.@[XMLProtocol.HEIGHT] = child.height;
+			result.@[XMLProtocol.TILE_INDEX] = child.index;
+			
+			for (var i:int = 0; i < count; i++)
+			{
+				property = properties.getItemAt(i);
+				node = new XML("<" + XMLProtocol.PROPERTY + "/>" );
+				node.@[XMLProtocol.KEY] 	= property[XMLProtocol.KEY];
+				node.@[XMLProtocol.VALUE] 	= property[XMLProtocol.VALUE];
+				result.appendChild(node);
+			}
+			return result;
+		}
+		
+		private function importTile (node:XML):ImageTile
+		{
+			const nodeList:XMLList = node[XMLProtocol.PROPERTIES];
+			const count:uint = nodeList.length();
+			
+			const x:int = parseInt(String(node.@[XMLProtocol.X]));
+			const y:int = parseInt(String(node.@[XMLProtocol.Y]));
+			const w:int = parseInt(String(node.@[XMLProtocol.Y]));
+			const h:int = parseInt(String(node.@[XMLProtocol.Y]));
+			
+			var result:ImageTile = new ImageTile();
+			var propNode:XML;
+			var property:Object;
+			
+			result = new ImageTile();
+			result.move(x, y);
+			result.index = parseInt(String(node.@[XMLProtocol.TILE_INDEX]));
+			
+			for (var i:int = 0; i < count; i++)
+			{
+				propNode = nodeList[i];
+				property = {};
+				property[XMLProtocol.KEY] = String(node.@[XMLProtocol.KEY]) || "";
+				property[XMLProtocol.VALUE] = String(node.@[XMLProtocol.VALUE]) || "";
+				result.properties.addItem(property);
+			}
+			
+			return result;
+		}
+
 	}
 }

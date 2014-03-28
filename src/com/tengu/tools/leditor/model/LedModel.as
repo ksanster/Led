@@ -2,6 +2,7 @@ package com.tengu.tools.leditor.model
 {
 	import com.tengu.core.errors.SingletonConstructError;
 	import com.tengu.tools.leditor.api.IEditableLayer;
+	import com.tengu.tools.leditor.api.IPropertyContainer;
 	import com.tengu.tools.leditor.model.enum.LayerType;
 	
 	import mx.collections.ArrayCollection;
@@ -23,6 +24,9 @@ package com.tengu.tools.leditor.model
 		[Bindable]
 		public var layers:LayerModel;
 		
+		[Bindable]
+		public var selections:SelectionModel;
+		
 		public function LedModel()
 		{
 			if (instance != null)
@@ -40,6 +44,7 @@ package com.tengu.tools.leditor.model
 			files = new FileModel();
 			screenSettings = new ScreenSettings();
 			layers = new LayerModel();
+			selections = new SelectionModel();
 		}
 	}
 }

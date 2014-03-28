@@ -74,11 +74,6 @@ package com.tengu.scroll.display.views
 			visibleBounds.height = cameraHeight / cameraScale;
 		}
 		
-		protected function updateSort ():void
-		{
-			
-		}
-		
 		public function setCameraScale (value:Number):void
 		{
 			cameraScale = value;

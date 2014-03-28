@@ -7,6 +7,7 @@ package com.tengu.scroll.layers
 	{
 		private var lTileWidth:uint = 32;
 		private var lTileHeight:uint = 32;
+		
 		[Bindable]
 		public function set tileWidth(value:uint):void 
 		{

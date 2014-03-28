@@ -60,7 +60,7 @@ package com.tengu.scroll.layers
 			return sign * absTileCoord;
 		}
 		
-		private function drawWithBrush(xCoord:Number, yCoord:Number):void
+		private function drawWithBrush(xCoord:Number, yCoord:Number):Boolean
 		{
 			const actionType:String = model.actions.actionType;
 			const tileX:int = translateToTileCoord(xCoord, tileWidth);
@@ -68,10 +68,16 @@ package com.tengu.scroll.layers
 			const uid:uint = SceneUtils.getCoordsUid(tileX, tileY);
 			var tile:ImageTile = tilesHash[uid];
 			var tileList:Vector.<BitmapData>;
+			
+			if (model.actions.actionType == ActionType.MOVE)
+			{
+				model.selections.selectedTile = tile;
+				return (tile != null);
+			}
 
 			if (lastCoordUid == String(uid))
 			{
-				return;
+				return false;
 			}
 			
 			lastCoordUid = String(uid);
@@ -85,7 +91,7 @@ package com.tengu.scroll.layers
 				tileList = assetManager.getTileList(brushAssetId, tileWidth, tileHeight);
 				if (brushIndex < 0 || brushIndex >= tileList.length)
 				{
-					return;
+					return false;
 				}
 				tile = new ImageTile();
 				tile.setSize(tileWidth, tileHeight);
@@ -96,6 +102,7 @@ package com.tengu.scroll.layers
 				tilesHash[uid] = tile;
 			}
 			
+			return true;
 		}
 		
 		protected override function initialize():void
@@ -106,13 +113,12 @@ package com.tengu.scroll.layers
 
 		public override function mouseDown(xCoord:Number, yCoord:Number):Boolean
 		{
-			if (brushAssetId == null || model.actions.actionType == ActionType.MOVE)
+			if (brushAssetId == null)
 			{
 				return false;
 			}
-			isDrawMode = true;
-			drawWithBrush(xCoord, yCoord);
-			return true;
+			isDrawMode = drawWithBrush(xCoord, yCoord);
+			return isDrawMode;
 		}
 		
 		public override function mouseMove(xCoord:Number, yCoord:Number):void

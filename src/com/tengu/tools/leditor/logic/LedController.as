@@ -104,9 +104,20 @@ package com.tengu.tools.leditor.logic
 		
 		public function setActiveLayer (layer:IEditableLayer):void
 		{
+			if (model.layers.activeLayer == layer)
+			{
+				return;
+			}
+			
+			if (model.layers.activeLayer != null)
+			{
+				model.layers.activeLayer.selected = false;
+			}
+			
 			layerControlsHolder.removeAllElements();
 			if (layer != null)
 			{
+				layer.selected = true;
 				model.layers.activeLayer = layer;
 				const controls:UIComponent = layerFactory.createControls(layer.type);
 				if (controls != null)

@@ -21,6 +21,11 @@ package com.tengu.tools.leditor.logic.external
 		public static const BITMAP:String = "bitmap";
 		public static const TILE_INDEX:String = "tile-index";
 
+		public static const PROPERTIES:String = "properties";
+		public static const PROPERTY:String   = "property";
+		public static const KEY:String 		  = "key";
+		public static const VALUE:String 	  = "value";
+
 		public function XMLProtocol()
 		{
 			throw new StaticClassConstructError(this);

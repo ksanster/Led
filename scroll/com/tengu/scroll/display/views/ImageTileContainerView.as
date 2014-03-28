@@ -21,6 +21,8 @@ package com.tengu.scroll.display.views
 		private var objects:Vector.<IGameObject>;
 		private var objectHash:Dictionary;
 		
+		private var gridVisible:Boolean = false;
+		
 		public function ImageTileContainerView()
 		{
 			super();
@@ -84,7 +86,7 @@ package com.tengu.scroll.display.views
 			
 			graphix.clear();
 			
-			if (tileLayer == null || tileLayer.tileWidth == 0 || tileLayer.tileHeight == 0)
+			if (!gridVisible || tileLayer == null || tileLayer.tileWidth == 0 || tileLayer.tileHeight == 0)
 			{
 				return;
 			}
@@ -132,6 +134,12 @@ package com.tengu.scroll.display.views
 		
 		protected override function updatePosition():void
 		{
+			//Empty
+		}
+		
+		protected override function updateData ():void
+		{
+			drawGrid();
 		}
 		
 		protected override function updateBounds():void
@@ -156,12 +164,16 @@ package com.tengu.scroll.display.views
 			super.assignObject(value);
 			tileLayer = value as ImageTileLayer;
 			tileLayer.addEventListener("tileSizeChanged", onChangeTileSize);
+			tileLayer.addEventListener(Event.SELECT, onSelectLayer);
+			
+			updateData();
 		}
 		
 		public override function removeObject():void
 		{
 			if (tileLayer != null)
 			{
+				tileLayer.removeEventListener(Event.SELECT, onSelectLayer);
 				tileLayer.removeEventListener("tileSizeChanged", onChangeTileSize);
 				tileLayer = null;
 			}
@@ -199,6 +211,12 @@ package com.tengu.scroll.display.views
 				delete objectHash[child];
 			}
 			removeChildView(child);
+		}
+		
+		private function onSelectLayer(event:Event):void
+		{
+			gridVisible = tileLayer.selected;
+			invalidate(VALIDATION_FLAG_DATA);
 		}
 	}
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="200" height="110"
+			   >
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			public var result:Boolean = false;
+			
+			[Bindable]
+			public var message:String;
+			
+			protected function onClickOk(event:MouseEvent):void
+			{
+				result = true;		
+				PopUpManager.removePopUp(this);
+				dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
+			}
+			
+			protected function onClickCancel(event:MouseEvent):void
+			{
+				result = false;
+				PopUpManager.removePopUp(this);
+				dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
+			}
+
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:Label text="{message}" color="0x333333"/>
+	<s:HGroup>
+		<s:Button label="Да"
+				  click="onClickOk(event)"/> 
+		<s:Button label="Нет"
+				  click="onClickCancel(event)"/> 
+	</s:HGroup>
+</s:TitleWindow>

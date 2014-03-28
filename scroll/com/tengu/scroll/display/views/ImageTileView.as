@@ -5,9 +5,14 @@ package com.tengu.scroll.display.views
 	
 	import flash.display.Bitmap;
 	import flash.events.Event;
+	import flash.filters.GlowFilter;
+	
+	import mx.effects.Glow;
 
 	public class ImageTileView extends BaseDisplayView
 	{
+		private static const SELECT:Array = [ new GlowFilter(0xFFFF00, .8, 3, 3, 5, 3)];
+		private static const UNSELECT:Array = [];
 		private var bitmap:Bitmap;
 		private var tile:ImageTile;
 		
@@ -27,6 +32,11 @@ package com.tengu.scroll.display.views
 			bitmap.y = - tile.height * .5;
 		}
 		
+		private function updateSelection ():void
+		{
+			filters = tile.selected ? SELECT : UNSELECT;
+		}
+		
 		protected override function initialize():void
 		{
 			super.initialize();
@@ -39,13 +49,16 @@ package com.tengu.scroll.display.views
 			super.assignObject(value);
 			tile = value as ImageTile;
 			tile.addEventListener(Event.CHANGE, onChangeBitmap);
+			tile.addEventListener(Event.SELECT, onSelect);
 			updateBitmap();
+			updateSelection();
 		}
 		
 		public override function removeObject():void
 		{
 			if (tile != null)
 			{
+				tile.removeEventListener(Event.SELECT, onSelect);
 				tile.removeEventListener(Event.CHANGE, onChangeBitmap);
 				tile = null;
 			}
@@ -56,5 +69,12 @@ package com.tengu.scroll.display.views
 		{
 			updateBitmap();			
 		}
+		
+		
+		private function onSelect(event:Event):void
+		{
+			updateSelection();
+		}
+
 	}
 }

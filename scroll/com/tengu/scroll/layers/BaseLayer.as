@@ -3,15 +3,35 @@ package com.tengu.scroll.layers
 	import com.tengu.scene.api.IGameContainer;
 	import com.tengu.scene.objects.GameContainer;
 	import com.tengu.tools.leditor.api.IEditableLayer;
+	import com.tengu.tools.leditor.api.ISelectable;
 	
-	public class BaseLayer extends GameContainer implements IGameContainer, IEditableLayer
+	import flash.events.Event;
+	
+	public class BaseLayer extends GameContainer implements IGameContainer, IEditableLayer, ISelectable
 	{
 		private var layerType:String;
+		private var isSelected:Boolean;
+		
 		public function BaseLayer()
 		{
 			super();
 		}
+
+		public function set selected (value:Boolean):void
+		{
+			if (isSelected == value)
+			{
+				return;
+			}
+			isSelected = value;
+			dispatchEvent(new Event(Event.SELECT));
+		}
 		
+		public function get selected ():Boolean
+		{
+			return isSelected;
+		}
+
 		public function set type (value:String):void
 		{
 			layerType = value;

@@ -19,6 +19,7 @@ package com.tengu.scroll.display.views
 		public static const VALIDATION_FLAG_ROTATION:uint 	= 0x8;
 		public static const VALIDATION_FLAG_VIEWPORT:uint 	= 0x10;
 		public static const VALIDATION_FLAG_SORT:uint 		= 0x20;
+		public static const VALIDATION_FLAG_DATA:uint 		= 0x40;
 
 		private var validating:Boolean  = false;
 
@@ -93,6 +94,16 @@ package com.tengu.scroll.display.views
 		{
 			// Abstract
 		}
+		
+		protected function updateSort():void
+		{
+			// Abstract
+		}
+		
+		protected function updateData():void
+		{
+			// Abstract
+		}
 
 		public function get sleeping():Boolean
 		{
@@ -164,11 +175,13 @@ package com.tengu.scroll.display.views
 		
 		public function validate():void
 		{
-			const coordsInvalid:Boolean = isInvalid(VALIDATION_FLAG_POSITION);
-			const boundsInvalid:Boolean = isInvalid(VALIDATION_FLAG_BOUNDS);
-			const scaleInvalid:Boolean = isInvalid(VALIDATION_FLAG_SCALE);
-			const angleInvalid:Boolean = isInvalid(VALIDATION_FLAG_ROTATION);
-			const viewportInvalid:Boolean = isInvalid(VALIDATION_FLAG_VIEWPORT);
+			const coordsInvalid:Boolean 	= isInvalid(VALIDATION_FLAG_POSITION);
+			const boundsInvalid:Boolean 	= isInvalid(VALIDATION_FLAG_BOUNDS);
+			const scaleInvalid:Boolean 		= isInvalid(VALIDATION_FLAG_SCALE);
+			const angleInvalid:Boolean 		= isInvalid(VALIDATION_FLAG_ROTATION);
+			const viewportInvalid:Boolean 	= isInvalid(VALIDATION_FLAG_VIEWPORT);
+			const dataInvalid:Boolean 		= isInvalid(VALIDATION_FLAG_DATA);
+			const sortInvalid:Boolean 		= isInvalid(VALIDATION_FLAG_SORT);
 			
 			if (coordsInvalid)
 			{
@@ -198,6 +211,18 @@ package com.tengu.scroll.display.views
 			{
 				updateViewport();
 				unsetValidationFlag(VALIDATION_FLAG_VIEWPORT);
+			}
+			
+			if (sortInvalid)
+			{
+				updateSort();
+				unsetValidationFlag(VALIDATION_FLAG_SORT);
+			}
+			
+			if (dataInvalid)
+			{
+				updateData();
+				unsetValidationFlag(VALIDATION_FLAG_DATA);
 			}
 			
 		}

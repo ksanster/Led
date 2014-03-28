@@ -4,10 +4,18 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
 		  xmlns:selector="com.tengu.tools.leditor.view.controls.selector.*"
 		  addedToStage="onAddedToStage(event)" 
-		  removedFromStage="onRemovedFromStage(event)">
+		  removedFromStage="onRemovedFromStage(event)"
+		  currentState="{model.selections.selectionState}">
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
+	
+	<s:states>
+		<s:State name="none"/>
+		<s:State name="tile" />
+	</s:states>
 	
 	<fx:Script>
 		<![CDATA[
@@ -20,10 +28,13 @@
 			import com.tengu.tools.leditor.model.enum.ActionType;
 			
 			import mx.collections.ArrayCollection;
+			import mx.collections.IList;
 			
 			import spark.events.IndexChangeEvent;
 			
+			[Bindable]
 			private var model:LedModel = LedModel.instance;
+			
 			[Bindable]
 			private var manager:AssetManager = AssetManager.instance;
 
@@ -91,6 +102,21 @@
 				}
 			}
 			
+			protected function onClickAddProperty(event:MouseEvent):void
+			{
+				model.selections.selectedTile.properties.addItem({key:"", value:""});
+			}
+			
+			protected function onClickRemoveProperty(event:MouseEvent):void
+			{
+				const properties:IList = model.selections.selectedTile.properties;
+				if (propertyList.selectedIndex >= 0 && propertyList.selectedIndex < properties.length)
+				{
+					properties.removeItemAt(propertyList.selectedIndex);
+				}
+			}
+
+			
 		]]>
 	</fx:Script>
 	<s:Label text="Set focal index"/>
@@ -128,6 +154,28 @@
 							columnWidth="{layer.tileWidth}"
 							height="{layer.tileHeight * 3 + 15}" 
 							change="onChangeImage(event)"/>
-
+	
+	<s:Label text="Tile properties" includeIn="tile"/>
+	<s:DataGrid id="propertyList" 
+				width="100%" height="100"
+				dataProvider="{model.selections.selectedTile.properties}" 
+				editable="true" 
+				includeIn="tile">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn dataField="key" headerText="Key"/>
+				<s:GridColumn dataField="value" headerText="Value"/>
+			</s:ArrayList> 
+		</s:columns >
+	</s:DataGrid> 
+	<s:HGroup includeIn="tile">
+		<s:Button label="Add" 
+				  includeIn="tile"
+				  click="onClickAddProperty(event)"/>
+		<s:Button label="Remove" 
+				  includeIn="tile"
+				  enabled="{propertyList.selectedIndex != -1}" 
+				  click="onClickRemoveProperty(event)"/>
+	</s:HGroup>		
 
 </s:VGroup>

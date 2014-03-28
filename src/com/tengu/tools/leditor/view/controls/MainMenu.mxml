@@ -32,10 +32,11 @@
 		<![CDATA[
 			import com.tengu.tools.leditor.logic.api.IEditorController;
 			import com.tengu.tools.leditor.model.LedModel;
+			import com.tengu.tools.leditor.view.controls.windows.ConfirmWindow;
 			
-			import mx.controls.Alert;
 			import mx.events.CloseEvent;
 			import mx.events.MenuEvent;
+			import mx.managers.PopUpManager;
 
 			private static const NEW_PROJECT:String 	= "new";
 			private static const LOAD_PROJECT:String 	= "load";
@@ -43,7 +44,14 @@
 			private static const SAVE_PROJECT_AS:String = "save_as";
 			private static const QUIT:String 			= "quit";
 			
+			private static const CONFIRM_CLOSE:String 	= "confirmClose";
+			private static const CONFIRM_CLEAR:String 	= "confirmClear";
+			private static const CONFIRM_LOAD:String 	= "confirmLoad";
+
 			private static const MOVE_CAMERA_TO_CENTER:String 	= "move-to-center";
+			
+			private var window:ConfirmWindow;
+			private var confirmType:String;
 
 			[Inject]
 			public var controller:IEditorController;
@@ -57,7 +65,21 @@
 			
 			public function showClosingAlert():void
 			{
-				Alert.show("Сохранить изменения?", "", Alert.YES | Alert.NO, null, onSaveRequest);
+				showConfirmWindow(CONFIRM_CLOSE);
+			}
+			
+			private function showConfirmWindow(type:String):void
+			{
+				if (window != null)
+				{
+					return;
+				}
+				confirmType = type;
+				
+				window = PopUpManager.createPopUp(mainApp, ConfirmWindow, true) as ConfirmWindow;
+				window.message = "Сохранить изменения?";
+				window.addEventListener(CloseEvent.CLOSE, onCloseConfirm);
+				PopUpManager.centerPopUp(window);
 			}
 			
 			private function onClickItem(event:MenuEvent):void
@@ -69,7 +91,7 @@
 					case NEW_PROJECT:
 						if (!model.files.saved)
 						{
-							Alert.show("Сохранить изменения?", "", Alert.YES | Alert.NO, null, onSaveRequest1);
+							showConfirmWindow(CONFIRM_CLEAR);
 						}
 						else
 						{
@@ -79,7 +101,7 @@
 					case LOAD_PROJECT:
 						if (!model.files.saved)
 						{
-							Alert.show("Сохранить изменения?", "", Alert.YES | Alert.NO, null, onSaveRequest2);
+							showConfirmWindow(CONFIRM_LOAD);
 						}
 						else
 						{
@@ -109,34 +131,6 @@
 				}
 			}
 			
-			private function onSaveRequest(event:CloseEvent):void
-			{
-				if (event.detail == Alert.YES)
-				{
-					controller.saveProject();
-				}
-				model.files.saved = true;
-				mainApp.close();
-			}
-
-			private function onSaveRequest1(event:CloseEvent):void
-			{
-				if (event.detail == Alert.YES)
-				{
-					controller.saveProject();
-				}
-				controller.clearAll();
-			}
-
-			private function onSaveRequest2(event:CloseEvent):void
-			{
-				if (event.detail == Alert.YES)
-				{
-					controller.saveProject();
-				}
-				controller.loadProject();
-			}
-			
 			protected function onShowMenu(event:MenuEvent):void
 			{
 				model.screenSettings.locked = true;
@@ -145,6 +139,29 @@
 			protected function onHideMenu(event:MenuEvent):void
 			{
 				model.screenSettings.locked = false;
+			}
+			
+			private function onCloseConfirm(event:CloseEvent):void
+			{
+				if (window.result)
+				{
+					controller.saveProject();
+				}
+				window.removeEventListener(CloseEvent.CLOSE, onCloseConfirm);
+				window = null;
+				model.files.saved = true;
+				switch (confirmType)
+				{
+					case CONFIRM_CLOSE:
+						mainApp.close();
+						break;
+					case CONFIRM_CLEAR:
+						controller.clearAll();
+						break;
+					case CONFIRM_LOAD:
+						controller.loadProject();
+						break;
+				}
 			}
 			
 		]]>
